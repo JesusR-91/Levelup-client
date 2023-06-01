@@ -3,8 +3,8 @@ import Navbar from './components/Navbar'
 import {Routes, Route} from "react-router-dom"
 import Signup from './pages/auth/Signup'
 import Login from './pages/auth/Login'
-import Error from './pages/Error'
-import NotFound from './pages/NotFound'
+import Error from './pages/error/Error'
+import NotFound from './pages/error/NotFound'
 import Home from './pages/Home'
 
 function App() {

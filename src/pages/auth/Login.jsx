@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "../../services/auth.services";
 import { AuthContext } from "../../context/auth.context";
+import logoImg from "../../../public/logo.png"
+import icon from "../../../public/img.png"
+
 
 
 export default function Login() {
@@ -40,6 +43,9 @@ export default function Login() {
 
   return (
     <div>
+    <img src={icon} alt="logo" />
+    <img src={logoImg} alt="web-name" />
+
       <h2>Login</h2>
         <form onSubmit={handleSubmitForm}>
             <div>
