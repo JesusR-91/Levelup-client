@@ -12,8 +12,8 @@ const groupDetailsService = (groupId) =>{
     return service.get(`/group/${groupId}/details`);
 };
 
-const createGroupService = () =>{
-    return service.post("/group/create");
+const createGroupService = (name) =>{
+    return service.post("/group/create", name);
 };
 
 const groupAddUserService = (groupId, userId) =>{
@@ -23,8 +23,6 @@ const groupAddUserService = (groupId, userId) =>{
 const groupDeleteUserService = (groupId, userId) =>{
     return service.patch(`/group/${groupId}/${userId}/delete-use`);
 };
-
-
 
 const addModService = (groupId, modId) =>{
     return service.patch(`/group/${groupId}/${modId}/add-mod)`)
