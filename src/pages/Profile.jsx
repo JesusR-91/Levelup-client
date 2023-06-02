@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { userInfo } from "../services/user.services";
-import { allPublications } from "../services/publications.services";
-import { useNavigate} from "react-router-dom";
+import { userInfoService } from "../services/user.services";
+import { allPublicationsService } from "../services/publications.services";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);
@@ -41,9 +41,32 @@ export default function Profile() {
           <p>
             E-mail: {profile.email} - <span>Phone: {profile.phoneNum}</span>
           </p>
+          <div>
+            <h4>Your friends:</h4>
+            {profile.friends.map((friend) => (
+              <p key={friend._id}>{friend.username}</p>
+            ))}
+          </div>
+          <br />
+          {publication.length > 0 ? (
+            <div>
+              <h4>Publications:</h4>
+              {publication.map((publication) => (
+                <div key={publication._id}>
+                  <h4>
+                    {publication.owner.username} -{" "}
+                    <span>{publication.createdAt}</span>
+                  </h4>
+                  <p>{publication.content}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <h4>There's not publications</h4>
+          )}
         </div>
       ) : (
-        <p>No se encontró perfil.</p>
+        <p>We didn't found the profile</p>
       )}
     </div>
   ) : (

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  allPublications,
-  friendsPublication,
+  allPublicationsService,
+  friendsPublicationService,
 } from "../services/publications.services.js";
 
 export default function PublicationList() {
