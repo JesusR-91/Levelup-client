@@ -1,22 +1,27 @@
-import axios from "axios"
 import { useEffect, useState } from "react";
+import { gameListService } from "../../services/games.services";
 
 export default function GameList() {
   const [gameList, setGameList] = useState([]);
+  const [page, setPage] = useState(1)
 
-  let page = 1;
   const getData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5005/api/games/list/${page}`);
+      const response = await gameListService(page);
       setGameList(response.data);
-      console.log(gameList)
+      console.log(gameList);
+      console.log(page)
     } catch (error) {
       console.log(error);
     }
         
   }
 
-  useEffect(()=>{ getData()}, [])
+  const handleLeftArrow = () => page > 1 && setPage(page - 1);
+  const handleRightArrow = () => setPage(page + 1);
+
+
+  useEffect(()=>{ getData()}, [page]);
 
   return gameList.length > 0 ?  (
     <div>
@@ -34,6 +39,10 @@ export default function GameList() {
             </div>
           )
         )}
+      </div>
+      <div style={{display: "flex", flexDirection:"row", justifyContent:"space-between"}}>
+        <button onClick={handleLeftArrow}> <img src="../../../public/icons8-back-arrow-60-left.png" alt="left-arrow" /> </button>
+        <button onClick={handleRightArrow} > <img src="../../../public/icons8-back-arrow-60-rigth.png" alt="right-arrow" /> </button>
       </div>
 
     </div>
