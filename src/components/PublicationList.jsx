@@ -11,8 +11,8 @@ export default function PublicationList() {
   const navigate = useNavigate();
   const getData = async () => {
     try {
-      const allResponse = await allPublications();
-      const friendResponse = await friendsPublication();
+      const allResponse = await allPublicationsService();
+      const friendResponse = await friendsPublicationService();
 
       const publicationUpdated = [...allResponse.data, ...friendResponse.data];
       publicationUpdated.forEach((publication) => {

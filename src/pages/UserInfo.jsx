@@ -11,8 +11,8 @@ export default function UserInfo() {
   const { userId } = useParams();
   const getData = async () => {
     try {
-      const userProfile = await userInfo(userId);
-      const allUserPublications = await allPublications();
+      const userProfile = await userInfoService(userId);
+      const allUserPublications = await allPublicationsService();
       setProfile(userProfile.data);
       setPublications(allUserPublications.data);
       setIsLoading(false);
