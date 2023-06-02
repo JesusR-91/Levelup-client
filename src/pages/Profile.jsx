@@ -13,8 +13,8 @@ export default function Profile() {
 
   const getData = async () => {
     try {
-      const activeUserProfile = await userInfo();
-      const allPublication = await allPublications();
+      const activeUserProfile = await userInfoService();
+      const allPublication = await allPublicationsService();
       setProfile(activeUserProfile.data);
       setPublication(allPublication.data);
       setIsLoading(false);
