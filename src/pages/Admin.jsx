@@ -1,5 +1,5 @@
-import { groupListService } from "../services/group.services";
-import { userInfoService } from "../services/user.services";
+import { getAllGroupsService } from "../services/admin.services";
+import { getAllUserService } from "../services/admin.services";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -8,11 +8,11 @@ export default function Admin() {
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-console.log(users)
+console.log(groups)
   const getData = async () => {
     try {
-      const users = await userInfoService();
-      const groups = await groupListService();
+      const users = await getAllUserService();
+      const groups = await getAllGroupsService();
       setUsers(users.data);
       setGroups(groups.data);
       setIsLoading(false);
@@ -27,18 +27,18 @@ console.log(users)
 
   return !isLoading ? (
     <div>
-      <div>
         {users.map((eachUser)=>(
-          <h4>{eachUser.name} <button>Delete</button></h4>
-      ))}
+      <div key={eachUser._id}>
+          <h4>{eachUser.username} <button>Delete</button></h4>
       </div>
+      ))}
       <br/>
-      <div>
       {groups.map((eachGroup)=>{
+      <div key={eachGroup._id}>
           <h4>{eachGroup.name} <button>Delete</button></h4>
+      </div>
       })}
       </div>
-    </div>
   ):(
     <h4>Loading</h4>
   )
