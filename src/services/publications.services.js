@@ -1,19 +1,19 @@
 import service from "./config.services";
 
-const allPublications = (allPubli) => {
-    return service.get("/publications", allPubli);
+const allPublications = () => {
+    return service.get("/publications");
   };
   
-  const newPublication = (newPubli) => {
-    return service.post("/publications", newPubli);
+  const newPublication = () => {
+    return service.post("/publications");
   };
   
-  const deletePublication = (deletePubli) => {
-    return service.delete(`/publications/${deletePubli}`);
+  const deletePublication = (deletePublicationId) => {
+    return service.delete(`/publications/${deletePublicationId}`);
   };
   
-  const friendsPublication = (friendsPubli) => {
-    return service.get(`/publications/friendList`, friendsPubli);
+  const friendsPublication = () => {
+    return service.get(`/publications/friendList`);
   };
   
   export { allPublications, newPublication, deletePublication, friendsPublication };
