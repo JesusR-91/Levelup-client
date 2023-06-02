@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react"
 import { gameDetailsService } from "../../services/games.services";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import ValuationList from "../../components/ValuationList";
 
 export default function GameDetails() {
   const [game, setGame] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
   const {gameId} = useParams();
+  const navigate = useNavigate()
 
   const getData = async () => {
     try {
       const response = await gameDetailsService(gameId);
       setGame(response.data);
       setIsLoading(false)
-      console.log(response.data)
     } catch (error) {
       console.log(error)
+      navigate("/error")
     }
   }
 
@@ -48,6 +50,10 @@ export default function GameDetails() {
       <br />
 
       <a href={game.website}>Oficial website</a>
+
+      <br />
+
+      <ValuationList/>
 
     </div>
   ) : <h3>Loading...</h3>
