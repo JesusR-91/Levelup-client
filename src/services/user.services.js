@@ -1,23 +1,23 @@
 import service from "./config.services";
 
-const userInfo = (user) => {
-  return service.get("/user", user);
+const userInfo = () => {
+  return service.get("/user");
 };
 
-const friendInfo = (friend) => {
-  return service.get(`/user/friend/${friend}`, friend);
+const friendInfo = (friendId) => {
+  return service.get(`/user/friend/${friendId}`, friendId);
 };
 
-const editUser = (user) => {
-  return service.put(`/user/edit`, user);
+const editUser = () => {
+  return service.put(`/user/edit`);
 };
 
-const addFriend = (friend) => {
-  return service.patch(`/user/addfriend/${friend}`, friend);
+const addFriend = (friendId) => {
+  return service.patch(`/user/add-friend/${friendId}`, friendId);
 };
 
-const deleteFriend = (friend) => {
-  return service.patch(`/user/friends/${friend}`);
+const deleteFriend = (friendId) => {
+  return service.patch(`/user/friends/${friendId}`);
 };
 
 export { userInfo, friendInfo, editUser, addFriend, deleteFriend };
