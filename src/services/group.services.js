@@ -12,8 +12,8 @@ const groupDetailsService = (groupId) =>{
     return service.get(`/group/${groupId}/details`);
 };
 
-const createGroupService = (name) =>{
-    return service.post("/group/create", name);
+const createGroupService = (groupDetails) =>{
+    return service.post("/group/create", groupDetails);
 };
 
 const groupAddUserService = (groupId, userId) =>{

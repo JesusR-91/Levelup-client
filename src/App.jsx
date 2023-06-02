@@ -30,7 +30,7 @@ function App() {
         <Route path="/user/:userId" element={<UserInfo />} />
 
         <Route path="/group/list" element={<GroupList />} />
-        <Route path="/group/:groupId" element={<GroupDetails />} />
+        <Route path="/group/:groupId/details" element={<GroupDetails />} />
 
         <Route path="/game/list" element={<GameList />} />
         <Route path="/game/:gameId/details" element={<GameDetails />} />

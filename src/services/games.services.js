@@ -1,7 +1,7 @@
 import service from "./config.services";
 
 const gameListService = (page) => {
-  return service.get(`/game/list/${page}`);
+  return service.get(`/games/list/${page}`);
 };
 
 const gameDetailsService = (gameId) =>{
