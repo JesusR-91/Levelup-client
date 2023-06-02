@@ -5,7 +5,7 @@ const userInfo = () => {
 };
 
 const friendInfo = (friendId) => {
-  return service.get(`/user/friend/${friendId}`);
+  return service.get(`/user/${friendId}`);
 };
 
 const editUser = () => {
