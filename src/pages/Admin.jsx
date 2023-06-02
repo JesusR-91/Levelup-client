@@ -1,5 +1,5 @@
 import { groupListService } from "../services/group.services";
-import { userInfo } from "../services/user.services";
+import { userInfoService } from "../services/user.services";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -11,7 +11,7 @@ export default function Admin() {
 
   const getData = async () => {
     try {
-      const users = await userInfo();
+      const users = await userInfoService();
       const groups = await groupListService();
       setUsers(users);
       setGroups(groups);
