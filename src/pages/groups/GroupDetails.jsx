@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { groupDetailsService } from "../../services/group.services";
-import { userInfoService } from "../../services/user.services";
+import { friendInfoService } from "../../services/user.services";
 
 export default function GroupDetails() {
   const [group, setGroup] = useState();
@@ -14,7 +14,7 @@ export default function GroupDetails() {
     try {
       const response = await groupDetailsService(groupId);
       setGroup(response.data)
-      const ownerResponse = await userInfoService();
+      const ownerResponse = await friendInfoService(group.owner);
       setOwner(ownerResponse.data)
       setIsLoading(false)
     } catch (error) {

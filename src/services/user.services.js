@@ -8,6 +8,10 @@ const friendInfoService = (friendId) => {
   return service.get(`/user/${friendId}`);
 };
 
+const friendQueryService = (queryFriend) => {
+  return service.get(`/user/${queryFriend}/find`);
+};
+
 const editUserService = () => {
   return service.put(`/user/edit`);
 };
@@ -20,4 +24,4 @@ const deleteFriendService = (friendId) => {
   return service.patch(`/user/friends/${friendId}`);
 };
 
-export { userInfoService, friendInfoService, editUserService, addFriendService, deleteFriendService};
+export { userInfoService, friendInfoService, friendQueryService, editUserService, addFriendService, deleteFriendService};

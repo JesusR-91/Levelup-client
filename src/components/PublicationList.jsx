@@ -26,9 +26,6 @@ export default function PublicationList() {
       navigate("/error");
     }
   };
-
-
-  console.log(publication);
   useEffect(() => {
     getData();
   }, []);
