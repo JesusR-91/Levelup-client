@@ -5,12 +5,12 @@ const allPublicationsService = () => {
     return service.get("/publication");
   };
   
-  const newPublicationService = () => {
-    return service.post("/publication");
+  const newPublicationService = (content) => {
+    return service.post("/publication", {content});
   };
   
-  const deletePublicationService = (deletePubli) => {
-    return service.delete(`/publication/${deletePubli}`);
+  const deletePublicationService = (deletePublication) => {
+    return service.delete(`/publication/${deletePublication}`);
   };
   
   const friendsPublicationService = () => {

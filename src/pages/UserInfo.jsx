@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { userInfoService } from "../services/user.services";
+import { friendInfoService } from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export default function UserInfo() {
   const { userId } = useParams();
   const getData = async () => {
     try {
-      const userProfile = await userInfoService(userId);
+      const userProfile = await friendInfoService(userId);
       const allUserPublications = await allPublicationsService();
       setProfile(userProfile.data);
       setPublications(allUserPublications.data);

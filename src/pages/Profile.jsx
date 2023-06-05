@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { userInfoService } from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EditProfile from "../components/EditProfile";
+
 export default function Profile() {
+
+  //STATES
   const [profile, setProfile] = useState(null);
   const [publication, setPublication] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
 
-  console.log(profile);
+  const navigate = useNavigate();
 
   const getData = async () => {
     try {
@@ -44,7 +46,7 @@ export default function Profile() {
           <div>
             <h4>Your friends:</h4>
             {profile.friends.map((friend) => (
-              <p key={friend._id}>{friend.username}</p>
+              <Link to={`/user/${friend._id}`} key={friend._id}>{friend.username}</Link>
             ))}
           </div>
           <br />

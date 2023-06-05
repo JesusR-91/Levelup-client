@@ -27,17 +27,19 @@ console.log(groups)
 
   return !isLoading ? (
     <div>
+      <h3>All users:</h3>
         {users.map((eachUser)=>(
       <div key={eachUser._id}>
           <h4>{eachUser.username} <button>Delete</button></h4>
       </div>
       ))}
       <br/>
-      {groups.map((eachGroup)=>{
+      <h3>All groups:</h3>
+      {groups.map((eachGroup)=>
       <div key={eachGroup._id}>
           <h4>{eachGroup.name} <button>Delete</button></h4>
       </div>
-      })}
+      )}
       </div>
   ):(
     <h4>Loading</h4>

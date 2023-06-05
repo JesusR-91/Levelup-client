@@ -4,8 +4,8 @@ const allValuationServices = gameId => {
     return service.get(`/valuation/${gameId}`)
 }
 
-const newValuationService = (gameId) => {
-    return service.post(`/valuation/${gameId}`);
+const newValuationService = (gameId, content, value) => {
+    return service.post(`/valuation/${gameId}`, {content, value});
   };
   
   const deleteValuationService = (valuationId) => {

@@ -1,31 +1,32 @@
 import { useState } from "react"
 import {newPublicationService} from "../services/publications.services"
+import { useNavigate } from "react-router-dom";
 export default function CreatePublication() {
-  const [owner, setOwner] = useState("")
-  const [content ,setConent] = useState("")
+  //STATES
+  const [content ,setContent] = useState("")
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleNameInput = ({target}) => {setOwner(target.value)}
-  const handleContentInput = ({target}) => {setConent(target.value)}
+  const navigate = useNavigate()
 
+  //FUNCTIONS
+  const handleContentInput = ({target}) => {setContent(target.value)}
   const handleSubmit = async () => {
     try {
-      await newPublicationService({owner, content})
+      setIsLoading(true)
+      await newPublicationService(content);
+      setIsLoading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      navigate("/error");
+      
     }
   }
   return !isLoading ? (
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name</label>
-          <input type="text" name="name" onChange={handleNameInput} value={owner}/>
-        </div>
-        <br />
-        <div>
           <label>Description</label>
-          <input type="textarea" name="description" onChange={handleContentInput} value={content}/>
+          <input type="textarea" name="content" onChange={handleContentInput} value={content}/>
         </div>
         <button>Create!</button>
       </form>

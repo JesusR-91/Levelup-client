@@ -1,44 +1,46 @@
 import { useState } from "react";
 import { newValuationService } from "../services/valuation.services";
+import { useParams } from "react-router-dom";
 
-export default function CreateValuation(props) {
-  const [owner, setOwner] = useState("");
+export default function CreateValuation() {
+
+  //STATES
   const [content, setContent] = useState("");
+  const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { children } = props;
-  const filledStars = Math.round(children);
-  const emptyStars = 5 - filledStars;
+  const {gameId} = useParams;
 
-  const handleOwnerInput = ({ target }) => {
-    setOwner(target.value);
-  };
+
+
   const handleContentInput = ({ target }) => {
     setContent(target.value);
   };
-
+  const handleValueInput = ({ target }) => {
+    setValue(target.value);
+  };
   const handleSubmit = async () => {
     try {
-      await newValuationService({ owner, content });
+      setIsLoading(true);
+      await newValuationService(gameId, content, value);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
   return !isLoading ? (
     <div>
-      <form onSubmit={handleSubmit}>
-      <div>
-          {"★".repeat(filledStars)}
-          {"☆".repeat(emptyStars)}
-        </div>
+    <h3>New valuation:</h3>
+     <form onSubmit={handleSubmit}>
+      
         <div>
-
-          <label>Name</label>
+          <label>Note</label>
           <input
-            type="text"
-            name="owner"
-            onChange={handleOwnerInput}
-            value={owner}
+            type="number"
+            name="value"
+            onChange={handleValueInput}
+            value={value}
+            min="0" max="5"
           />
         </div>
         <br />
@@ -51,7 +53,7 @@ export default function CreateValuation(props) {
             value={content}
           />
         </div>
-
+        <br />
         <button>Create!</button>
       </form>
     </div>

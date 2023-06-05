@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { editUserService } from "../services/user.services";
 import { userInfoService } from "../services/user.services";
 import { useNavigate } from "react-router-dom";
+import { uploadImageService } from "../services/upload.services";
 
 export default function EditProfile() {
+  //STATES
   const [editProfile, setEditProfile] = useState({
     username: "",
     pastPassword: "",
@@ -15,7 +17,12 @@ export default function EditProfile() {
     phoneNumber: "",
     profileImg: "",
   });
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+
   const navigate = useNavigate();
+
+  //FUNCTIONS
   const getData = async () => {
     try {
       const activeUser = await userInfoService();
@@ -36,12 +43,9 @@ export default function EditProfile() {
       navigate("/error");
     }
   };
-  useEffect(() => {
-    getData();
-  }, []);
-
   const handleEdit = ({ target: { name, value } }) => {
-    setEditProfile({ ...editProfile, [name]: value });
+    const img = imageUrl  ? imageUrl : editProfile.profileImg;
+    setEditProfile({ ...editProfile, [name]: value,  profileImg: img });
   };
 
   const handleForm = async (e) => {
@@ -54,18 +58,57 @@ export default function EditProfile() {
     }
   };
 
+  const handleFileUpload = async (event) => {
+    // to prevent accidentally clicking the choose file button and not selecting a file
+    if (!event.target.files[0]) {
+      return;
+    }
+
+    setIsUploading(true); // to start the loading animation
+
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("image", event.target.files[0]);
+
+    try {
+      const response = await uploadImageService(uploadData);
+
+      setImageUrl(response.data.imageUrl);
+
+      setIsUploading(false); // to stop the loading animation
+    } catch (error) {
+      navigate("/error");
+    }
+  };
+
+  //USE EFFECT:
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div>
       <h3>Edit Profile</h3>
 
       <form onSubmit={handleForm}>
-        <label>Profile Image </label>
-        <input
-          type="string"
-          name="profileImg"
-          value={editProfile.profileImg}
-          onChange={handleEdit}
-        />
+        <div>
+          <label>Image</label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleFileUpload}
+            disabled={isUploading}
+          />
+          {/* below disabled prevents the user from attempting another upload while one is already happening */}
+        </div>
+        {/* to render a loading message or spinner while uploading the picture */}
+        {isUploading ? <h3>... uploading image</h3> : null}
+        {/* below line will render a preview of the image from cloudinary */}
+        {imageUrl ? (
+          <div>
+            <img src={imageUrl} alt="img" width={200} />
+          </div>
+        ) : null}
+
         <br />
         <label>Username: </label>
         <input
@@ -90,7 +133,6 @@ export default function EditProfile() {
           value={editProfile.pastPassword}
           onChange={handleEdit}
         />
-
         <br />
         <label>First name: </label>
         <input
