@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { allValuationServices } from "../services/valuation.services"
 import { useEffect, useState } from "react"
+import CreateValuation from "./CreateValuation"
 export default function ValuationsList() {
 const [valuation, setValuations] = useState([])
 const [isLoading, setIsLoading]= useState(true)
@@ -21,7 +22,9 @@ useEffect(()=>{
 
 
   return (
-    <div><h4>Valoration List</h4>
+    <div>
+      <CreateValuation/>
+      <h4>Valuation List</h4>
   {valuation.map((eachValue)=>{
     <div>
     <h5>{eachValue.owner} - {eachValue.value}</h5>
@@ -29,6 +32,7 @@ useEffect(()=>{
     <p>{eachValue.updateAt}</p>
     </div>
   })}
+  
     </div>
   )
 }

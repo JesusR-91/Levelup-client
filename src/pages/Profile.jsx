@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { userInfoService } from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
 import { useNavigate } from "react-router-dom";
-
+import EditProfile from "../components/EditProfile";
 export default function Profile() {
   const [profile, setProfile] = useState(null);
   const [publication, setPublication] = useState([]);
@@ -68,6 +68,7 @@ export default function Profile() {
       ) : (
         <p>We didn't found the profile</p>
       )}
+      <EditProfile/>
     </div>
   ) : (
     <h3>Loading...</h3>

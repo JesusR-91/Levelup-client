@@ -4,6 +4,7 @@ import {
   allPublicationsService,
   friendsPublicationService,
 } from "../services/publications.services.js";
+import CreatePublication from "./CreatePublication.jsx";
 
 export default function PublicationList() {
   const [publication, setPublication] = useState([]);
@@ -32,6 +33,7 @@ export default function PublicationList() {
 
   return !isLoading ? (
     <div>
+      <CreatePublication/>
       {publication.map((eachPubl) => (
         <div key={eachPubl._id}>
           <h4>{eachPubl.owner.username} - <span>{eachPubl.createdAt}</span></h4>

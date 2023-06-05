@@ -12,8 +12,8 @@ const friendQueryService = (queryFriend) => {
   return service.get(`/user/${queryFriend}/find`);
 };
 
-const editUserService = () => {
-  return service.put(`/user/edit`);
+const editUserService = (editProfile) => {
+  return service.put(`/user/edit`, editProfile);
 };
 
 const addFriendService = (friendId) => {

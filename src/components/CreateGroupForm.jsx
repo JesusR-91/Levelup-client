@@ -5,7 +5,6 @@ export default function CreateGroupForm() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("")
   const handleNameInput = ({target}) => {setName(target.value)};
   const handleDescriptionInput = ({target}) => {setDescription(target.value)};
 
