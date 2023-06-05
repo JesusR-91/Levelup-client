@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { gameListService } from "../../services/games.services";
 import { Link } from "react-router-dom";
+import GameSearchBar from "../../components/GameSearchBar";
 
 export default function GameList() {
   const [gameList, setGameList] = useState([]);
@@ -25,6 +26,8 @@ export default function GameList() {
 
   return gameList.length > 0 ?  (
     <div>
+      <GameSearchBar/>
+
       <h2>Game list</h2>
 
       <div style={{display:"flex", flexWrap: "wrap", gap:"50px", justifyContent: "space-evenly", alignItems:"center"}}>

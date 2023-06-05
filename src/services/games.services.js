@@ -8,4 +8,8 @@ const gameDetailsService = (gameId) =>{
     return service.get(`/games/${gameId}/details`)
 };
 
-export {gameListService, gameDetailsService};
+const findAGameService = (queryValue) =>{
+  return service.get(`/games/${queryValue}`)
+}
+
+export {gameListService, gameDetailsService, findAGameService};

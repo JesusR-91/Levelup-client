@@ -13,6 +13,7 @@ import GroupList from "./pages/groups/GroupList";
 import GroupDetails from "./pages/groups/GroupDetails";
 import GameList from "./pages/games/GameList";
 import GameDetails from "./pages/games/GameDetails";
+import FoundGame from "./pages/games/FoundGame";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
 
         <Route path="/game/list" element={<GameList />} />
         <Route path="/game/:gameId/details" element={<GameDetails />} />
+        <Route path="/game/found-games/:queryValue" element={<FoundGame/>}/>
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
