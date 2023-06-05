@@ -11,7 +11,6 @@ export default function GameList() {
     try {
       const response = await gameListService(page);
       setGameList(response.data);
-      console.log(response.data)
     } catch (error) {
       console.log(error);
     }

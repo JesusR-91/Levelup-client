@@ -8,8 +8,32 @@ const newValuationService = (gameId, content, value) => {
     return service.post(`/valuation/${gameId}`, {content, value});
   };
   
-  const deleteValuationService = (valuationId) => {
-    return service.delete(`/valuation/${valuationId}`);
-  };
+const deleteValuationService = (valuationId) => {
+  return service.delete(`/valuation/${valuationId}`);
+};
 
-  export {allValuationServices, newValuationService, deleteValuationService}
+const addLikeValuationService = (valuationId) => {
+  return service.patch(`/valuation/${valuationId}/add-like`);
+};
+
+const deleteDislikeValuationService = (valuationId) => {
+  return service.patch(`/valuation/${valuationId}/delete-like`);
+};
+
+const adDislikeValuationService = (valuationId) => {
+  return service.patch(`/valuation/${valuationId}/add-dislike`);
+};
+
+const deleteLikeValuationService = (valuationId) => {
+  return service.patch(`/valuation/${valuationId}/delete-dislike`);
+};
+
+const addLoveValuationService = (valuationId) => {
+  return service.patch(`/valuation/${valuationId}/add-dislike`);
+};
+
+const deleteLoveValuationService = (valuationId) => {
+  return service.patch(`/valuation/${valuationId}/delete-love`);
+};
+
+  export {allValuationServices, newValuationService, deleteValuationService, addLikeValuationService, deleteDislikeValuationService, adDislikeValuationService, deleteLikeValuationService, addLoveValuationService, deleteLoveValuationService}
