@@ -1,5 +1,5 @@
 import { useNavigate, useParams} from "react-router-dom"
-import { addLikeValuationService, allValuationServices } from "../services/valuation.services"
+import { handleLikeValuationService, allValuationServices } from "../services/valuation.services"
 import { useEffect, useState } from "react"
 import CreateValuation from "./CreateValuation"
 
@@ -32,7 +32,7 @@ const getData = async ()=>{
 
 const addLike = async (valId) => {
   try {
-    await addLikeValuationService(valId);
+    await handleLikeValuationService(valId);
   } catch (error) {
     console.log(error);
     navigate("/error")

@@ -17,30 +17,19 @@ const allPublicationsService = () => {
     return service.get(`/publication/friendList`);
   };
   
-  const addLikePublicationService = (publicationID) => {
+  const handleLikePublicationService = (publicationID) => {
     return service.patch(`/publication/${publicationID}/add-like`);
   };
   
-  const deleteDislikePublicationService = (publicationID) => {
-    return service.patch(`/publication/${publicationID}/delete-like`);
-  };
-  
-  const adDislikePublicationService = (publicationID) => {
+  const handleDislikePublicationService = (publicationID) => {
     return service.patch(`/publication/${publicationID}/add-dislike`);
   };
   
-  const deleteLikePublicationService = (publicationID) => {
-    return service.patch(`/publication/${publicationID}/delete-dislike`);
-  };
-  
-  const addLovePublicationService = (publicationID) => {
+  const handleLovePublicationService = (publicationID) => {
     return service.patch(`/publication/${publicationID}/add-dislike`);
   };
   
-  const deleteLovePublicationService = (publicationID) => {
-    return service.patch(`/publication/${publicationID}/delete-love`);
-  };
 
   
-  export { allPublicationsService, newPublicationService, deletePublicationService, friendsPublicationService, addLikePublicationService, deleteDislikePublicationService, adDislikePublicationService, deleteLikePublicationService, addLovePublicationService, deleteLovePublicationService};
+  export { allPublicationsService, newPublicationService, deletePublicationService, friendsPublicationService, handleLikePublicationService, handleDislikePublicationService, handleLovePublicationService};
   
