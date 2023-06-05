@@ -9,7 +9,8 @@ export default function CreateValuation() {
   const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const {gameId} = useParams;
+  const {gameId} = useParams();
+  console.log(gameId)
 
 
 

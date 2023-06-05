@@ -20,7 +20,7 @@ const deleteDislikeValuationService = (valuationId) => {
   return service.patch(`/valuation/${valuationId}/delete-like`);
 };
 
-const adDislikeValuationService = (valuationId) => {
+const addDislikeValuationService = (valuationId) => {
   return service.patch(`/valuation/${valuationId}/add-dislike`);
 };
 
@@ -36,4 +36,4 @@ const deleteLoveValuationService = (valuationId) => {
   return service.patch(`/valuation/${valuationId}/delete-love`);
 };
 
-  export {allValuationServices, newValuationService, deleteValuationService, addLikeValuationService, deleteDislikeValuationService, adDislikeValuationService, deleteLikeValuationService, addLoveValuationService, deleteLoveValuationService}
+  export {allValuationServices, newValuationService, deleteValuationService, addLikeValuationService, deleteDislikeValuationService, addDislikeValuationService, deleteLikeValuationService, addLoveValuationService, deleteLoveValuationService}
