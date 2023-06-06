@@ -17,11 +17,11 @@ const createGroupService = (groupDetails) =>{
 };
 
 const groupAddUserService = (groupId, userId) =>{
-    return service.patch(`/group/${groupId}/${userId}/add-use`);
+    return service.patch(`/group/${groupId}/${userId}/add-user`);
 };
 
 const groupDeleteUserService = (groupId, userId) =>{
-    return service.patch(`/group/${groupId}/${userId}/delete-use`);
+    return service.patch(`/group/${groupId}/${userId}/delete-user`);
 };
 
 const addModService = (groupId, modId) =>{
