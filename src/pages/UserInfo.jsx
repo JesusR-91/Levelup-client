@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { friendInfoService } from "../services/user.services";
+import { addFriendService, friendInfoService, userInfoService } from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function UserInfo() {
+  const [activeUser, setActiveUser] = useState();
   const [profile, setProfile] = useState(null);
   const [publications, setPublications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +14,8 @@ export default function UserInfo() {
     try {
       const userProfile = await friendInfoService(userId);
       const allUserPublications = await allPublicationsService();
+      const currentUser = await userInfoService();
+      setActiveUser(currentUser.data);
       setProfile(userProfile.data);
       setPublications(allUserPublications.data);
       setIsLoading(false);
@@ -21,11 +24,18 @@ export default function UserInfo() {
       navigate("/error");
     }
   };
-  console.log(profile);
-
+  
+  const addUser = async (userId) =>{
+    setIsLoading(true);
+    await addFriendService(userId);
+    setIsLoading(false);
+  };
+  
   useEffect(() => {
     getData();
   }, [userId]);
+
+  activeUser && console.log(activeUser.friends)
 
   return !isLoading ? (
     <div>
@@ -33,6 +43,7 @@ export default function UserInfo() {
         <div key={profile._id}>
           <img src={profile.profileImg} alt="Profile-Image" width="200px" />
           <h3>{profile.username}</h3>
+         {!activeUser.friends.map(e => e._id).includes(profile._id) && (<button onClick={() =>{addUser(profile._id)}}>Add friend</button>)}
           <p>
             {profile.firstName} {profile.lastName}
           </p>
