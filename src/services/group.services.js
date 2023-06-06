@@ -25,11 +25,11 @@ const groupDeleteUserService = (groupId, userId) =>{
 };
 
 const addModService = (groupId, modId) =>{
-    return service.patch(`/group/${groupId}/${modId}/add-mod)`)
+    return service.patch(`/group/${groupId}/${modId}/add-mod`);
 };
 
 const deleteModService = (groupId, modId) =>{
-    return service.patch(`/group/${groupId}/${modId}/delete-mod)`)
+    return service.patch(`/group/${groupId}/${modId}/delete-mod`);
 };
 
 export {groupListService, ownGroupListService, groupDetailsService, groupAddUserService, groupDeleteUserService, createGroupService, addModService, deleteModService};
