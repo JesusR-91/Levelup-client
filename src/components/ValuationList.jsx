@@ -1,5 +1,5 @@
 import { useNavigate, useParams} from "react-router-dom"
-import { handleLikeValuationService, allValuationServices, handleDislikeValuationService } from "../services/valuation.services"
+import { handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService } from "../services/valuation.services"
 import { useEffect, useState } from "react"
 import CreateValuation from "./CreateValuation"
 
@@ -35,6 +35,7 @@ const getData = async ()=>{
 const handleLike = async (valId) => {
   try {
     await handleLikeValuationService(valId);
+    setReload(!reload);
   } catch (error) {
     console.log(error);
     navigate("/error")
@@ -44,6 +45,7 @@ const handleLike = async (valId) => {
 const handleDislike = async (valId) => {
   try {
     await handleDislikeValuationService(valId);
+    setReload(!reload);
   } catch (error) {
     console.log(error);
     navigate("/error")
@@ -52,7 +54,8 @@ const handleDislike = async (valId) => {
 
 const handleLove = async (valId) => {
   try {
-    await handleDislikeValuationService(valId);
+    await handleLoveValuationService(valId);
+    setReload(!reload);
   } catch (error) {
     console.log(error);
     navigate("/error")
@@ -66,7 +69,7 @@ useEffect(()=>{
 
   return !isLoading ? (
     <div>
-    
+
       <CreateValuation setReload={setReload}/>
 
       <h4>Valuation List - Average: { "★".repeat(Math.floor(average))}{"☆".repeat(5 - Math.floor(average))} </h4>
@@ -82,8 +85,8 @@ useEffect(()=>{
       </div>
       <div>
         <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/></button> 
-        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
         <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachValue._id)}}><img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/></button>
+        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
       </div>
 
     </div>

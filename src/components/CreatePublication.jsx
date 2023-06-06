@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
+
+//IMPORTS
 import { useState } from "react"
 import {newPublicationService} from "../services/publications.services"
 import { useNavigate } from "react-router-dom";
-export default function CreatePublication() {
+
+export default function CreatePublication({setReload}) {
   //STATES
   const [content ,setContent] = useState("")
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +18,8 @@ export default function CreatePublication() {
     try {
       setIsLoading(true)
       await newPublicationService(content);
+      setReload(currentValue => {!currentValue});
+      setContent("");
       setIsLoading(false);
     } catch (error) {
       console.log(error);
