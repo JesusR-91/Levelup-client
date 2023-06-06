@@ -10,6 +10,8 @@ export default function ValuationsList() {
 const [valuation, setValuations] = useState([])
 const [isLoading, setIsLoading]= useState(true);
 const [average, setAverage] = useState(0);
+const [reload, setReload] = useState(false);
+
 const {gameId} = useParams();
 
   //FUNCTIONS
@@ -59,12 +61,14 @@ const handleLove = async (valId) => {
 
 useEffect(()=>{
   getData()
-}, [])
+}, [reload])
 
 
   return !isLoading ? (
     <div>
-      <CreateValuation/>
+    
+      <CreateValuation setReload={setReload}/>
+
       <h4>Valuation List - Average: { "★".repeat(Math.floor(average))}{"☆".repeat(5 - Math.floor(average))} </h4>
   {valuation.map((eachValue)=>(
     <div key={eachValue._id}>

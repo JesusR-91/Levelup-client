@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
+
 import { useState } from "react";
 import { newValuationService } from "../services/valuation.services";
 import { useParams } from "react-router-dom";
 
-export default function CreateValuation() {
+export default function CreateValuation({setReload}) {
 
   //STATES
   const [content, setContent] = useState("");
@@ -21,7 +23,10 @@ export default function CreateValuation() {
     try {
       setIsLoading(true);
       await newValuationService(gameId, content, value);
+      setReload(currentValue => {!currentValue})
       setIsLoading(false);
+      setContent("");
+      setValue(0)
     } catch (error) {
       console.log(error);
     }
