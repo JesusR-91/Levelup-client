@@ -11,6 +11,7 @@ const AuthWrapper = (props) =>{
     const [isLoggedIn, setIsLoggedIn] = useState();
     const [activeUser, setActiveUser] = useState();
     const [isLoading, setIsLoading] = useState();
+    const [isAdmin, setIsAdmin] = useState();
 
     
     //Function that verify the Token and receive the Payload
@@ -21,6 +22,7 @@ const AuthWrapper = (props) =>{
             console.log("Token validated");
             setIsLoggedIn(true);
             setActiveUser(response.data);
+            response.data.rol.includes("admin") ? setIsAdmin (true) : setIsAdmin(false);
             setIsLoading(false)
         } catch (error) {
             console.log (error);
@@ -39,7 +41,7 @@ const AuthWrapper = (props) =>{
 
     // 2. Context object
 
-    const passedContext = {isLoggedIn, activeUser, authenticateUser};
+    const passedContext = {isLoggedIn, activeUser, authenticateUser, isAdmin};
 
     // When the server is getting the data
     if(isLoading) {
