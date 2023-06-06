@@ -23,10 +23,11 @@ export default function PublicationList({setReload}) {
   //FUNCTION
   const getData = async () => {
     try {
+      setIsLoading(true);
       const allResponse = await allPublicationsService();
       const friendResponse = await friendsPublicationService();
-
       const publicationUpdated = [...allResponse.data, ...friendResponse.data];
+
       publicationUpdated.forEach((publication) => {
         const publicationDate = publication.createdAt;
         publication.createdAt = new Date(publicationDate).toTimeString().slice(0,8) + " - " + new Date(publicationDate).toDateString();
@@ -71,13 +72,12 @@ export default function PublicationList({setReload}) {
 
 
   useEffect(() => {
-    console.log(publication.length)
     getData();
   }, []);
 
   return !isLoading ? (
     <div>
-      <CreatePublication setReload = {setReload}/>
+      <CreatePublication getData = {getData}/>
       {publication.length > 0 ? (
       <div>
       <h4>All publications:</h4>

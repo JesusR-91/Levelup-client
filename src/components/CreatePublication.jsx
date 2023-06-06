@@ -5,7 +5,7 @@ import { useState } from "react"
 import {newPublicationService} from "../services/publications.services"
 import { useNavigate } from "react-router-dom";
 
-export default function CreatePublication({setReload}) {
+export default function CreatePublication({getData}) {
   //STATES
   const [content ,setContent] = useState("")
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function CreatePublication({setReload}) {
     try {
       setIsLoading(true)
       await newPublicationService(content);
-      setReload(currentValue => {!currentValue});
+      getData();
       setContent("");
       setIsLoading(false);
     } catch (error) {

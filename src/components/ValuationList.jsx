@@ -1,7 +1,8 @@
 import { useNavigate, useParams} from "react-router-dom"
-import { handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService } from "../services/valuation.services"
-import { useEffect, useState } from "react"
-import CreateValuation from "./CreateValuation"
+import { handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService, deleteValuationService } from "../services/valuation.services"
+import { useContext, useEffect, useState } from "react";
+import CreateValuation from "./CreateValuation";
+import { AuthContext } from "../context/auth.context";
 
 
 export default function ValuationsList() {
@@ -12,6 +13,7 @@ const [isLoading, setIsLoading]= useState(true);
 const [average, setAverage] = useState(0);
 const [reload, setReload] = useState(false);
 
+const {activeUser} = useContext(AuthContext);
 const {gameId} = useParams();
 
   //FUNCTIONS
@@ -20,8 +22,9 @@ const getData = async ()=>{
   try {
     const response = await allValuationServices(gameId)
     const allValuations = response.data;
+    setIsLoading(true);
     setValuations(allValuations)
-    setIsLoading(false)
+    setIsLoading(false);
     let  values  = 0;
     allValuations.forEach(val => (values += val.value));
     values = values /allValuations.length
@@ -58,19 +61,29 @@ const handleLove = async (valId) => {
     setReload(!reload);
   } catch (error) {
     console.log(error);
-    navigate("/error")
+    navigate("/error");
   }
 };
 
+const handleValuation = async (valId) =>{
+  try {
+    await deleteValuationService(valId)
+  } catch (error) {
+    console.log(error);
+    navigate("/error");
+  }
+}
+console.log(activeUser)
+
 useEffect(()=>{
   getData()
-}, [reload])
+}, [])
 
 
   return !isLoading ? (
     <div>
 
-      <CreateValuation setReload={setReload}/>
+      <CreateValuation getData={getData}/>
 
       <h4>Valuation List - Average: { "★".repeat(Math.floor(average))}{"☆".repeat(5 - Math.floor(average))} </h4>
   {valuation.map((eachValue)=>(
@@ -88,7 +101,7 @@ useEffect(()=>{
         <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachValue._id)}}><img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/></button>
         <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
       </div>
-
+      {(eachValue.owner === activeUser._id) && (<button onClick={()=>{handleValuation(eachValue._id)}}>Delete valuation</button>)}
     </div>
   ))}
   
