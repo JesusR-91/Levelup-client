@@ -15,6 +15,7 @@ import GameList from "./pages/games/GameList";
 import GameDetails from "./pages/games/GameDetails";
 import FoundGame from "./pages/games/FoundGame";
 import IsLogged from "./pages/auth/IsLogged";
+import IsAdmin from "./pages/auth/IsAdmin";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
         <Route path="/auth/signup" element={<Signup/>} />
         <Route path="/auth/login" element={<Login/>} />
 
-        <Route path="/admin" element={<IsLogged><Admin/></IsLogged>} />
+        <Route path="/admin" element={<IsLogged> <IsAdmin><Admin/></IsAdmin></IsLogged>} />
 
         <Route path="/" element={<IsLogged><Home/></IsLogged>} />
         <Route path="/profile" element={<IsLogged><Profile/></IsLogged>} />
