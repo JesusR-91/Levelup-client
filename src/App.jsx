@@ -14,6 +14,7 @@ import GroupDetails from "./pages/groups/GroupDetails";
 import GameList from "./pages/games/GameList";
 import GameDetails from "./pages/games/GameDetails";
 import FoundGame from "./pages/games/FoundGame";
+import IsLogged from "./pages/auth/IsLogged";
 
 function App() {
   return (
@@ -21,21 +22,21 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/auth/signup" element={<Signup />} />
-        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/signup" element={<Signup/>} />
+        <Route path="/auth/login" element={<Login/>} />
 
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<IsLogged><Admin/></IsLogged>} />
 
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/user/:userId" element={<UserInfo />} />
+        <Route path="/" element={<IsLogged><Home/></IsLogged>} />
+        <Route path="/profile" element={<IsLogged><Profile/></IsLogged>} />
+        <Route path="/user/:userId" element={<IsLogged><UserInfo/></IsLogged>} />
 
-        <Route path="/group/list" element={<GroupList />} />
-        <Route path="/group/:groupId/details" element={<GroupDetails />} />
+        <Route path="/group/list" element={<IsLogged><GroupList/></IsLogged>} />
+        <Route path="/group/:groupId/details" element={<IsLogged><GroupDetails/></IsLogged>} />
 
-        <Route path="/game/list" element={<GameList />} />
-        <Route path="/game/:gameId/details" element={<GameDetails />} />
-        <Route path="/game/found-games/:queryValue" element={<FoundGame/>}/>
+        <Route path="/game/list" element={<IsLogged><GameList/></IsLogged>} />
+        <Route path="/game/:gameId/details" element={<IsLogged><GameDetails /></IsLogged>} />
+        <Route path="/game/found-games/:queryValue" element={<IsLogged><FoundGame/></IsLogged>}/>
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />

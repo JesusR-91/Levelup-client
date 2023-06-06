@@ -11,9 +11,9 @@ export default function CreateGroupForm() {
 
   const handleSubmit = async () => {
     try {
-      // setIsLoading(true)
+      setIsLoading(true)
       await createGroupService({name, description});
-      // setIsLoading(false); 
+      setIsLoading(false); 
     } catch (error) {
       console.log(error);   
     }

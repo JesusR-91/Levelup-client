@@ -1,35 +1,35 @@
 import service from "./config.services";
 
-const getAllGPService = (gpId) => {
-  return service.get(`/group-comment/${gpId}`);
+const getAllGCService = (gcId) => {
+  return service.get(`/group-comment/${gcId}`);
 };
 
-const createGPService = (gpId) => {
-  return service.post(`/group-comment/${gpId}`);
+const createGCService = (gcId, content) => {
+  return service.post(`/group-comment/${gcId}`, {content});
 };
 
-const deleteGPService = (gpId) => {
-  return service.delete(`/group-comment/${gpId}`);
+const deleteGCService = (gcId) => {
+  return service.delete(`/group-comment/${gcId}`);
 };
 
-const handleLikeGPService = (gpId) => {
-  return service.patch(`/group-comment/${gpId}/handle-like`);
+const handleLikeGCService = (gcId) => {
+  return service.patch(`/group-comment/${gcId}/handle-like`);
 };
 
-const handleDislikeGPService = (gpId) => {
-  return service.patch(`/group-comment/${gpId}/handle-dislike`);
+const handleDislikeGCService = (gcId) => {
+  return service.patch(`/group-comment/${gcId}/handle-dislike`);
 };
 
-const handleLoveGPService = (gpId) => {
-  return service.patch(`/group-comment/${gpId}/handle-dislike`);
+const handleLoveGCService = (gcId) => {
+  return service.patch(`/group-comment/${gcId}/handle-dislike`);
 };
 
 
 export {
-  getAllGPService,
-  createGPService,
-  deleteGPService,
-  handleLikeGPService,
-  handleDislikeGPService,
-  handleLoveGPService,
+  getAllGCService,
+  createGCService,
+  deleteGCService,
+  handleLikeGCService,
+  handleDislikeGCService,
+  handleLoveGCService,
 };

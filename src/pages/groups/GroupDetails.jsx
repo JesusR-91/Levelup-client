@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { groupDetailsService } from "../../services/group.services";
 import { friendInfoService } from "../../services/user.services";
+import GroupCommentList from "../../components/GroupCommentList";
 
 export default function GroupDetails() {
   const [group, setGroup] = useState();
@@ -42,6 +43,9 @@ export default function GroupDetails() {
           {user.username}
         </Link>
       ))}
+
+      <br />
+      <GroupCommentList/>
     </div>
   ) : (
     <h3>Loading...</h3>
