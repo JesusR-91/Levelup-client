@@ -10,9 +10,6 @@ export default function CreateValuation() {
   const [isLoading, setIsLoading] = useState(false);
 
   const {gameId} = useParams();
-  console.log(gameId)
-
-
 
   const handleContentInput = ({ target }) => {
     setContent(target.value);

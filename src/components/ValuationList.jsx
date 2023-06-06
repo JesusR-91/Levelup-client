@@ -1,5 +1,5 @@
 import { useNavigate, useParams} from "react-router-dom"
-import { handleLikeValuationService, allValuationServices } from "../services/valuation.services"
+import { handleLikeValuationService, allValuationServices, handleDislikeValuationService } from "../services/valuation.services"
 import { useEffect, useState } from "react"
 import CreateValuation from "./CreateValuation"
 
@@ -30,14 +30,32 @@ const getData = async ()=>{
   }
 }
 
-const addLike = async (valId) => {
+const handleLike = async (valId) => {
   try {
     await handleLikeValuationService(valId);
   } catch (error) {
     console.log(error);
     navigate("/error")
   }
-}
+};
+
+const handleDislike = async (valId) => {
+  try {
+    await handleDislikeValuationService(valId);
+  } catch (error) {
+    console.log(error);
+    navigate("/error")
+  }
+};
+
+const handleLove = async (valId) => {
+  try {
+    await handleDislikeValuationService(valId);
+  } catch (error) {
+    console.log(error);
+    navigate("/error")
+  }
+};
 
 useEffect(()=>{
   getData()
@@ -59,9 +77,9 @@ useEffect(()=>{
         {eachValue.dislikes.length > 0 && (eachValue.dislikes.length > 1 ? (<p>{eachValue.dislikes.length} Likes</p>): (<p>{eachValue.dislikes.length} Dislikes</p>))}
       </div>
       <div>
-        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{addLike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/></button> 
-        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
-        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}}><img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/></button>
+        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/></button> 
+        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
+        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachValue._id)}}><img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/></button>
       </div>
 
     </div>

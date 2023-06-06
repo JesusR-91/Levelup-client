@@ -13,7 +13,7 @@ const deleteValuationService = (valuationId) => {
 };
 
 const handleLikeValuationService = (valuationId) => {
-  return service.patch(`/valuation/${valuationId}/add-like`);
+  return service.patch(`/valuation/${valuationId}/handle-like`);
 };
 
 
@@ -25,7 +25,6 @@ const handleDislikeValuationService = (valuationId) => {
 const handleLoveValuationService = (valuationId) => {
   return service.patch(`/valuation/${valuationId}/handle-love`);
 };
-
 
 
   export {allValuationServices, newValuationService, deleteValuationService, handleLikeValuationService, handleDislikeValuationService, handleLoveValuationService}
