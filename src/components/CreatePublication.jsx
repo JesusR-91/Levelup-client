@@ -4,6 +4,8 @@
 import { useState } from "react"
 import {newPublicationService} from "../services/publications.services"
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
 
 export default function CreatePublication({getData}) {
   //STATES
@@ -28,13 +30,12 @@ export default function CreatePublication({getData}) {
     }
   }
   return !isLoading ? (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div style={{padding:"5vh"}}>
+      <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"row", justifyContent:"center", gap:"2vh"}}>
         <div>
-          <label>Description</label>
-          <input type="textarea" name="content" onChange={handleContentInput} value={content}/>
+          <input type="textarea" name="content" onChange={handleContentInput} value={content} placeholder="What are you thinking about?" style={{width:"50vw", height:"6vh"}}/>
         </div>
-        <button>Create!</button>
+        <Button type="submit">Create!</Button>
       </form>
     </div>
   ) : <h3>Loading...</h3>

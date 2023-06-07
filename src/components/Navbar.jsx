@@ -1,20 +1,28 @@
-import {Link} from "react-router-dom"
 import IsAdmin from "./auth/IsAdmin"
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import SearchBar from "../components/Searchbar.jsx";
 
-export default function Navbar() {
+
+export default function NavBar() {
+
   return (
-    <div>
-        <Link to="/auth/login">Login</Link>
-        <Link to="/auth/signup">Signup</Link>
+    <Navbar style={{border:"white solid 1px", borderRadius:"10px"}} variant="dark">
+      <Container>
 
-        <IsAdmin><Link to="/admin">Admin</Link></IsAdmin> 
+        <IsAdmin><Nav.Link href="/admin">Admin</Nav.Link></IsAdmin> 
 
-        <Link to="/">Home</Link>
-        <Link to="/profile">Profile</Link>
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/profile">Profile</Nav.Link>
 
-        <Link to="/group/list">Group list</Link>
+        <Nav.Link href="/group/list">Group list</Nav.Link>
 
-        <Link to="/game/list">Games list</Link>
-    </div>
+        <Nav.Link href="/game/list">Games list</Nav.Link>
+
+      <SearchBar/>
+
+      </Container>
+    </Navbar>
   )
 }

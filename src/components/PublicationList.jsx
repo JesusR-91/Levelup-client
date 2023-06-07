@@ -14,6 +14,8 @@ import CreatePublication from "./CreatePublication.jsx";
 import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../assets/icons8-pixel-heart-white.png";
+import {PuffLoader} from "react-spinners";
+import { Button, Card, CardGroup  } from "react-bootstrap";
 
 export default function PublicationList() {
   
@@ -70,36 +72,37 @@ export default function PublicationList() {
     }
   }
 
-
   useEffect(() => {
     getData();
   }, [reload]);
 
   return !isLoading ? (
     <div>
-      <CreatePublication getData = {getData}/>
+    <div style={{padding:"2vh"}}><CreatePublication getData = {getData}/></div>
       {publication.length > 0 ? (
-      <div>
+      <div style={{padding:"2vh"}}>
       <h4>All publications:</h4>
-      {publication.map(eachPubl => (
-        <div key={eachPubl._id}>
-          <h4>{eachPubl.owner.username} - <span>{eachPubl.createdAt}</span></h4>
-          <p>{eachPubl.content}</p>
-          <div>
-            {eachPubl.likes.length > 0 && (eachPubl.likes.length > 1 ? (<p>{eachPubl.likes.length} Likes</p>): (<p>{eachPubl.likes.length} Like</p>))}
-            {eachPubl.loves.length > 0 &&  (eachPubl.loves.length > 1 ? (<p>{eachPubl.loves.length} Likes</p>): (<p>{eachPubl.loves.length} Love</p>))}
-            {eachPubl.dislikes.length > 0 && (eachPubl.dislikes.length > 1 ? (<p>{eachPubl.dislikes.length} Likes</p>): (<p>{eachPubl.dislikes.length} Dislikes</p>))}
-          </div>
-          <div>
-            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachPubl._id)}}><img src={likeImg} alt="thumbUp" width={"20px"}/></button> 
-            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachPubl._id)}}><img src={dislikeImg} alt="thumbUp" width={"20px"}/></button> 
-            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachPubl._id)}}><img src={loveImg} alt="thumbUp" width={"20px"}/></button>
-          </div>
-        </div>
-      ))}
+        <CardGroup style={{display:"flex", flexWrap:"wrap", gap:"5vh", padding:"2vh"}}>
+          {publication.map(eachPubl => (
+            <Card key={eachPubl._id} style={{backgroundColor:"lightgrey", padding:"2vh", display:"flex", justifyContent:"center", alignItems:"center"}}>
+              <h5>{eachPubl.owner.username} - <span>{eachPubl.createdAt}</span></h5>
+              <p>{eachPubl.content}</p>
+              <div>
+                {eachPubl.likes.length > 0 && (eachPubl.likes.length > 1 ? (<p>{eachPubl.likes.length} Likes</p>): (<p>{eachPubl.likes.length} Like</p>))}
+                {eachPubl.loves.length > 0 &&  (eachPubl.loves.length > 1 ? (<p>{eachPubl.loves.length} Likes</p>): (<p>{eachPubl.loves.length} Love</p>))}
+                {eachPubl.dislikes.length > 0 && (eachPubl.dislikes.length > 1 ? (<p>{eachPubl.dislikes.length} Likes</p>): (<p>{eachPubl.dislikes.length} Dislikes</p>))}
+              </div>
+              <div style={{display:"flex", justifyContent:"center", gap:"2vh", padding:"2vh"}}>
+                <Button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachPubl._id)}}><img src={likeImg} alt="thumbUp" width={"20px"}/></Button> 
+                <Button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachPubl._id)}}><img src={dislikeImg} alt="thumbUp" width={"20px"}/></Button> 
+                <Button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachPubl._id)}}><img src={loveImg} alt="thumbUp" width={"20px"}/></Button>
+              </div>
+            </Card>
+          ))}
+        </CardGroup>
       </div>
         
       ): (<p>No publications</p>)}
     </div>
-  ) : (<h4>Loading</h4>);
+  ) : (<div className="spinners"><PuffLoader color="white" size={120}/></div>);
 }
