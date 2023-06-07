@@ -12,11 +12,12 @@ import {
 } from "../services/publications.services.js";
 import CreatePublication from "./CreatePublication.jsx";
 
-export default function PublicationList({setReload}) {
+export default function PublicationList() {
   
   //STATE
   const [publication, setPublication] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [reload, setReload] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ export default function PublicationList({setReload}) {
   const handleLike = async (valId) => {
     try {
       await handleLikePublicationService(valId);
-      setReload(currentValue => {!currentValue});
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       navigate("/error")
@@ -53,7 +54,7 @@ export default function PublicationList({setReload}) {
   const handleDislike = async (valId) => {
     try {
       await handleDislikePublicationService(valId);
-      setReload(currentValue => {!currentValue});
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       navigate("/error")
@@ -63,7 +64,7 @@ export default function PublicationList({setReload}) {
   const handleLove = async (valId) => {
     try {
       await handleLovePublicationService(valId);
-      setReload(currentValue => {!currentValue});
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       navigate("/error")
@@ -73,7 +74,7 @@ export default function PublicationList({setReload}) {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [reload]);
 
   return !isLoading ? (
     <div>
@@ -85,6 +86,11 @@ export default function PublicationList({setReload}) {
         <div key={eachPubl._id}>
           <h4>{eachPubl.owner.username} - <span>{eachPubl.createdAt}</span></h4>
           <p>{eachPubl.content}</p>
+          <div>
+            {eachPubl.likes.length > 0 && (eachPubl.likes.length > 1 ? (<p>{eachPubl.likes.length} Likes</p>): (<p>{eachPubl.likes.length} Like</p>))}
+            {eachPubl.loves.length > 0 &&  (eachPubl.loves.length > 1 ? (<p>{eachPubl.loves.length} Likes</p>): (<p>{eachPubl.loves.length} Love</p>))}
+            {eachPubl.dislikes.length > 0 && (eachPubl.dislikes.length > 1 ? (<p>{eachPubl.dislikes.length} Likes</p>): (<p>{eachPubl.dislikes.length} Dislikes</p>))}
+          </div>
           <div>
             <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachPubl._id)}}><img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/></button> 
             <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachPubl._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 

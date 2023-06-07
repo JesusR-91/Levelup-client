@@ -73,11 +73,10 @@ const handleValuation = async (valId) =>{
     navigate("/error");
   }
 }
-console.log(activeUser)
 
 useEffect(()=>{
   getData()
-}, [])
+}, [reload])
 
 
   return !isLoading ? (

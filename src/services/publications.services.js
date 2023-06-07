@@ -18,15 +18,15 @@ const allPublicationsService = () => {
   };
   
   const handleLikePublicationService = (publicationID) => {
-    return service.patch(`/publication/${publicationID}/add-like`);
+    return service.patch(`/publication/${publicationID}/handle-like`);
   };
   
   const handleDislikePublicationService = (publicationID) => {
-    return service.patch(`/publication/${publicationID}/add-dislike`);
+    return service.patch(`/publication/${publicationID}/handle-dislike`);
   };
   
   const handleLovePublicationService = (publicationID) => {
-    return service.patch(`/publication/${publicationID}/add-dislike`);
+    return service.patch(`/publication/${publicationID}/handle-dislike`);
   };
   
 
