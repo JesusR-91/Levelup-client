@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { newValuationService } from "../services/valuation.services";
 import { useParams } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 
 export default function CreateValuation({setReload}) {
 
@@ -31,9 +32,24 @@ export default function CreateValuation({setReload}) {
       console.log(error);
     }
   };
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
   return !isLoading ? (
     <div>
-    <h3>New valuation:</h3>
+    <Button onClick={handleOpenPopup}>New Valuation</Button>
+
+<Modal show={showPopup} onHide={handleClosePopup}>
+  <Modal.Header closeButton>
+    <Modal.Title>Add User</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
      <form onSubmit={handleSubmit}>
       
         <div>
@@ -59,6 +75,11 @@ export default function CreateValuation({setReload}) {
         <br />
         <button>Create!</button>
       </form>
+      </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClosePopup}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   ) : (
     <h3>Loading...</h3>

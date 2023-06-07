@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createGCService } from "../services/groupComment.services";
+import { Button, Modal } from "react-bootstrap";
 
 export default function CreateGroupComment({setReload}) {
     
@@ -25,10 +26,25 @@ export default function CreateGroupComment({setReload}) {
         
       }
     }
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleOpenPopup = () => {
+      setShowPopup(true);
+    };
+  
+    const handleClosePopup = () => {
+      setShowPopup(false);
+    };
 
   return !isLoading ? (
     <div>
-        <h2>Create new comment</h2>
+        <Button onClick={handleOpenPopup}>Create a New Comment</Button>
+
+<Modal show={showPopup} onHide={handleClosePopup}>
+  <Modal.Header closeButton>
+    <Modal.Title>Add User</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Description</label>
@@ -36,6 +52,11 @@ export default function CreateGroupComment({setReload}) {
             </div>
             <button>Create!</button>
         </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClosePopup}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   ) : <h3>Loading...</h3>
 }

@@ -3,6 +3,7 @@ import { editUserService } from "../services/user.services";
 import { userInfoService } from "../services/user.services";
 import { useNavigate } from "react-router-dom";
 import { uploadImageService } from "../services/upload.services";
+import { Button, Modal } from "react-bootstrap";
 
 export default function EditProfile() {
   //STATES
@@ -86,7 +87,15 @@ export default function EditProfile() {
       navigate("/error");
     }
   };
+  const [showPopup, setShowPopup] = useState(false);
 
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
   //USE EFFECT:
   useEffect(() => {
     getData();
@@ -94,8 +103,14 @@ export default function EditProfile() {
 
   return (
     <div>
-      <h3>Edit Profile</h3>
+          
+      <Button onClick={handleOpenPopup}>Edit Info</Button>
 
+      <Modal show={showPopup} onHide={handleClosePopup}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Info</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
       <form onSubmit={handleForm}>
         <div>
           <label>Image</label>
@@ -182,6 +197,11 @@ export default function EditProfile() {
 
         <button type="submit">Edit</button>
       </form>
+      </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClosePopup}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

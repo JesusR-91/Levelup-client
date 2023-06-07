@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { createGroupService } from "../services/group.services";
 import {useNavigate } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 
 export default function CreateGroupForm() {
   const [name, setName] = useState("");
@@ -26,9 +27,24 @@ const navigate = useNavigate()
       navigate("/error")
     }
   }
+  const [showPopup, setShowPopup] = useState(false);
 
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
   return !isLoading ? (
     <div>
+            <Button onClick={handleOpenPopup}>Create Group</Button>
+
+<Modal show={showPopup} onHide={handleClosePopup}>
+  <Modal.Header closeButton>
+    <Modal.Title>Add User</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
@@ -43,6 +59,11 @@ const navigate = useNavigate()
 
         <button>Create!</button>
       </form>
+      </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClosePopup}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   ) : <h3>Loading...</h3>
 }
