@@ -19,6 +19,7 @@ export default function EditProfile() {
   });
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,7 +27,6 @@ export default function EditProfile() {
   const getData = async () => {
     try {
       const activeUser = await userInfoService();
-      console.log(activeUser);
       setEditProfile({
         username: activeUser.data.name,
         pastPassword: activeUser.data.password,
@@ -38,6 +38,8 @@ export default function EditProfile() {
         phoneNumber: activeUser.data.phoneNumber,
         profileImg: activeUser.data.profileImg,
       });
+      console.log(activeUser);
+
     } catch (error) {
       console.log(error);
       navigate("/error");
@@ -50,23 +52,28 @@ export default function EditProfile() {
 
   const handleForm = async (e) => {
     e.preventDefault();
+   
     try {
       await editUserService(editProfile);
     } catch (error) {
+      if (error.response.status === 400) {
+        console.log(error.response.data.errorMessage)
+        setErrorMessage(error.response.data.errorMessage)
+        return;
+      }
       console.log(error);
       navigate("/error");
     }
   };
 
   const handleFileUpload = async (event) => {
-    // to prevent accidentally clicking the choose file button and not selecting a file
     if (!event.target.files[0]) {
       return;
     }
 
-    setIsUploading(true); // to start the loading animation
+    setIsUploading(true); 
 
-    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    const uploadData = new FormData(); 
     uploadData.append("image", event.target.files[0]);
 
     try {
@@ -74,7 +81,7 @@ export default function EditProfile() {
 
       setImageUrl(response.data.imageUrl);
 
-      setIsUploading(false); // to stop the loading animation
+      setIsUploading(false); 
     } catch (error) {
       navigate("/error");
     }
@@ -98,11 +105,8 @@ export default function EditProfile() {
             onChange={handleFileUpload}
             disabled={isUploading}
           />
-          {/* below disabled prevents the user from attempting another upload while one is already happening */}
         </div>
-        {/* to render a loading message or spinner while uploading the picture */}
         {isUploading ? <h3>... uploading image</h3> : null}
-        {/* below line will render a preview of the image from cloudinary */}
         {imageUrl ? (
           <div>
             <img src={imageUrl} alt="img" width={200} />
@@ -174,9 +178,10 @@ export default function EditProfile() {
           onChange={handleEdit}
         />
         <br />
+        {errorMessage && <p style={{color:"red"}}>{errorMessage}</p> }
+
         <button type="submit">Edit</button>
       </form>
-      {/*         <button onClick={navigate("/profile")}>Cancel</button> */}
     </div>
   );
 }
