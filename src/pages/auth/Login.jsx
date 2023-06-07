@@ -2,8 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "../../services/auth.services";
 import { AuthContext } from "../../context/auth.context";
-import icon from "../../assets/img.png"
-import name from "../../assets/logo.png"
+import name from "../../assets/logo-no-background.png"
 
 
 
@@ -45,7 +44,6 @@ export default function Login() {
 
   return (
     <div>
-    <img src={icon} alt="logo" />
     <img src={name} alt="web-name" />
 
       <h2>Login</h2>
