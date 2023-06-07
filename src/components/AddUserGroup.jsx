@@ -10,7 +10,10 @@ export default function AddUserGroup() {
   const [users, setUsers] = useState();
   const [queryValue, setQueryValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+
   const { groupId } = useParams();
+
   //FUNCTIONS
   const getData = async () => {
     try {
