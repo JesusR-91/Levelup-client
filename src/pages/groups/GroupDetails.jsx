@@ -66,7 +66,7 @@ const {activeUser} = useContext(AuthContext)
             group.owner.includes(activeUser._id)) && (
               <button
                 onClick={() => {
-                  handleDeleteUser(group._id, modId);
+                  handleDeleteUser(group._id, user._id);
                 }}
               >
                 Delete User
@@ -79,7 +79,7 @@ const {activeUser} = useContext(AuthContext)
                 group.owner.includes(activeUser._id)) && (
                   <button
                     onClick={() => {
-                      handleDeleteMod(group._id, modId);
+                      handleDeleteMod(group._id, user._id);
                     }}
                   >
                     Delete Mod
