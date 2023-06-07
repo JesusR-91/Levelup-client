@@ -14,9 +14,9 @@ import GroupDetails from "./pages/groups/GroupDetails";
 import GameList from "./pages/games/GameList";
 import GameDetails from "./pages/games/GameDetails";
 import FoundGame from "./pages/games/FoundGame";
-import IsLogged from "./pages/auth/IsLogged";
-import IsAdmin from "./pages/auth/IsAdmin";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import IsLogged from "./components/auth/IsLogged";
+import IsAdmin from "./components/auth/IsAdmin";
+
 
 function App() {
   return (

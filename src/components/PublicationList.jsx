@@ -28,11 +28,12 @@ export default function PublicationList() {
       const allResponse = await allPublicationsService();
       const friendResponse = await friendsPublicationService();
       const publicationUpdated = [...allResponse.data, ...friendResponse.data];
+      console.log(publicationUpdated)
 
-      publicationUpdated.forEach((publication) => {
-        const publicationDate = publication.createdAt;
-        publication.createdAt = new Date(publicationDate).toTimeString().slice(0,8) + " - " + new Date(publicationDate).toDateString();
-      });
+      // publicationUpdated.forEach((publication) => {
+      //   const publicationDate = publication.createdAt;
+      //   publication.createdAt = new Date(publicationDate).toTimeString().slice(0,8) + " - " + new Date(publicationDate).toDateString();
+      // });
       setPublication(publicationUpdated);
       setIsLoading(false);
     } catch (error) {
