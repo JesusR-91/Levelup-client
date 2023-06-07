@@ -1,7 +1,11 @@
+//IMPORTS
 import { useEffect, useState } from "react";
 import { gameListService } from "../../services/games.services";
 import { Link } from "react-router-dom";
 import GameSearchBar from "../../components/GameSearchBar";
+import lefArrow from "../../assets/icons8-back-arrow-60-left.png";
+import rightArrow from "../../assets/icons8-back-arrow-60-rigth.png";
+
 
 export default function GameList() {
   const [gameList, setGameList] = useState([]);
@@ -44,8 +48,8 @@ export default function GameList() {
       </div>
 
       <div style={{display: "flex", flexDirection:"row", justifyContent:"space-between"}}>
-        <button onClick={handleLeftArrow}> <img src="../../../public/icons8-back-arrow-60-left.png" alt="left-arrow" /> </button>
-        <button onClick={handleRightArrow} > <img src="../../../public/icons8-back-arrow-60-rigth.png" alt="right-arrow" /> </button>
+        <button onClick={handleLeftArrow}> <img src={lefArrow} alt="left-arrow" /> </button>
+        <button onClick={handleRightArrow} > <img src={rightArrow} alt="right-arrow" /> </button>
       </div>
 
     </div>

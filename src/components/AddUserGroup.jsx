@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { groupAddUserService, groupDetailsService } from "../services/group.services";
 import { getAllUserService } from "../services/admin.services";
