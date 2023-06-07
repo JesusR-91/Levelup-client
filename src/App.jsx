@@ -16,6 +16,7 @@ import GameDetails from "./pages/games/GameDetails";
 import FoundGame from "./pages/games/FoundGame";
 import IsLogged from "./pages/auth/IsLogged";
 import IsAdmin from "./pages/auth/IsAdmin";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
