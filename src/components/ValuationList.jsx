@@ -98,7 +98,8 @@ useEffect(()=>{
       <h4>Valuation List - Average: { "★".repeat(Math.floor(average))}{"☆".repeat(5 - Math.floor(average))} </h4>
   {valuation.map((eachValue)=>(
     <div key={eachValue._id}>
-      <h5>{eachValue.owner.username} - { "★".repeat(Math.floor(eachValue.value))}{"☆".repeat(5 - Math.floor(eachValue.value))}</h5>
+      <h5><span>{eachValue.createdAt}</span> - {eachValue.owner.username} - { "★".repeat(Math.floor(eachValue.value))}{"☆".repeat(5 - Math.floor(eachValue.value))}</h5>
+      
       <p>{eachValue.content}</p>
       <p>{eachValue.updateAt}</p>
       <div>

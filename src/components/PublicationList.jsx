@@ -32,6 +32,7 @@ export default function PublicationList() {
       const friendResponse = await friendsPublicationService();
       const publicationUpdated = [...allResponse.data, ...friendResponse.data];
       setPublication(publicationUpdated);
+      console.log(publicationUpdated)
       setIsLoading(false);
     } catch (error) {
       console.log(error);
