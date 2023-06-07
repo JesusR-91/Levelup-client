@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom"
+import IsAdmin from "./auth/IsAdmin"
 
 export default function Navbar() {
   return (
@@ -6,7 +7,7 @@ export default function Navbar() {
         <Link to="/auth/login">Login</Link>
         <Link to="/auth/signup">Signup</Link>
 
-        <Link to="/admin">Admin</Link>
+        <IsAdmin><Link to="/admin">Admin</Link></IsAdmin> 
 
         <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>

@@ -21,7 +21,7 @@ import IsAdmin from "./components/auth/IsAdmin";
 function App() {
   return (
     <div>
-      <Navbar />
+      <IsLogged><Navbar/></IsLogged>
 
       <Routes>
         <Route path="/auth/signup" element={<Signup/>} />
