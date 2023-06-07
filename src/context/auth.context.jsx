@@ -10,7 +10,7 @@ const AuthWrapper = (props) =>{
     // 1. Functions and states
     const [isLoggedIn, setIsLoggedIn] = useState();
     const [activeUser, setActiveUser] = useState();
-    const [isLoading, setIsLoading] = useState();
+    const [isLoading, setIsLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState();
 
     

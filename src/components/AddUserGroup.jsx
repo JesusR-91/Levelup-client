@@ -34,11 +34,10 @@ export default function AddUserGroup({setReload}) {
     }
   };
   
-  const handleFilter = async () => {setFilteredUsers([...users].filter(e => e.username.includes(search)))};
 
   const handleSearch =({target}) => {
     setSearch(target.value);
-    handleFilter();
+    setFilteredUsers(users.filter(e => e.username.includes(target.value)));
   } 
   
   const handleAddUser = async (groupId, userId) => {
