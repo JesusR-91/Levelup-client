@@ -29,8 +29,8 @@ export default function EditProfile() {
       const activeUser = await userInfoService();
       setEditProfile({
         username: activeUser.data.name,
-        pastPassword: activeUser.data.password,
-        newPassword: activeUser.data.password,
+        pastPassword: "",
+        newPassword: "",
         firstName: activeUser.data.firstName,
         lastName: activeUser.data.lastName,
         birthDate: activeUser.data.birthDate,

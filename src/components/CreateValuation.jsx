@@ -4,7 +4,7 @@ import { useState } from "react";
 import { newValuationService } from "../services/valuation.services";
 import { useParams } from "react-router-dom";
 
-export default function CreateValuation({setReload}) {
+export default function CreateValuation({getData}) {
 
   //STATES
   const [content, setContent] = useState("");
@@ -19,11 +19,12 @@ export default function CreateValuation({setReload}) {
   const handleValueInput = ({ target }) => {
     setValue(target.value);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       setIsLoading(true);
       await newValuationService(gameId, content, value);
-      setReload(currentValue => {!currentValue})
+      getData();
       setIsLoading(false);
       setContent("");
       setValue(0)
