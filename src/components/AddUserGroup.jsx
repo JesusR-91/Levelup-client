@@ -1,22 +1,26 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { friendQueryService } from "../services/user.services";
-import { groupAddUserService, addModService } from "../services/group.services";
+import { groupAddUserService, addModService, groupDetailsService } from "../services/group.services";
 import { getAllUserService } from "../services/admin.services";
 
 export default function AddUserGroup() {
   //STATES
   const navigate = useNavigate();
   const [users, setUsers] = useState();
+  const [group, setGroup] = useState();
   const [queryValue, setQueryValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { groupId } = useParams();
   //FUNCTIONS
   const getData = async () => {
     try {
+      const groups = await groupDetailsService(groupId)
       const response = await getAllUserService();
+      setGroup(groups.data)
       setUsers(response.data);
-      setIsLoading(false);
+      setIsLoading(false)
+      console.log(groups.data)
     } catch (error) {
       console.log(error);
       navigate("/error");
@@ -25,7 +29,7 @@ export default function AddUserGroup() {
   useEffect(() => {
     getData();
   }, []);
-
+  
   const handleForm = ({ target }) => {
     setQueryValue(target.value);
   };
@@ -37,7 +41,6 @@ export default function AddUserGroup() {
       navigate("/error");
     }
   };
-
   const handleAddUser = async (groupId, userId) => {
     try {
       await groupAddUserService(groupId, userId);
@@ -69,7 +72,7 @@ try {
       <h3>All users:</h3>
 
       {users.map((eachUser) => (
-  !groupId.includes(eachUser._id) && (
+  !group.participants.map(e => e._id).includes(eachUser._id) && (
     <div key={eachUser._id}>
       <h4>
         {eachUser.username}{" "}
