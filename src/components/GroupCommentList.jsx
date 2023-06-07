@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { getAllGCService, handleDislikeGCService, handleLikeGCService, handleLoveGCService } from "../services/groupComment.services";
+import { useContext, useEffect, useState } from "react";
+import { deleteGCService, getAllGCService, handleDislikeGCService, handleLikeGCService, handleLoveGCService } from "../services/groupComment.services";
 import { useNavigate, useParams } from "react-router-dom";
 import CreateGroupComment from "./CreateGroupComment";
+import { AuthContext } from "../context/auth.context";
 
 export default function GroupCommentList() {
 
@@ -10,6 +11,8 @@ export default function GroupCommentList() {
   const [isLoading, setIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
 
+  //OTHER VARIABLES
+  const {activeUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const {groupId} = useParams();
 
@@ -25,6 +28,7 @@ export default function GroupCommentList() {
           new Date(gcDate).toTimeString().slice(0, 8) +
           " - " +
           new Date(gcDate).toDateString();
+      console.log(gcUpdated)
       });
       setGroupComment(gcUpdated);
       setIsLoading(false);
@@ -34,6 +38,7 @@ export default function GroupCommentList() {
     }
   };
 
+  //REACTIONS HANDLERS
   const handleLike = async (valId) => {
     try {
       await handleLikeGCService(valId);
@@ -63,6 +68,16 @@ export default function GroupCommentList() {
       navigate("/error");
     }
   };
+  //DELETE DE COMMENT
+  const handleValuation = async (valId) =>{
+    try {
+      await deleteGCService(valId);
+      setReload(!reload)
+    } catch (error) {
+      console.log(error);
+      navigate("/error");
+    }
+  }
 
 
   useEffect(() => {
@@ -71,7 +86,7 @@ export default function GroupCommentList() {
 
   return !isLoading ? (
     <div>
-        <CreateGroupComment/>
+        <CreateGroupComment setReload={setReload}/>
 
         <h3>Comments:</h3>
       {groupComment.map((groupComment) => (
@@ -108,6 +123,7 @@ export default function GroupCommentList() {
               <img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/>
             </button>
           </div>
+        {(groupComment.owner._id === activeUser._id) && (<button onClick={()=>{handleValuation(groupComment._id)}}>Delete valuation</button>)}
         </div>
       ))}
     </div>

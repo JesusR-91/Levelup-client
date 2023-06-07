@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createGCService } from "../services/groupComment.services";
 
-export default function CreateGroupComment() {
+export default function CreateGroupComment({setReload}) {
     
     //STATES
     const [content ,setContent] = useState("")
@@ -17,6 +17,7 @@ export default function CreateGroupComment() {
       try {
         setIsLoading(true)
         await createGCService(groupId, content);
+        setReload(currentValue => {!currentValue})
         setIsLoading(false);
       } catch (error) {
         console.log(error);

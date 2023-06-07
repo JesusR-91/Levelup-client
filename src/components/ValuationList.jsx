@@ -1,3 +1,4 @@
+//IMPORTS
 import { useNavigate, useParams} from "react-router-dom"
 import { handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService, deleteValuationService } from "../services/valuation.services"
 import { useContext, useEffect, useState } from "react";
@@ -13,6 +14,7 @@ const [isLoading, setIsLoading]= useState(true);
 const [average, setAverage] = useState(0);
 const [reload, setReload] = useState(false);
 
+  //OTHER VARIABLE
 const {activeUser} = useContext(AuthContext);
 const {gameId} = useParams();
 
@@ -23,11 +25,13 @@ const getData = async ()=>{
     const response = await allValuationServices(gameId)
     const allValuations = response.data;
     setIsLoading(true);
-    setValuations(allValuations)
+    setValuations(allValuations);
     setIsLoading(false);
+
+    //making the average rating
     let  values  = 0;
     allValuations.forEach(val => (values += val.value));
-    values = values /allValuations.length
+    values = values /allValuations.length;
     setAverage(values)
   } catch (error) {
     console.log(error)
@@ -35,6 +39,7 @@ const getData = async ()=>{
   }
 }
 
+//REACTION HANDLERS
 const handleLike = async (valId) => {
   try {
     await handleLikeValuationService(valId);
@@ -65,9 +70,11 @@ const handleLove = async (valId) => {
   }
 };
 
+//DELETE THE COMMENT
 const handleValuation = async (valId) =>{
   try {
     await deleteValuationService(valId)
+    setReload(!reload)
   } catch (error) {
     console.log(error);
     navigate("/error");
@@ -100,7 +107,7 @@ useEffect(()=>{
         <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachValue._id)}}><img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/></button>
         <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
       </div>
-      {(eachValue.owner === activeUser._id) && (<button onClick={()=>{handleValuation(eachValue._id)}}>Delete valuation</button>)}
+      {(eachValue.owner._id === activeUser._id) && (<button onClick={()=>{handleValuation(eachValue._id)}}>Delete valuation</button>)}
     </div>
   ))}
   

@@ -23,7 +23,6 @@ export default function AddUserGroup() {
       setGroup(groups.data)
       setUsers(response.data);
       setIsLoading(false)
-      console.log(groups.data)
     } catch (error) {
       console.log(error);
       navigate("/error");
