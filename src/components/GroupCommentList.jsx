@@ -28,7 +28,6 @@ export default function GroupCommentList() {
           new Date(gcDate).toTimeString().slice(0, 8) +
           " - " +
           new Date(gcDate).toDateString();
-      console.log(gcUpdated)
       });
       setGroupComment(gcUpdated);
       setIsLoading(false);

@@ -1,14 +1,16 @@
+//IMPORTS
 import { getAllGroupsService, getAllUserService, deleteUserService, deleteGroupService } from "../services/admin.services";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function Admin() {
+  //STATES
   const [users, setUsers] = useState(null);
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const params = useParams()
-console.log(groups)
+
+  //FUNCTIONS
   const getData = async () => {
     try {
       const users = await getAllUserService();
@@ -22,9 +24,7 @@ console.log(groups)
       navigate("/error");
     }
   };
-  useEffect(() => {
-    getData();
-  }, []);
+
   const handleDeleteGroup = async (id)=> {
     try {
       await deleteGroupService(id)
@@ -34,6 +34,7 @@ console.log(groups)
       navigate("/admin")
     }
   }
+  
   const handleDeleteUser = async (id)=> {
     try {
       await deleteUserService(id)
@@ -43,6 +44,11 @@ console.log(groups)
       navigate("/admin")
     }
   }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   
   return !isLoading ? (
     <div>
