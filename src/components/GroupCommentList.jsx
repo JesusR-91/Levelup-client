@@ -3,6 +3,9 @@ import { deleteGCService, getAllGCService, handleDislikeGCService, handleLikeGCS
 import { useNavigate, useParams } from "react-router-dom";
 import CreateGroupComment from "./CreateGroupComment";
 import { AuthContext } from "../context/auth.context";
+import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
+import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
+import loveImg from "../assets/icons8-pixel-heart-white.png";
 
 export default function GroupCommentList() {
 
@@ -105,21 +108,21 @@ export default function GroupCommentList() {
               onClick={() => {
                 handleLike(groupComment._id);
               }}>
-              <img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/>
+              <img src={likeImg} alt="thumbUp" width={"20px"}/>
             </button>
             <button
               style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
               onClick={() => {
                 handleDislike(groupComment._id);
               }}>
-              <img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/>
+              <img src={dislikeImg} alt="thumbUp" width={"20px"}/>
             </button>
             <button
               style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
               onClick={() => {
                 handleLove(groupComment._id);
               }}>
-              <img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/>
+              <img src={loveImg} width={"20px"}/>
             </button>
           </div>
         {(groupComment.owner._id === activeUser._id) && (<button onClick={()=>{handleValuation(groupComment._id)}}>Delete valuation</button>)}

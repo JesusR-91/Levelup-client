@@ -26,7 +26,7 @@ const allPublicationsService = () => {
   };
   
   const handleLovePublicationService = (publicationID) => {
-    return service.patch(`/publication/${publicationID}/handle-dislike`);
+    return service.patch(`/publication/${publicationID}/handle-love`);
   };
   
 

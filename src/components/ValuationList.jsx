@@ -4,6 +4,10 @@ import { handleLikeValuationService, allValuationServices, handleDislikeValuatio
 import { useContext, useEffect, useState } from "react";
 import CreateValuation from "./CreateValuation";
 import { AuthContext } from "../context/auth.context";
+import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
+import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
+import loveImg from "../assets/icons8-pixel-heart-white.png";
+
 
 
 export default function ValuationsList() {
@@ -103,9 +107,9 @@ useEffect(()=>{
         {eachValue.dislikes.length > 0 && (eachValue.dislikes.length > 1 ? (<p>{eachValue.dislikes.length} Likes</p>): (<p>{eachValue.dislikes.length} Dislikes</p>))}
       </div>
       <div>
-        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/></button> 
-        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachValue._id)}}><img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/></button>
-        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachValue._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
+        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachValue._id)}}><img src={likeImg} alt="thumbUp" width={"20px"}/></button> 
+        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachValue._id)}}><img src={dislikeImg} alt="thumbUp" width={"20px"}/></button>
+        <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachValue._id)}}><img src={loveImg} alt="thumbUp" width={"20px"}/></button> 
       </div>
       {(eachValue.owner._id === activeUser._id) && (<button onClick={()=>{handleValuation(eachValue._id)}}>Delete valuation</button>)}
     </div>

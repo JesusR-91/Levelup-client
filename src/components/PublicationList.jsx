@@ -11,6 +11,9 @@ import {
   handleLovePublicationService,
 } from "../services/publications.services.js";
 import CreatePublication from "./CreatePublication.jsx";
+import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
+import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
+import loveImg from "../assets/icons8-pixel-heart-white.png";
 
 export default function PublicationList() {
   
@@ -87,9 +90,9 @@ export default function PublicationList() {
             {eachPubl.dislikes.length > 0 && (eachPubl.dislikes.length > 1 ? (<p>{eachPubl.dislikes.length} Likes</p>): (<p>{eachPubl.dislikes.length} Dislikes</p>))}
           </div>
           <div>
-            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachPubl._id)}}><img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/></button> 
-            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachPubl._id)}}><img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/></button> 
-            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachPubl._id)}}><img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/></button>
+            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLike(eachPubl._id)}}><img src={likeImg} alt="thumbUp" width={"20px"}/></button> 
+            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachPubl._id)}}><img src={dislikeImg} alt="thumbUp" width={"20px"}/></button> 
+            <button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachPubl._id)}}><img src={loveImg} alt="thumbUp" width={"20px"}/></button>
           </div>
         </div>
       ))}
