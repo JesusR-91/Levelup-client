@@ -37,6 +37,7 @@ export default function GroupDetails() {
   
   const handleDeleteUser = async (groupId, userId) => {
     try {
+      group.mods.includes (userId) && await await deleteModService(groupId, userId)
       await groupDeleteUserService(groupId, userId);
       setReload(!reload);
     } catch (error) {
