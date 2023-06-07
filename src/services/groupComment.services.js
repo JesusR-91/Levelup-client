@@ -21,7 +21,7 @@ const handleDislikeGCService = (gcId) => {
 };
 
 const handleLoveGCService = (gcId) => {
-  return service.patch(`/group-comment/${gcId}/handle-dislike`);
+  return service.patch(`/group-comment/${gcId}/handle-love`);
 };
 
 

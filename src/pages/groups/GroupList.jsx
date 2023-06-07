@@ -38,7 +38,20 @@ export default function GroupList() {
             <div>
               {group.participants.map(user => (<Link to= {`/user/${user._id}`} key={user._id}>{user.username}</Link>))}
             </div>
+          </div>
+        ))}
+        </div>
+      </div>
 
+      <div>
+        <h3>Other groups</h3>
+        <div>
+        {groups.map((group, index) =>(
+          <div key={index}>
+            <h3><Link to={`/group/${group._id}/details`}>{group.name}</Link></h3>
+            <div>
+              {group.participants.map(user => (<Link to= {`/user/${user._id}`} key={user._id}>{user.username}</Link>))}
+            </div>
           </div>
         ))}
         </div>

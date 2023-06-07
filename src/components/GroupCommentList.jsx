@@ -8,12 +8,15 @@ export default function GroupCommentList() {
     //STATES
   const [groupComment, setGroupComment] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [reload, setReload] = useState(false);
+
   const navigate = useNavigate();
   const {groupId} = useParams();
 
   //FUNCTIONS
   const getData = async () => {
     try {
+      setIsLoading(true)
       const allResponse = await getAllGCService(groupId);
       const gcUpdated = allResponse.data;
       gcUpdated.forEach((gc) => {
@@ -34,6 +37,7 @@ export default function GroupCommentList() {
   const handleLike = async (valId) => {
     try {
       await handleLikeGCService(valId);
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       navigate("/error");
@@ -43,6 +47,7 @@ export default function GroupCommentList() {
   const handleDislike = async (valId) => {
     try {
       await handleDislikeGCService(valId);
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       navigate("/error");
@@ -52,6 +57,7 @@ export default function GroupCommentList() {
   const handleLove = async (valId) => {
     try {
       await handleLoveGCService(valId);
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       navigate("/error");
@@ -61,7 +67,7 @@ export default function GroupCommentList() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [reload]);
 
   return !isLoading ? (
     <div>
@@ -75,59 +81,31 @@ export default function GroupCommentList() {
           </h4>
           <p>{groupComment.content}</p>
           <div>
+            {groupComment.likes.length > 0 && (groupComment.likes.length > 1 ? (<p>{groupComment.likes.length} Likes</p>): (<p>{groupComment.likes.length} Like</p>))}
+            {groupComment.loves.length > 0 &&  (groupComment.loves.length > 1 ? (<p>{groupComment.loves.length} Likes</p>): (<p>{groupComment.loves.length} Love</p>))}
+            {groupComment.dislikes.length > 0 && (groupComment.dislikes.length > 1 ? (<p>{groupComment.dislikes.length} Likes</p>): (<p>{groupComment.dislikes.length} Dislikes</p>))}
+          </div>
+          <div>
             <button
-              style={{
-                width: "10px",
-                height: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              style={{width: "10px",height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}} 
               onClick={() => {
                 handleLike(groupComment._id);
-              }}
-            >
-              <img
-                src="../../public/icons8-zombie-hand-thumbs-up-100.png"
-                alt="thumbUp"
-                width={"20px"}
-              />
+              }}>
+              <img src="../../public/icons8-zombie-hand-thumbs-up-100.png" alt="thumbUp" width={"20px"}/>
             </button>
             <button
-              style={{
-                width: "10px",
-                height: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
               onClick={() => {
                 handleDislike(groupComment._id);
-              }}
-            >
-              <img
-                src="../../public/icons8-zombie-hand-thumbs-dow-100.png"
-                alt="thumbUp"
-                width={"20px"}
-              />
+              }}>
+              <img src="../../public/icons8-zombie-hand-thumbs-dow-100.png" alt="thumbUp" width={"20px"}/>
             </button>
             <button
-              style={{
-                width: "10px",
-                height: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
               onClick={() => {
                 handleLove(groupComment._id);
-              }}
-            >
-              <img
-                src="../../public/icons8-pixel-heart-white.png"
-                alt="thumbUp"
-                width={"20px"}
-              />
+              }}>
+              <img src="../../public/icons8-pixel-heart-white.png" alt="thumbUp" width={"20px"}/>
             </button>
           </div>
         </div>
