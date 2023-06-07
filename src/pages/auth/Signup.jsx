@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { signupService } from "../../services/auth.services";
 import { useState } from "react";
 
@@ -85,6 +85,9 @@ export default function Signup() {
         <br />
 
         {errorMessage && <p style={{color:"red"}}>{errorMessage}</p>}
+        <br/>
+        <p>If you already have an account <Link to={`/auth/login`}>click here!</Link></p>
+        <br/>
         <button type="submit">Signup</button>
       </form>
       

@@ -32,8 +32,8 @@ export default function GroupList() {
       <div>
         <h3>Your groups</h3>
         <div>
-        {ownGroups.map(group =>(
-          <div key={group._id}>
+        {ownGroups.map((group, index) =>(
+          <div key={index}>
             <h3><Link to={`/group/${group._id}/details`}>{group.name}</Link></h3>
             <div>
               {group.participants.map(user => (<Link to= {`/user/${user._id}`} key={user._id}>{user.username}</Link>))}

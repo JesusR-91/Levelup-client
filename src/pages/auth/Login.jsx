@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "../../services/auth.services";
 import { AuthContext } from "../../context/auth.context";
 
@@ -16,6 +16,10 @@ export default function Login() {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
+    if (username.trim() === "" || password.trim() === "") {
+      setErrorMessage("Please enter a username and password");
+      return;
+    }
     try {
       // Use loginService to check the data with the DB
       const response = await loginService({username, password});
@@ -32,8 +36,6 @@ export default function Login() {
       console.log(error);
       if(error.response.status === 404) {
         setErrorMessage(error.response.data.errorMessage);
-      } else {
-        navigate("/error");
       }
     }
   }
@@ -57,7 +59,11 @@ export default function Login() {
             <br />
             {errorMessage && <p style={{color:"red"}}>{errorMessage}</p> }
             <br />
+            <br/>
             <button>Login</button>
+            <p>If you don't have an account <Link to={`/auth/signup`}>click here!</Link></p>
+
+
         </form>
     </div>
   )
