@@ -17,6 +17,7 @@ import FoundGame from "./pages/games/FoundGame";
 import IsLogged from "./components/auth/IsLogged";
 import IsAdmin from "./components/auth/IsAdmin";
 
+
 function App() {
   return (
     <div>

@@ -1,83 +1,99 @@
 /* eslint-disable react/prop-types */
 
-//IMPORTS
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { groupAddUserService, groupDetailsService } from "../services/group.services";
 import { getAllUserService } from "../services/admin.services";
+import { Button, Modal } from "react-bootstrap";
 
-export default function AddUserGroup({setReload}) {
-  //STATES
-  const [users, setUsers] = useState();
-  const [group, setGroup] = useState();
+export default function AddUserGroup({ setReload }) {
+  const [users, setUsers] = useState([]);
+  const [group, setGroup] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState("")
-  const[filteredUsers, setFilteredUsers] = useState([])
-  
-  //OTHER VARIABLES
+  const [search, setSearch] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const { groupId } = useParams();
   const navigate = useNavigate();
 
-  //FUNCTIONS
   const getData = async () => {
     try {
       setIsLoading(true);
-      const groups = await groupDetailsService(groupId)
+      const groups = await groupDetailsService(groupId);
       const response = await getAllUserService();
       setGroup(groups.data);
       setUsers(response.data);
-      setFilteredUsers(response.data)
+      setFilteredUsers(response.data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
       navigate("/error");
     }
   };
-  
 
-  const handleSearch =({target}) => {
+  const handleSearch = ({ target }) => {
     setSearch(target.value);
-    setFilteredUsers(users.filter(e => e.username.includes(target.value)));
-  } 
-  
+    setFilteredUsers(users.filter((e) => e.username.includes(target.value)));
+  };
+
   const handleAddUser = async (groupId, userId) => {
     try {
       await groupAddUserService(groupId, userId);
-      setReload(currentValue => {!currentValue})
+      setReload((currentValue) => !currentValue);
     } catch (error) {
       console.log(error);
       navigate("/error");
     }
   };
-  
 
   useEffect(() => {
     getData();
   }, []);
 
+  const [showPopup, setShowPopup] = useState(false);
 
-  return !isLoading ? (
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
+  return (
     <div>
-      <form onSubmit={handleSearch}>
-        <input type="text" name="queryValue" onChange={handleSearch} value={search} placeholder="Find an user"/>
-        <button>Search</button>
-      </form>
-      <h3>All users:</h3>
+      <Button onClick={handleOpenPopup}>Add Users</Button>
 
-      {filteredUsers.map((eachUser) => (
-  !group.participants.map(e => e._id).includes(eachUser._id) && (
-    <div key={eachUser._id}>
-      <h4>
-        {eachUser.username}{" "}
-        <button onClick={() => handleAddUser(groupId, eachUser._id)}>
-          Add User
-        </button>
-      </h4>
+      <Modal show={showPopup} onHide={handleClosePopup}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={handleSearch}>
+            <input type="text" name="queryValue" onChange={handleSearch} value={search} placeholder="Find a user" />
+            <button type="submit">Search</button>
+          </form>
+
+          {!isLoading ? (
+            filteredUsers.map((eachUser) => (
+              !group.participants.map((e) => e._id).includes(eachUser._id) && (
+                <div key={eachUser._id}>
+                  <h4>
+                    {eachUser.username}{" "}
+                    <button onClick={() => handleAddUser(groupId, eachUser._id)}>
+                      Add User
+                    </button>
+                  </h4>
+                </div>
+              )
+            ))
+          ) : (
+            <h3>Loading...</h3>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClosePopup}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
-  )
-))}
-    </div>
-  ) : (
-    <h3>Loading...</h3>
   );
 }
