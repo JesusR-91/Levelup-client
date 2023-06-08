@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import GameSearchBar from "../../components/games/GameSearchBar";
 import lefArrow from "../../assets/icons8-back-arrow-60-left.png";
 import rightArrow from "../../assets/icons8-back-arrow-60-rigth.png";
-import { Card, ListGroup } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 export default function GameList() {
   const [gameList, setGameList] = useState([]);
