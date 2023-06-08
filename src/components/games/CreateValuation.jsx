@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
+//IMPORTS
+import { useContext, useState } from "react";
 import { newValuationService } from "../../services/valuation.services";
 import { useParams } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
+import { ThemeContext } from "../../context/theme.context";
 
 export default function CreateValuation({getData}) {
 
@@ -12,8 +14,10 @@ export default function CreateValuation({getData}) {
   const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  const {buttonTheme, cardTheme} = useContext (ThemeContext);
   const {gameId} = useParams();
 
+  //FUNCTIONS
   const handleContentInput = ({ target }) => {
     setContent(target.value);
   };
@@ -44,13 +48,13 @@ export default function CreateValuation({getData}) {
   };
   return !isLoading ? (
     <div>
-    <Button onClick={handleOpenPopup}>New Valuation</Button>
+    <Button className={buttonTheme} onClick={handleOpenPopup}>New Valuation</Button>
 
 <Modal show={showPopup} onHide={handleClosePopup}>
-  <Modal.Header closeButton>
+  <Modal.Header className={cardTheme} closeButton>
     <Modal.Title>Add User</Modal.Title>
   </Modal.Header>
-  <Modal.Body>
+  <Modal.Body className={cardTheme}>
      <form onSubmit={handleSubmit}>
       
         <div>
@@ -74,11 +78,11 @@ export default function CreateValuation({getData}) {
           />
         </div>
         <br />
-        <Button type="submit">Create!</Button>
+        <Button className={buttonTheme} onClick={handleClosePopup} type="submit">Create!</Button>
       </form>
       </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleClosePopup}>Close</Button>
+        <Modal.Footer className={cardTheme}>
+          <Button className={buttonTheme} onClick={handleClosePopup}>Close</Button>
         </Modal.Footer>
       </Modal>
     </div>

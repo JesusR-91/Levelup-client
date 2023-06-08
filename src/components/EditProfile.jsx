@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { editUserService } from "../services/user.services";
 import { userInfoService } from "../services/user.services";
 import { useNavigate } from "react-router-dom";
 import { uploadImageService } from "../services/upload.services";
 import { Button, Modal } from "react-bootstrap";
+import { ThemeContext } from "../context/theme.context";
 
 export default function EditProfile() {
   //STATES
@@ -22,6 +23,7 @@ export default function EditProfile() {
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const {buttonTheme, cardTheme} = useContext (ThemeContext);
   const navigate = useNavigate();
 
   //FUNCTIONS
@@ -103,13 +105,13 @@ export default function EditProfile() {
   return (
     <div>
           
-      <Button onClick={handleOpenPopup}>Edit Info</Button>
+      <Button className={buttonTheme} onClick={handleOpenPopup}>Edit Info</Button>
 
       <Modal show={showPopup} onHide={handleClosePopup}>
-        <Modal.Header closeButton>
+        <Modal.Header className={cardTheme} closeButton>
           <Modal.Title>Edit Info</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={cardTheme}>
       <form onSubmit={handleForm}>
         <div>
           <label>Image</label>
@@ -197,8 +199,8 @@ export default function EditProfile() {
         <button type="submit">Edit</button>
       </form>
       </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleClosePopup}>Close</Button>
+        <Modal.Footer className={cardTheme}>
+          <Button className={buttonTheme} onClick={handleClosePopup}>Close</Button>
         </Modal.Footer>
       </Modal>
     </div>

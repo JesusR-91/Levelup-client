@@ -1,15 +1,23 @@
+//IMPORTS
 import { useEffect, useState } from "react"
 import { gameDetailsService } from "../../services/games.services";
 import { useNavigate, useParams } from "react-router-dom";
 import ValuationList from "../../components/games/ValuationList";
 import {Button, Collapse} from "react-bootstrap"
+import { PuffLoader } from "react-spinners";
+
+
 export default function GameDetails() {
+
+  //STATES
   const [game, setGame] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
   const {gameId} = useParams();
+
   const navigate = useNavigate()
 
+  //FUNCTIONS
   const getData = async () => {
     try {
       const response = await gameDetailsService(gameId);
@@ -71,5 +79,7 @@ const toggleCollapse = () =>{
       <ValuationList/>
 
     </div>
-  ) : <h3>Loading...</h3>
+  ) : (<div className="spinners">
+        <PuffLoader color="white" size={120} />
+      </div>)
 }

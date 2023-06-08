@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { userInfoService } from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
 import { Link, useNavigate } from "react-router-dom";
 import EditProfile from "../components/EditProfile";
 import { Card, CardGroup } from "react-bootstrap";
 import logo from "../assets/img-removebg-preview.png";
+import { ThemeContext } from "../context/theme.context";
+import { PuffLoader } from "react-spinners";
+
 
 export default function Profile() {
   //STATES
@@ -12,6 +15,7 @@ export default function Profile() {
   const [publication, setPublication] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const {cardTheme} = useContext (ThemeContext);
   const navigate = useNavigate();
 
   const getData = async () => {
@@ -39,12 +43,12 @@ export default function Profile() {
           <div style={{ padding: "5vh" }}>
 
             <div className="profile-distribution">
-              <Card style={{ backgroundColor: "lightgrey" }}>
+              <Card className={cardTheme}>
                 <div className="profile">
 
                   <img src={profile.profileImg ? profile.profileImg : logo} alt="Profile-Image" width="125vw"/>
 
-                  <div className= "profile-info">
+                  <div className= {`${cardTheme} profile-info`}>
                     <h3>{profile.username}</h3>
                     <p> Name: {profile.firstName} {profile.lastName}</p>
                     <p>Birth date:{" "} {profile.birthDate !== "Invalid Date" && profile.birthDate.slice(4)} </p>
@@ -60,7 +64,7 @@ export default function Profile() {
                 {publication.length > 0 ? (
                   <CardGroup className="publication-distribution">
                     {publication.map((publication) => (
-                      <Card className="publication-card" key={publication._id} >
+                      <Card className={`${cardTheme} publication-card`} key={publication._id} >
                         <h5>{publication.owner.username} -{" "} <span>{publication.createdAt}</span></h5>
                         <p>{publication.content}</p>
                       </Card>
@@ -73,7 +77,7 @@ export default function Profile() {
             </div>
             <div className="friends-card-distribution">
               <h4>Your friends:</h4>
-              <Card className="friends-card" >
+              <Card className={`${cardTheme} friends-card`} >
                 {profile.friends.map((friend) => (<Link to={`/user/${friend._id}`} key={friend._id}> {friend.username}</Link>))}
               </Card>
             </div>
@@ -84,6 +88,8 @@ export default function Profile() {
       )}
     </div>
   ) : (
-    <h3>Loading...</h3>
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
   );
 }

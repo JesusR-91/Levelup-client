@@ -1,10 +1,13 @@
 //IMPORTS
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {addFriendService, deleteFriendService, friendInfoService, userInfoService} from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Card, CardGroup } from "react-bootstrap";
 import logo from "../assets/img-removebg-preview.png";
+import { ThemeContext } from "../context/theme.context";
+import { PuffLoader } from "react-spinners";
+
 
 export default function UserInfo() {
   //STATE
@@ -14,6 +17,7 @@ export default function UserInfo() {
   const [isLoading, setIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
 
+  const {buttonTheme, cardTheme} = useContext (ThemeContext);
   const navigate = useNavigate();
   const { userId } = useParams();
 
@@ -58,15 +62,15 @@ export default function UserInfo() {
         <div key={profile._id}>
 
         <div style={{padding:"3vh 3vh 0 3vh", display:"flex", justifyContent:"flex-end"}}>
-            {!activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button onClick={() => {addUser(profile._id);}}>Add friend</Button>)}
-            {activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button onClick={() => {deleteFriend(profile._id)}}>Delete friend</Button>)}
+            {!activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button className={buttonTheme} onClick={() => {addUser(profile._id);}}>Add friend</Button>)}
+            {activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button className={buttonTheme} onClick={() => {deleteFriend(profile._id)}}>Delete friend</Button>)}
         </div>
 
           <div style={{ padding: "5vh" }}>
 
             <div className="profile-distribution">
-              <Card style={{maxHeight:"25vh" }}>
-                <div className="profile">
+              <Card>
+                <div className={`${cardTheme} profile`}>
                   
                   <img src={profile.profileImg ? profile.profileImg : logo} alt="Profile-Image" width="125vw"/>
                   
@@ -88,7 +92,7 @@ export default function UserInfo() {
                   <div>
                     <CardGroup className="publication-distribution">
                       {publications.map((publication) => (
-                        <Card className="publication-card" key={publication._id}>
+                        <Card className={`${cardTheme} publication-card`} key={publication._id}>
                           <h5>{publication.owner.username} -{" "}<span>{publication.createdAt}</span></h5>
                           <p>{publication.content}</p>
                         </Card>
@@ -104,7 +108,7 @@ export default function UserInfo() {
             <br />
           <div className="friends-card-distribution">
             <h4>Friends of {profile.username}</h4>
-            <Card className="friends-card">
+            <Card className={`${cardTheme} friends-card`}>
               {profile.friends.length >0 ? profile.friends.map(friend => (<Link to={`/user/${friend._id}`} key={friend._id}>{friend.username}</Link>)): <p>You have no friends</p>}
             </Card>
           </div>
@@ -114,6 +118,8 @@ export default function UserInfo() {
       )}
     </div>
   ) : (
-    <h3>Loading...</h3>
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
   );
 }

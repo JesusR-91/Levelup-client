@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
 
 //IMPORTS
-import { useState } from "react"
+import { useContext, useState } from "react"
 import {newPublicationService} from "../services/publications.services"
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { ThemeContext } from "../context/theme.context";
 
 
 export default function CreatePublication({getData}) {
   //STATES
   const [content ,setContent] = useState("")
   const [isLoading, setIsLoading] = useState(false);
+  const {buttonTheme, cardTheme} = useContext (ThemeContext);
 
   const navigate = useNavigate()
 

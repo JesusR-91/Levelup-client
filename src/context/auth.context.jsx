@@ -41,7 +41,7 @@ const AuthWrapper = (props) =>{
 
     // 2. Context object
 
-    const passedContext = {isLoggedIn, activeUser, authenticateUser, isAdmin};
+    const passedContext = {isLoggedIn, activeUser, authenticateUser, isAdmin, setActiveUser};
 
     // When the server is getting the data
     if(isLoading) {

@@ -1,18 +1,17 @@
+//IMPORTS
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  handleLikeValuationService,
-  allValuationServices,
-  handleDislikeValuationService,
-  handleLoveValuationService,
-  deleteValuationService,
-} from "../../services/valuation.services";
+import {handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService, deleteValuationService} from "../../services/valuation.services";
 import { useContext, useEffect, useState } from "react";
 import CreateValuation from "./CreateValuation";
 import { AuthContext } from "../../context/auth.context";
 import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../../assets/icons8-pixel-heart-white.png";
-import { Button, Card, Col, CardGroup } from "react-bootstrap";
+import { Button, Card} from "react-bootstrap";
+import { ThemeContext } from "../../context/theme.context";
+import { PuffLoader } from "react-spinners";
+
+
 
 export default function ValuationsList() {
   //STATES
@@ -23,6 +22,7 @@ export default function ValuationsList() {
 
   //OTHER VARIABLE
   const { activeUser } = useContext(AuthContext);
+  const {buttonTheme, cardTheme} = useContext(ThemeContext);
   const { gameId } = useParams();
 
   //FUNCTIONS
@@ -97,22 +97,16 @@ export default function ValuationsList() {
 
       <CreateValuation getData={getData} />
     
-      <div md={4} className="overflow-auto" style={{ maxHeight: "65vh" }}>
+      <div className="overflow-auto" style={{ maxHeight: "65vh" }}>
 
       <h4>
         Valuation List - Average: {"★".repeat(Math.floor(average))}
         {"☆".repeat(5 - Math.floor(average))}{" "}
       </h4>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "5rem 30rem",
-        }}
-      >
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "1vh 2vw", flexDirection:"row", justifyContent:"center"}}>
         {valuation.map((eachValue) => (
           <div key={eachValue._id}>
-            <Card
+            <Card className={cardTheme}
               style={{
                 display: "flex",
                 flexWrap: "wrap",
@@ -152,8 +146,8 @@ export default function ValuationsList() {
                       <p>{eachValue.dislikes.length} Dislike</p> 
                     ))}
                 </div>
-                <div>
-                  <Button
+                <div style={{display:"flex", flexDirection:"row", justifyContent:"center", padding:"1vh"}}>
+                  <Button className={buttonTheme}
                     style={{
                       width: "10px",
                       height: "20px",
@@ -167,7 +161,7 @@ export default function ValuationsList() {
                   >
                     <img src={likeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button
+                  <Button className={buttonTheme}
                     style={{
                       width: "10px",
                       height: "20px",
@@ -181,7 +175,7 @@ export default function ValuationsList() {
                   >
                     <img src={dislikeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button
+                  <Button className={buttonTheme}
                     style={{
                       width: "10px",
                       height: "20px",
@@ -189,21 +183,13 @@ export default function ValuationsList() {
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    onClick={() => {
-                      handleLove(eachValue._id);
-                    }}
-                  >
+                    onClick={() => {handleLove(eachValue._id)}}>
+
                     <img src={loveImg} alt="thumbUp" width={"20px"} />
                   </Button>
                 </div>
                 {eachValue.owner._id === activeUser._id && (
-                  <Button
-                    onClick={() => {
-                      handleValuation(eachValue._id); 
-                    }}
-                  >
-                    Delete valuation
-                  </Button>
+                  <Button className={buttonTheme} onClick={() => { handleValuation(eachValue._id)}}>Delete valuation</Button>
                 )}
               </Card.Body>
             </Card>
@@ -213,6 +199,8 @@ export default function ValuationsList() {
       </div>
     </div>
   ) : (
-    <h3>Loading...</h3>
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
   );
 }
