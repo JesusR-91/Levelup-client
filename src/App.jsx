@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap";
 import "./App.css";
 import MyNavbar from "./components/MyNavbar";
 import { Routes, Route } from "react-router-dom";
@@ -18,15 +19,19 @@ import IsLogged from "./components/auth/IsLogged";
 import IsAdmin from "./components/auth/IsAdmin";
 import { useContext } from "react";
 import { AuthContext } from "./context/auth.context";
+import { ThemeContext } from "./context/theme.context";
 
 
 function App() {
   //STATE
-  const {activeUser} = useContext(AuthContext)
+  const {activeUser} = useContext(AuthContext);
+  const {isDarkMode, toggleTheme, buttonTheme} = useContext (ThemeContext);
 
   return (
-    <div>
+    <div className = {isDarkMode ? "app-dark" : "app-light"}>
       {activeUser && (<MyNavbar/>)}
+      <Button onClick={toggleTheme} className={buttonTheme}>Theme</Button>
+      
 
       <Routes>
         <Route path="/auth/signup" element={<Signup/>} />

@@ -3,14 +3,7 @@
 //IMPORTS
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  allPublicationsService,
-  deletePublicationService,
-  friendsPublicationService,
-  handleDislikePublicationService,
-  handleLikePublicationService,
-  handleLovePublicationService,
-} from "../services/publications.services.js";
+import { allPublicationsService, deletePublicationService, friendsPublicationService, handleDislikePublicationService, handleLikePublicationService, handleLovePublicationService} from "../services/publications.services.js";
 import CreatePublication from "./CreatePublication.jsx";
 import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
@@ -18,6 +11,7 @@ import loveImg from "../assets/icons8-pixel-heart-white.png";
 import { PuffLoader } from "react-spinners";
 import { Button, Card, CardGroup } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context.jsx";
+import { ThemeContext } from "../context/theme.context.jsx";
 
 export default function PublicationList() {
   //STATE
@@ -27,6 +21,8 @@ export default function PublicationList() {
 
   const navigate = useNavigate();
   const { activeUser } = useContext(AuthContext);
+  const {buttonTheme, cardTheme} = useContext (ThemeContext);
+
 
   //FUNCTION
   const getData = async () => {
@@ -96,19 +92,11 @@ export default function PublicationList() {
       {publication.length > 0 ? (
         <div style={{ padding: "2vh" }}>
           <h4>All publications:</h4>
-          <CardGroup
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "5vh",
-              padding: "2vh",
-            }}
-          >
+          <CardGroup style={{ display: "flex", flexWrap: "wrap", gap: "5vh", padding: "2vh"}}>
             {publication.map((eachPubl) => (
-              <Card
+              <Card className={cardTheme}
                 key={eachPubl._id}
                 style={{
-                  backgroundColor: "lightgrey",
                   padding: "2vh",
                   display: "flex",
                   justifyContent: "center",
@@ -147,7 +135,7 @@ export default function PublicationList() {
                     padding: "2vh",
                   }}
                 >
-                  <Button
+                  <Button className={buttonTheme}
                     style={{
                       width: "10px",
                       height: "20px",
@@ -161,7 +149,7 @@ export default function PublicationList() {
                   >
                     <img src={likeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button
+                  <Button className={buttonTheme}
                     style={{
                       width: "10px",
                       height: "20px",
@@ -175,7 +163,7 @@ export default function PublicationList() {
                   >
                     <img src={dislikeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button
+                  <Button className={buttonTheme}
                     style={{
                       width: "10px",
                       height: "20px",
@@ -191,13 +179,7 @@ export default function PublicationList() {
                   </Button>
                 </div>
                 {eachPubl.owner._id === activeUser._id && (
-                  <Button
-                    onClick={() => {
-                      handlePublication(eachPubl._id);
-                    }}
-                  >
-                    Delete publication
-                  </Button>
+                  <Button className={buttonTheme} onClick={() => {handlePublication(eachPubl._id)}}>Delete publication</Button>
                 )}
               </Card>
             ))}
