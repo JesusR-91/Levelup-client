@@ -37,7 +37,8 @@ const navigate = useNavigate()
     setShowPopup(false);
   };
   return !isLoading ? (
-    <div>
+    <div style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"flex-end"}}>
+
             <Button onClick={handleOpenPopup}>Create Group</Button>
 
 <Modal show={showPopup} onHide={handleClosePopup}>

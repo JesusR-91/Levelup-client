@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react"
-import CreateGroupForm from "../../components/group/CreateGroupForm"
+import { useEffect, useState } from "react";
+import CreateGroupForm from "../../components/group/CreateGroupForm";
 import { Link, useNavigate } from "react-router-dom";
 import { groupListService, ownGroupListService } from "../../services/group.services";
-import { Card, CardGroup } from "react-bootstrap";
+import { Card, CardGroup, Col } from "react-bootstrap";
 
 export default function GroupList() {
-
   const [ownGroups, setOwnGroups] = useState([]);
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,46 +21,97 @@ export default function GroupList() {
       console.log(error);
       navigate("/error");
     }
-  }
+  };
 
-  useEffect(()=>{getData()},[]);
+  useEffect(() => {
+    getData();
+  }, []);
 
   return !isLoading ? (
     <div>
-    <CreateGroupForm/>
-      
+      <div style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"flex-end"}}>
+      <CreateGroupForm />
 
-    <CardGroup style={{display:"flex", flexWrap: "wrap", gap:"50px", justifyContent: "space-evenly", alignItems:"center"}}>
-        <div>
-        <h3>Your groups</h3>
-        {ownGroups.map((group, index) =>(
-                <Card style={{display: "flex",flexWrap: "wrap", flexDirection: "row", justifyContent: "center", backgroundColor: "lightgrey", padding:"3vw", margin:"3vw"}}>
-          <div key={index}>
-            <h3><Link to={`/group/${group._id}/details`}>{group.name}</Link></h3>
-            <div>
-              {group.participants.map(user => (<Link to= {`/user/${user._id}`} key={user._id} style={{ textDecoration: "none" }}>{user.username}</Link>))}
-            </div>
+      </div>
+
+      <CardGroup style={{gap:"25vw"}}>
+        <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh"}}>
+          <div>
+            <h3>Your groups</h3>
+            {ownGroups.map((group, index) => (
+              <Card
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  backgroundColor: "lightgrey",
+                  padding: "3vw",
+                  margin: "3vw",
+                }}
+                key={index}
+              >
+                <div>
+                  <h3>
+                    <Link to={`/group/${group._id}/details`}>{group.name}</Link>
+                  </h3>
+                  <div>
+                    <h4>Users:</h4>
+                    {group.participants.map((user) => (
+                      <Link
+                        to={`/user/${user._id}`}
+                        key={user._id}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {user.username}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
-        </Card>
-        ))}
-        </div>
-        <div>
-        <h3>Other groups</h3>
-        {groups.map((group, index) =>(
-                <Card style={{display: "flex",flexWrap: "wrap", flexDirection: "row", justifyContent: "center", backgroundColor: "lightgrey", padding:"3vw", margin:"3vw"}}>
-
-          <div key={index}>
-            <h3><Link to={`/group/${group._id}/details`}>{group.name}</Link></h3>
-            <div>
-              {group.participants.map(user => (<Link to= {`/user/${user._id}`} key={user._id} style={{ textDecoration: "none" }}>{user.username}</Link>))}
-            </div>
+        </Col>
+        <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh" }}>
+          <div>
+            <h3>Other groups</h3>
+            {groups.map((group, index) => (
+              <Card
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  backgroundColor: "lightgrey",
+                  padding: "3vw",
+                  margin: "3vw",
+                }}
+                key={index}
+              >
+                <div>
+                  <h3>
+                    <Link to={`/group/${group._id}/details`}>{group.name}</Link>
+                  </h3>
+                  <div>
+                    <h4>Users:</h4>
+                    {group.participants.map((user) => (
+                      <Link
+                        to={`/user/${user._id}`}
+                        key={user._id}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {user.username}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
-        </Card>
-        ))}
-        </div>
-      <br />
-
+        </Col>
       </CardGroup>
     </div>
-  ) : <h3>Loading...</h3>
+  ) : (
+    <h3>Loading...</h3>
+  );
 }

@@ -6,24 +6,24 @@ import { AuthContext } from "../../context/auth.context";
 import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../../assets/icons8-pixel-heart-white.png";
-import { Button } from "react-bootstrap";
+import { Button, Card, CardGroup, Col } from "react-bootstrap";
 
 export default function GroupCommentList() {
 
-    //STATES
+  //STATES
   const [groupComment, setGroupComment] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
 
   //OTHER VARIABLES
-  const {activeUser} = useContext(AuthContext);
+  const { activeUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const {groupId} = useParams();
+  const { groupId } = useParams();
 
   //FUNCTIONS
   const getData = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const allResponse = await getAllGCService(groupId);
       const gcUpdated = allResponse.data;
       gcUpdated.forEach((gc) => {
@@ -72,63 +72,76 @@ export default function GroupCommentList() {
     }
   };
   //DELETE DE COMMENT
-  const handleValuation = async (valId) =>{
+  const handleValuation = async (valId) => {
     try {
       await deleteGCService(valId);
-      setReload(!reload)
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       navigate("/error");
     }
-  }
-
+  };
 
   useEffect(() => {
     getData();
   }, [reload]);
 
   return !isLoading ? (
-    <div>
-        <CreateGroupComment setReload={setReload}/>
+<div>
+      <CreateGroupComment setReload={setReload} />
+      <h3>Comments:</h3>
 
-        <h3>Comments:</h3>
-      {groupComment.map((groupComment) => (
-        <div key={groupComment._id}>
-          <h4>
-            {groupComment.owner.username} - <span>{groupComment.createdAt}</span>
-          </h4>
-          <p>{groupComment.content}</p>
-          <div>
-            {groupComment.likes.length > 0 && (groupComment.likes.length > 1 ? (<p>{groupComment.likes.length} Likes</p>): (<p>{groupComment.likes.length} Like</p>))}
-            {groupComment.loves.length > 0 &&  (groupComment.loves.length > 1 ? (<p>{groupComment.loves.length} Likes</p>): (<p>{groupComment.loves.length} Love</p>))}
-            {groupComment.dislikes.length > 0 && (groupComment.dislikes.length > 1 ? (<p>{groupComment.dislikes.length} Likes</p>): (<p>{groupComment.dislikes.length} Dislikes</p>))}
-          </div>
-          <div>
-            <Button
-              style={{width: "10px",height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}} 
-              onClick={() => {
-                handleLike(groupComment._id);
-              }}>
-              <img src={likeImg} alt="thumbUp" width={"20px"}/>
-            </Button>
-            <Button
-              style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
-              onClick={() => {
-                handleDislike(groupComment._id);
-              }}>
-              <img src={dislikeImg} alt="thumbUp" width={"20px"}/>
-            </Button>
-            <Button
-              style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
-              onClick={() => {
-                handleLove(groupComment._id);
-              }}>
-              <img src={loveImg} width={"20px"}/>
-            </Button>
-          </div>
-        {(groupComment.owner._id === activeUser._id) && (<Button onClick={()=>{handleValuation(groupComment._id)}}>Delete comment</Button>)}
-        </div>
-      ))}
+        <CardGroup style={{ gap: "3vw" }}>
+      <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh"}}>
+          {groupComment.map((groupComment) => (
+            <div key={groupComment._id}>
+              <Card style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                 
+                  justifyContent: "center",
+                  backgroundColor: "lightgrey",
+                  
+                  margin: "3vw",
+                }}>
+                <h4>
+                  {groupComment.owner.username} - <span>{groupComment.createdAt}</span>
+                </h4>
+                <p>{groupComment.content}</p>
+                <div>
+                  {groupComment.likes.length > 0 && (groupComment.likes.length > 1 ? (<p>{groupComment.likes.length} Likes</p>) : (<p>{groupComment.likes.length} Like</p>))}
+                  {groupComment.loves.length > 0 && (groupComment.loves.length > 1 ? (<p>{groupComment.loves.length} Likes</p>) : (<p>{groupComment.loves.length} Love</p>))}
+                  {groupComment.dislikes.length > 0 && (groupComment.dislikes.length > 1 ? (<p>{groupComment.dislikes.length} Likes</p>) : (<p>{groupComment.dislikes.length} Dislikes</p>))}
+                </div>
+                <div>
+                  <Button
+                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
+                    onClick={() => {
+                      handleLike(groupComment._id);
+                    }}>
+                    <img src={likeImg} alt="thumbUp" width={"20px"} />
+                  </Button>
+                  <Button
+                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
+                    onClick={() => {
+                      handleDislike(groupComment._id);
+                    }}>
+                    <img src={dislikeImg} alt="thumbUp" width={"20px"} />
+                  </Button>
+                  <Button
+                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
+                    onClick={() => {
+                      handleLove(groupComment._id);
+                    }}>
+                    <img src={loveImg} width={"20px"} />
+                  </Button>
+                </div>
+                {(groupComment.owner._id === activeUser._id) && (<Button onClick={() => { handleValuation(groupComment._id) }}>Delete comment</Button>)}
+              </Card>
+            </div>
+          ))}
+      </Col>
+        </CardGroup>
     </div>
   ) : (
     <h4>Loading</h4>

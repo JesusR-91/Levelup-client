@@ -6,7 +6,7 @@ import { friendInfoService } from "../../services/user.services";
 import AddUserGroup from "../../components/group/AddUserGroup";
 import GroupCommentList from "../../components/group/GroupCommentList";
 import { AuthContext } from "../../context/auth.context";
-import { Button } from "react-bootstrap";
+import { Button, Card, CardGroup, Col } from "react-bootstrap";
 
 
 export default function GroupDetails() {
@@ -73,6 +73,10 @@ export default function GroupDetails() {
   }, [reload]);
   return !isLoading ? (
     <div>
+      <CardGroup style={{gap:"3vw"}}>
+      <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh", paddingTop:"5vh"}}>
+
+      <Card style={{ backgroundColor: "lightgrey", padding:"5vh 5vh"}}>
       <h3>{group.name}</h3>
 
       <p>{group.description}</p>
@@ -82,6 +86,7 @@ export default function GroupDetails() {
       <AddUserGroup setReload={setReload}/>
 
       <h3>Users:</h3>
+
       {group.participants.map((user, index) => (
         <div key={index}>
           {user.username}{" "}
@@ -105,14 +110,17 @@ export default function GroupDetails() {
                     Delete Mod
                   </Button>
                 )}
+                
             </div>
+            
           )}
         </div>
       ))}
-
+</Card>
+       </Col>
       <br />
           <GroupCommentList/>
-   
+          </CardGroup>
     </div>
   ) : (
     <h3>Loading...</h3>
