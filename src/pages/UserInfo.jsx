@@ -1,14 +1,19 @@
+//IMPORTS
 import { useState, useEffect } from "react";
-import { addFriendService, friendInfoService, userInfoService } from "../services/user.services";
+import { addFriendService, deleteFriendService, friendInfoService, userInfoService } from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
 import { useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/img.png"
 
 export default function UserInfo() {
+  //STATE
   const [activeUser, setActiveUser] = useState();
   const [profile, setProfile] = useState(null);
   const [publications, setPublications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [reload, setReload] = useState(false)
+
+
   const navigate = useNavigate();
   const { userId } = useParams();
   const getData = async () => {
@@ -29,12 +34,20 @@ export default function UserInfo() {
   const addUser = async (userId) =>{
     setIsLoading(true);
     await addFriendService(userId);
+    setReload(!reload);
+    setIsLoading(false);
+  };
+
+  const deleteFriend = async (userId) =>{
+    setIsLoading(true);
+    await deleteFriendService(userId);
+    setReload(!reload);
     setIsLoading(false);
   };
   
   useEffect(() => {
     getData();
-  }, [userId]);
+  }, [reload]);
 
   activeUser && console.log(activeUser.friends)
 
@@ -45,6 +58,9 @@ export default function UserInfo() {
           <img src={profile.profileImg ? profile.profileImg : logo} alt="Profile-Image" width="200px" />
           <h3>{profile.username}</h3>
          {!activeUser.friends.map(e => e._id).includes(profile._id) && (<button onClick={() =>{addUser(profile._id)}}>Add friend</button>)}
+         {activeUser.friends.map(e => e._id).includes(profile._id) && (<button onClick={() =>{deleteFriend(profile._id)}}>Delete friend</button>)}
+         
+
           <p>
             {profile.firstName} {profile.lastName}
           </p>

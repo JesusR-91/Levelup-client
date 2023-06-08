@@ -44,7 +44,7 @@ export default function Profile() {
                   <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"flex-start", minWidth:"20vw",  paddingLeft:"2vw"}}>
                     <h3>{profile.username}</h3>
                     <p>Name: {profile.firstName} {profile.lastName}</p>
-                    <p>Birth date: {profile.birthDate.slice(4)}</p>
+                    <p>Birth date: {profile.birthDate && profile.birthDate.slice(4)}</p>
                     <p>E-mail: {profile.email}</p>
                     <p>Phone: {profile.phoneNum}</p>
                     
@@ -72,9 +72,9 @@ export default function Profile() {
               ) : (<h4>There's not publications</h4>)}
             </div>
           </div>
-          <div style={{padding:"10vh"}}>
-            <Card style={{padding:"2vh"}}>
-              <h4>Your friends:</h4>
+          <div style={{padding:"8vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+            <h4>Your friends:</h4>
+            <Card style={{backgroundColor: "lightgrey", padding:"2vh", display:"flex", flexWrap:"wrap", flexDirection:"row", justifyContent:"center", maxWidth:"40vw"}}>
               {profile.friends.map((friend) => (
                 <Link to={`/user/${friend._id}`} key={friend._id}>{friend.username}</Link>
               ))}
