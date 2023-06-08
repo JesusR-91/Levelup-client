@@ -21,11 +21,12 @@ import IsAdmin from "./components/auth/IsAdmin";
 function App() {
   return (
     <div>
-      <IsLogged><MyNavbar/></IsLogged>
+      <MyNavbar/>
 
       <Routes>
         <Route path="/auth/signup" element={<Signup/>} />
         <Route path="/auth/login" element={<Login/>} />
+
 
         <Route path="/admin" element={<IsLogged> <IsAdmin><Admin/></IsAdmin></IsLogged>} />
 

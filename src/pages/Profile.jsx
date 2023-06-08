@@ -72,13 +72,14 @@ export default function Profile() {
               ) : (<h4>There's not publications</h4>)}
             </div>
           </div>
-
+          <div style={{padding:"10vh"}}>
             <Card style={{padding:"2vh"}}>
               <h4>Your friends:</h4>
               {profile.friends.map((friend) => (
                 <Link to={`/user/${friend._id}`} key={friend._id}>{friend.username}</Link>
               ))}
             </Card>
+          </div>
           </div>
         </div>) : (<p>We didn't found the profile</p>)}
         

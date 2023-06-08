@@ -1,17 +1,20 @@
-import IsAdmin from "./auth/IsAdmin"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import SearchBar from "./Searchbar.jsx";
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context.jsx';
 
 
 export default function MyNavbar() {
 
-  return (
+  const {isAdmin, activeUser} = useContext(AuthContext);
+
+  return activeUser && (
     <Navbar style={{border:"white solid 1px", borderRadius:"10px"}} variant="dark">
       <Container>
 
-        <IsAdmin><Nav.Link href="/admin">Admin</Nav.Link></IsAdmin> 
+        {isAdmin && <Nav.Link href="/admin">Admin</Nav.Link>}
 
         <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href="/profile">Profile</Nav.Link>
