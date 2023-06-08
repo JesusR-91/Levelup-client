@@ -75,7 +75,7 @@ export default function AddUserGroup({ setReload }) {
         <Modal.Body>
           <form onSubmit={handleSearch}>
             <input type="text" name="queryValue" onChange={handleSearch} value={search} placeholder="Find a user" />
-            <button type="submit">Search</button>
+            <Button type="submit">Search</Button>
           </form>
 
           {!isLoading ? (
@@ -84,9 +84,9 @@ export default function AddUserGroup({ setReload }) {
                 <div key={eachUser._id}>
                   <h4>
                     {eachUser.username}{" "}
-                    <button onClick={() => handleAddUser(groupId, eachUser._id)}>
+                    <Button onClick={() => handleAddUser(groupId, eachUser._id)}>
                       Add User
-                    </button>
+                    </Button>
                   </h4>
                 </div>
               )

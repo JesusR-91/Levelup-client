@@ -6,6 +6,7 @@ import { friendInfoService } from "../../services/user.services";
 import AddUserGroup from "../../components/group/AddUserGroup";
 import GroupCommentList from "../../components/group/GroupCommentList";
 import { AuthContext } from "../../context/auth.context";
+import { Button } from "react-bootstrap";
 
 
 export default function GroupDetails() {
@@ -87,7 +88,7 @@ export default function GroupDetails() {
           {(group.mods.includes(activeUser._id) ||
             group.owner.includes(activeUser._id)) && (
               <div>
-                <button onClick={() => {handleDeleteUser(group._id, user._id)}}>Delete User</button>
+                <Button onClick={() => {handleDeleteUser(group._id, user._id)}}>Delete User</Button>
                 {!group.mods.includes(user._id) && <button onClick={() => handleAddMod(groupId, user._id)}>Add Mod</button>}
               </div>
             )}
@@ -96,13 +97,13 @@ export default function GroupDetails() {
               <p>Mod</p>
               {(group.mods.includes(activeUser._id) ||
                 group.owner.includes(activeUser._id)) && (
-                  <button
+                  <Button
                     onClick={() => {
                       handleDeleteMod(group._id, user._id);
                     }}
                   >
                     Delete Mod
-                  </button>
+                  </Button>
                 )}
             </div>
           )}

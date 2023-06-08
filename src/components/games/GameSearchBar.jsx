@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 
@@ -22,7 +23,7 @@ export default function GameSearchBar() {
     <div>
     <form onSubmit={handleSubmitForm}>
         <input type="text" name="queryValue" onChange={handleForm} value={queryValue} placeholder="What game are you looking for?" style={{width:"400px"}}/>
-        <button>Find it!</button>
+        <Button>Find it!</Button>
     </form>
     </div>
   )

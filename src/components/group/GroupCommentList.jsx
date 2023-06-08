@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/auth.context";
 import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../../assets/icons8-pixel-heart-white.png";
+import { Button } from "react-bootstrap";
 
 export default function GroupCommentList() {
 
@@ -103,29 +104,29 @@ export default function GroupCommentList() {
             {groupComment.dislikes.length > 0 && (groupComment.dislikes.length > 1 ? (<p>{groupComment.dislikes.length} Likes</p>): (<p>{groupComment.dislikes.length} Dislikes</p>))}
           </div>
           <div>
-            <button
+            <Button
               style={{width: "10px",height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}} 
               onClick={() => {
                 handleLike(groupComment._id);
               }}>
               <img src={likeImg} alt="thumbUp" width={"20px"}/>
-            </button>
-            <button
+            </Button>
+            <Button
               style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
               onClick={() => {
                 handleDislike(groupComment._id);
               }}>
               <img src={dislikeImg} alt="thumbUp" width={"20px"}/>
-            </button>
-            <button
+            </Button>
+            <Button
               style={{width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center",}}
               onClick={() => {
                 handleLove(groupComment._id);
               }}>
               <img src={loveImg} width={"20px"}/>
-            </button>
+            </Button>
           </div>
-        {(groupComment.owner._id === activeUser._id) && (<button onClick={()=>{handleValuation(groupComment._id)}}>Delete valuation</button>)}
+        {(groupComment.owner._id === activeUser._id) && (<Button onClick={()=>{handleValuation(groupComment._id)}}>Delete comment</Button>)}
         </div>
       ))}
     </div>

@@ -38,6 +38,8 @@ export default function GameDetails() {
 
            {game.esrb_rating?.name && (<p>Rating: {game.esrb_rating.name}</p>)}
           <p>Metacritic: {game.metacritic}</p>
+          <a href={game.website} style={{color:"black", textDecoration:"none"}}>Oficial website</a>
+
         </div>
       </div>
         <table>
@@ -49,7 +51,6 @@ export default function GameDetails() {
       </div>
       <br />
 
-      <a href={game.website}>Oficial website</a>
 
       <br />
 
