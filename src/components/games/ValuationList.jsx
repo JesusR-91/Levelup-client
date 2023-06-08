@@ -1,12 +1,12 @@
 //IMPORTS
 import { useNavigate, useParams} from "react-router-dom"
-import { handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService, deleteValuationService } from "../services/valuation.services"
+import { handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService, deleteValuationService } from "../../services/valuation.services"
 import { useContext, useEffect, useState } from "react";
 import CreateValuation from "./CreateValuation";
-import { AuthContext } from "../context/auth.context";
-import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
-import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
-import loveImg from "../assets/icons8-pixel-heart-white.png";
+import { AuthContext } from "../../context/auth.context";
+import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
+import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
+import loveImg from "../../assets/icons8-pixel-heart-white.png";
 
 
 

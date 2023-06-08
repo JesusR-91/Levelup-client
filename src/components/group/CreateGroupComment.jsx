@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
+
+//IMPORTS
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createGCService } from "../services/groupComment.services";
+import { createGCService } from "../../services/groupComment.services";
 import { Button, Modal } from "react-bootstrap";
 
 export default function CreateGroupComment({setReload}) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import CreateGroupForm from "../../components/CreateGroupForm"
+import CreateGroupForm from "../../components/group/CreateGroupForm"
 import { Link, useNavigate } from "react-router-dom";
 import { groupListService, ownGroupListService } from "../../services/group.services";
 

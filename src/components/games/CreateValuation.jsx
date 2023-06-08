@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from "react";
-import { newValuationService } from "../services/valuation.services";
+import { newValuationService } from "../../services/valuation.services";
 import { useParams } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 

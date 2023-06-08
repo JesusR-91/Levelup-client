@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { gameListService } from "../../services/games.services";
 import { Link } from "react-router-dom";
-import GameSearchBar from "../../components/GameSearchBar";
+import GameSearchBar from "../../components/games/GameSearchBar";
 import lefArrow from "../../assets/icons8-back-arrow-60-left.png";
 import rightArrow from "../../assets/icons8-back-arrow-60-rigth.png";
 

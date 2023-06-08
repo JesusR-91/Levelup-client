@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {groupDeleteUserService, groupDetailsService, deleteModService, addModService,} from "../../services/group.services";
 import { friendInfoService } from "../../services/user.services";
-import AddUserGroup from "../../components/AddUserGroup";
-import GroupCommentList from "../../components/GroupCommentList";
+import AddUserGroup from "../../components/group/AddUserGroup";
+import GroupCommentList from "../../components/group/GroupCommentList";
 import { AuthContext } from "../../context/auth.context";
 
 

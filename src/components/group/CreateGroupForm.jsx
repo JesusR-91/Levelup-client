@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { createGroupService } from "../services/group.services";
+import { createGroupService } from "../../services/group.services";
 import {useNavigate } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 

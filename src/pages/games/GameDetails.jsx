@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { gameDetailsService } from "../../services/games.services";
 import { useNavigate, useParams } from "react-router-dom";
-import ValuationList from "../../components/ValuationList";
+import ValuationList from "../../components/games/ValuationList";
 
 export default function GameDetails() {
   const [game, setGame] = useState([]);

@@ -1,20 +1,25 @@
 /* eslint-disable react/prop-types */
 
+//IMPORTS
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { groupAddUserService, groupDetailsService } from "../services/group.services";
-import { getAllUserService } from "../services/admin.services";
+import { groupAddUserService, groupDetailsService } from "../../services/group.services";
+import { getAllUserService } from "../../services/admin.services";
 import { Button, Modal } from "react-bootstrap";
 
 export default function AddUserGroup({ setReload }) {
+  //STATES
   const [users, setUsers] = useState([]);
   const [group, setGroup] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
+
+
   const { groupId } = useParams();
   const navigate = useNavigate();
 
+  //FUNCTIONS
   const getData = async () => {
     try {
       setIsLoading(true);

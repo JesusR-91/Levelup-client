@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { deleteGCService, getAllGCService, handleDislikeGCService, handleLikeGCService, handleLoveGCService } from "../services/groupComment.services";
+import { deleteGCService, getAllGCService, handleDislikeGCService, handleLikeGCService, handleLoveGCService } from "../../services/groupComment.services";
 import { useNavigate, useParams } from "react-router-dom";
 import CreateGroupComment from "./CreateGroupComment";
-import { AuthContext } from "../context/auth.context";
-import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
-import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
-import loveImg from "../assets/icons8-pixel-heart-white.png";
+import { AuthContext } from "../../context/auth.context";
+import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
+import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
+import loveImg from "../../assets/icons8-pixel-heart-white.png";
 
 export default function GroupCommentList() {
 
