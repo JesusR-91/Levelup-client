@@ -35,52 +35,21 @@ export default function Profile() {
     <div>
       {profile ? (
         <div key={profile._id}>
+
           <div style={{ padding: "5vh" }}>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "space-between",
-                gap: "2vw",
-              }}
-            >
+
+            <div className="profile-distribution">
               <Card style={{ backgroundColor: "lightgrey" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "5vw",
-                  }}
-                >
-                  <img
-                    src={profile.profileImg ? profile.profileImg : logo}
-                    alt="Profile-Image"
-                    width="125vw"
-                  />
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "flex-start",
-                      minWidth: "20vw",
-                      paddingLeft: "2vw",
-                    }}
-                  >
+                <div className="profile">
+
+                  <img src={profile.profileImg ? profile.profileImg : logo} alt="Profile-Image" width="125vw"/>
+
+                  <div className= "profile-info">
                     <h3>{profile.username}</h3>
-                    <p>
-                      Name: {profile.firstName} {profile.lastName}
-                    </p>
-                    <p>
-                      Birth date:{" "}
-                      {profile.birthDate !== "Invalid Date" && profile.birthDate.slice(4)}
-                    </p>
+                    <p> Name: {profile.firstName} {profile.lastName}</p>
+                    <p>Birth date:{" "} {profile.birthDate !== "Invalid Date" && profile.birthDate.slice(4)} </p>
                     <p>E-mail: {profile.email}</p>
                     <p>Phone: {profile.phoneNum}</p>
-
                     <EditProfile />
                   </div>
                 </div>
@@ -89,30 +58,10 @@ export default function Profile() {
                 <h4>Publications:</h4>
 
                 {publication.length > 0 ? (
-                  <CardGroup
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "5vh",
-                      padding: "2vh",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <CardGroup className="publication-distribution">
                     {publication.map((publication) => (
-                      <Card
-                        key={publication._id}
-                        style={{
-                          backgroundColor: "lightgrey",
-                          padding: "2vh",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <h5>
-                          {publication.owner.username} -{" "}
-                          <span>{publication.createdAt}</span>
-                        </h5>
+                      <Card className="publication-card" key={publication._id} >
+                        <h5>{publication.owner.username} -{" "} <span>{publication.createdAt}</span></h5>
                         <p>{publication.content}</p>
                       </Card>
                     ))}
@@ -122,32 +71,10 @@ export default function Profile() {
                 )}
               </div>
             </div>
-            <div
-              style={{
-                padding: "8vh",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <div className="friends-card-distribution">
               <h4>Your friends:</h4>
-              <Card
-                style={{
-                  backgroundColor: "lightgrey",
-                  padding: "2vh",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  maxWidth: "40vw",
-                }}
-              >
-                {profile.friends.map((friend) => (
-                  <Link to={`/user/${friend._id}`} key={friend._id}>
-                    {friend.username}
-                  </Link>
-                ))}
+              <Card className="friends-card" >
+                {profile.friends.map((friend) => (<Link to={`/user/${friend._id}`} key={friend._id}> {friend.username}</Link>))}
               </Card>
             </div>
           </div>

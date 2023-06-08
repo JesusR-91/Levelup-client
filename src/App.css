@@ -30,3 +30,65 @@ h1 {
   align-items: center;
   margin-top: 20vh;
 }
+
+.profile-distribution {
+  display: flex;
+  flex-wrap: wrap; 
+  flex-direction: row; 
+  justify-content: center; 
+  align-items: space-between; 
+  gap: 2vw
+}
+.card {
+  background-color: yellow;
+}
+
+.profile{
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 5vw
+}
+
+.profile-info{
+  display: "flex";
+  flex-direction: "column"; 
+  justify-content: "center"; 
+  align-items: "flex-start"; 
+  min-width: "20vw"; 
+  padding-left: "2vw"
+}
+
+.publication-distribution{
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 5vh; 
+  padding: 2vh; 
+  flex-direction: column
+}
+
+.publication-card{
+  background-color: lightgrey; 
+  padding: 2vh; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center
+}
+
+.friends-card-distribution{
+  padding: 8vh; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center 
+}
+
+.friends-card{
+  background-color: lightgrey;
+  padding: 2vh; 
+  display: flex; 
+  flex-wrap: wrap; 
+  flex-direction: row; 
+  justify-content: center; 
+  max-width: 40vw
+}
