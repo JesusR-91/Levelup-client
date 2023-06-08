@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "../../services/auth.services";
 import { AuthContext } from "../../context/auth.context";
 import name from "../../assets/logo-no-background.png"
+import { Button } from "react-bootstrap";
 
 
 
@@ -61,7 +62,7 @@ export default function Login() {
             {errorMessage && <p style={{color:"red"}}>{errorMessage}</p> }
             <br />
             <br/>
-            <button>Login</button>
+            <Button>Login</Button>
             <p>If you don't have an account <Link to={`/auth/signup`}>click here!</Link></p>
 
 

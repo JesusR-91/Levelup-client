@@ -89,7 +89,7 @@ export default function GroupDetails() {
             group.owner.includes(activeUser._id)) && (
               <div>
                 <Button onClick={() => {handleDeleteUser(group._id, user._id)}}>Delete User</Button>
-                {!group.mods.includes(user._id) && <button onClick={() => handleAddMod(groupId, user._id)}>Add Mod</button>}
+                {!group.mods.includes(user._id) && <Button onClick={() => handleAddMod(groupId, user._id)}>Add Mod</Button>}
               </div>
             )}
           {group.mods.includes(user._id) && (

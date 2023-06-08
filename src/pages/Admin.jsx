@@ -2,6 +2,7 @@
 import { getAllGroupsService, getAllUserService, deleteUserService, deleteGroupService } from "../services/admin.services";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 export default function Admin() {
   //STATES
@@ -55,14 +56,14 @@ export default function Admin() {
       <h3>All users:</h3>
         {users.map((eachUser)=>(
       <div key={eachUser._id}>
-          <h4>{eachUser.username} <button onClick={()=>{handleDeleteUser(eachUser._id)}}>Delete</button></h4>
+          <h4>{eachUser.username} <Button onClick={()=>{handleDeleteUser(eachUser._id)}}>Delete</Button></h4>
       </div>
       ))}
       <br/>
       <h3>All groups:</h3>
       {groups.map((eachGroup)=>
       <div key={eachGroup._id}>
-          <h4>{eachGroup.name} <button onClick={()=>{handleDeleteGroup(eachGroup._id)}}>Delete</button></h4>
+          <h4>{eachGroup.name} <Button onClick={()=>{handleDeleteGroup(eachGroup._id)}}>Delete</Button></h4>
       </div>
       )}
       </div>

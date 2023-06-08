@@ -191,13 +191,13 @@ export default function PublicationList() {
                   </Button>
                 </div>
                 {eachPubl.owner._id === activeUser._id && (
-                  <button
+                  <Button
                     onClick={() => {
                       handlePublication(eachPubl._id);
                     }}
                   >
                     Delete publication
-                  </button>
+                  </Button>
                 )}
               </Card>
             ))}

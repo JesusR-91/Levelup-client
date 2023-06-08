@@ -1,6 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { signupService } from "../../services/auth.services";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 export default function Signup() {
 
@@ -88,7 +89,7 @@ export default function Signup() {
         <br/>
         <p>If you already have an account <Link to={`/auth/login`}>click here!</Link></p>
         <br/>
-        <button type="submit">Signup</button>
+        <Button type="submit">Signup</Button>
       </form>
       
     </div>

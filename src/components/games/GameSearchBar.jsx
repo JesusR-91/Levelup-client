@@ -23,7 +23,7 @@ export default function GameSearchBar() {
     <div>
     <form onSubmit={handleSubmitForm}>
         <input type="text" name="queryValue" onChange={handleForm} value={queryValue} placeholder="What game are you looking for?" style={{width:"400px"}}/>
-        <Button>Find it!</Button>
+        <Button type="submit">Find it!</Button>
     </form>
     </div>
   )

@@ -51,8 +51,8 @@ export default function GameList() {
       </div>
 
       <div style={{display: "flex", flexDirection:"row", justifyContent:"space-between"}}>
-        <button onClick={handleLeftArrow}> <img src={lefArrow} alt="left-arrow" /> </button>
-        <button onClick={handleRightArrow} > <img src={rightArrow} alt="right-arrow" /> </button>
+        <Button onClick={handleLeftArrow}> <img src={lefArrow} alt="left-arrow" /> </Button>
+        <Button onClick={handleRightArrow} > <img src={rightArrow} alt="right-arrow" /> </Button>
       </div>
     </div>
   ) : (<h3>Loading...</h3>)

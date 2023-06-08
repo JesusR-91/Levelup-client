@@ -74,7 +74,7 @@ export default function CreateValuation({getData}) {
           />
         </div>
         <br />
-        <button>Create!</button>
+        <Button type="submit">Create!</Button>
       </form>
       </Modal.Body>
         <Modal.Footer>

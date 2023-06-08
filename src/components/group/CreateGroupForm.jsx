@@ -57,7 +57,7 @@ const navigate = useNavigate()
         </div>
         {errorMessage && <p style={{color:"red"}}>{errorMessage}</p>}
 
-        <Button>Create!</Button>
+        <Button type="submit">Create!</Button>
       </form>
       </Modal.Body>
         <Modal.Footer>

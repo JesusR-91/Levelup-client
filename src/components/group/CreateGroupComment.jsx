@@ -53,7 +53,7 @@ export default function CreateGroupComment({setReload}) {
                 <label>Description</label>
                 <input type="textarea" name="content" onChange={handleContentInput} value={content}/>
             </div>
-            <Button>Create!</Button>
+            <Button type="submit">Create!</Button>
         </form>
         </Modal.Body>
         <Modal.Footer>
