@@ -48,7 +48,7 @@ export default function Profile() {
 
                   <img src={profile.profileImg ? profile.profileImg : logo} alt="Profile-Image" width="125vw"/>
 
-                  <div className= {`${cardTheme} profile-info`}>
+                  <div className= "profile-info">
                     <h3>{profile.username}</h3>
                     <p> Name: {profile.firstName} {profile.lastName}</p>
                     <p>Birth date:{" "} {profile.birthDate !== "Invalid Date" && profile.birthDate.slice(4)} </p>
@@ -64,7 +64,7 @@ export default function Profile() {
                 {publication.length > 0 ? (
                   <CardGroup className="publication-distribution">
                     {publication.map((publication) => (
-                      <Card className={`${cardTheme} publication-card`} key={publication._id} >
+                      <Card className={`${cardTheme} publication-card`} style={{minWidth:"20vw", maxWidth:"30vw"}} key={publication._id} >
                         <h5>{publication.owner.username} -{" "} <span>{publication.createdAt}</span></h5>
                         <p>{publication.content}</p>
                       </Card>

@@ -1,12 +1,17 @@
 /* eslint-disable react/prop-types */
 
 //IMPORTS
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { groupAddUserService, groupDetailsService } from "../../services/group.services";
 import { getAllUserService } from "../../services/admin.services";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { PuffLoader } from "react-spinners";
+import { ThemeContext } from "../../context/theme.context";
+
+//IMGS
+import addUserLogoDark from "../../assets/icons8-add-user-dark-64.png";
+import addUserLogoLight from "../../assets/icons8-add-user-64 -light.png";
 
 export default function AddUserGroup({ setReload }) {
   //STATES
@@ -16,7 +21,8 @@ export default function AddUserGroup({ setReload }) {
   const [search, setSearch] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-
+  //OTHER VAR
+  const {isDarkMode, cardTheme, buttonTheme} = useContext(ThemeContext);
   const { groupId } = useParams();
   const navigate = useNavigate();
 
@@ -67,17 +73,19 @@ export default function AddUserGroup({ setReload }) {
 
   return (
     <div>
-      <Button onClick={handleOpenPopup}>Add Users</Button>
+      <Button onClick={handleOpenPopup} style={{backgroundColor:"transparent", borderColor:"transparent"}}><img src={isDarkMode ? addUserLogoDark : addUserLogoLight} alt="add-user" /></Button>
 
       <Modal show={showPopup} onHide={handleClosePopup}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={cardTheme}>
           <Modal.Title>Add User</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleSearch}>
-            <input type="text" name="queryValue" onChange={handleSearch} value={search} placeholder="Find a user" />
-            <Button type="submit">Search</Button>
-          </form>
+
+        <Modal.Body className={cardTheme} style={{display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
+          <Form onSubmit={handleSearch}>
+            <Form.Control type="text" name="queryValue" onChange={handleSearch} value={search} placeholder="Find an specific user" />
+            <br />
+          </Form>
+          <br />
 
           {!isLoading ? (
             filteredUsers.map((eachUser) => (
@@ -85,9 +93,7 @@ export default function AddUserGroup({ setReload }) {
                 <div key={eachUser._id}>
                   <h4>
                     {eachUser.username}{" "}
-                    <Button onClick={() => handleAddUser(groupId, eachUser._id)}>
-                      Add User
-                    </Button>
+                    <Button className={buttonTheme} onClick={() => handleAddUser(groupId, eachUser._id)}>Add User</Button>
                   </h4>
                 </div>
               )
@@ -98,8 +104,9 @@ export default function AddUserGroup({ setReload }) {
           </div>
           )}
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleClosePopup}>Close</Button>
+
+        <Modal.Footer className={cardTheme}>
+          <Button className={buttonTheme} onClick={handleClosePopup}>Close</Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -3,18 +3,25 @@ import { useContext, useEffect, useState } from "react";
 import { gameListService } from "../../services/games.services";
 import { Link } from "react-router-dom";
 import GameSearchBar from "../../components/games/GameSearchBar";
-import lefArrow from "../../assets/icons8-back-arrow-60-left.png";
-import rightArrow from "../../assets/icons8-back-arrow-60-rigth.png";
 import { Card, Button } from "react-bootstrap";
 import { ThemeContext } from "../../context/theme.context";
 import { PuffLoader } from "react-spinners";
 
 
+//IMGS
+import lefArrowDark from "../../assets/icons8-arrow-64-left-dark.png";
+import rightArrowDark from "../../assets/icons8-arrow-64-right-dark.png";
+import lefArrowLight from "../../assets/icons8-arrow-64-left-light.png";
+import rightArrowLight from "../../assets/icons8-arrow-64-right-light.png";
+
 export default function GameList() {
+
   //STATES
   const [gameList, setGameList] = useState([]);
   const [page, setPage] = useState(1);
-  const {buttonTheme, cardTheme} = useContext (ThemeContext);
+
+  //OTHER VARS
+  const {isDarkMode, cardTheme} = useContext (ThemeContext);
 
   //FUNCTIONS
   const getData = async () => {
@@ -39,6 +46,13 @@ export default function GameList() {
 
       <h2>Game list</h2>
 
+      <div style={{display: "flex", flexDirection:"row", justifyContent:"space-between"}}>
+        <Button onClick={handleLeftArrow} style={{backgroundColor:"transparent", borderColor:"transparent"}}> <img src={isDarkMode ? lefArrowDark : lefArrowLight} alt="left-arrow"/> </Button>
+        <Button onClick={handleRightArrow} style={{backgroundColor:"transparent", borderColor:"transparent"}} > <img src={isDarkMode ? rightArrowDark : rightArrowLight} alt="right-arrow" /> </Button>
+      </div>
+      
+      <br />
+
       <div style={{display:"flex", flexWrap: "wrap", gap:"50px", justifyContent: "space-evenly", alignItems:"center"}}>
         {gameList.map((game) => (
           <Card className={cardTheme} key={game.id}>
@@ -58,8 +72,8 @@ export default function GameList() {
       </div>
 
       <div style={{display: "flex", flexDirection:"row", justifyContent:"space-between"}}>
-        <Button className={buttonTheme} onClick={handleLeftArrow}> <img src={lefArrow} alt="left-arrow" /> </Button>
-        <Button className={buttonTheme} onClick={handleRightArrow} > <img src={rightArrow} alt="right-arrow" /> </Button>
+        <Button onClick={handleLeftArrow} style={{backgroundColor:"transparent", borderColor:"transparent"}}> <img src={isDarkMode ? lefArrowDark : lefArrowLight} alt="left-arrow"/> </Button>
+        <Button onClick={handleRightArrow} style={{backgroundColor:"transparent", borderColor:"transparent"}} > <img src={isDarkMode ? rightArrowDark : rightArrowLight} alt="right-arrow" /> </Button>
       </div>
     </div>
   ) : (<div className="spinners">

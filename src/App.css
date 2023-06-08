@@ -1,10 +1,13 @@
 @import 'bootstrap/dist/css/bootstrap.css';
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url(//db.onlinewebfonts.com/c/3101d0058e2d7317cd5a5af7a1216ff3?family=Reactor7);
 
 #root {
   text-align: center;
   color: rgba(255, 255, 255, 0.87);
+  font-family: 'Reactor7', monospace;
   font-weight: bold;
+  font-size: 2em;
   
 }
 
@@ -33,7 +36,7 @@ h1 {
   flex-wrap: wrap; 
   flex-direction: row; 
   justify-content: center; 
-  align-items: space-between; 
+  align-items: center; 
   gap: 2vw
 }
 .card {
@@ -44,7 +47,8 @@ h1 {
   display: flex;
   justify-content: space-between; 
   align-items: center; 
-  padding: 5vw
+  padding: 5vw;
+  gap: 2vw;
 }
 
 .profile-info{
@@ -59,14 +63,16 @@ h1 {
 .publication-distribution{
   display: flex; 
   flex-wrap: wrap; 
+  justify-content: center;
+  align-items: center;
   gap: 5vh; 
   padding: 2vh; 
-  flex-direction: column
+  flex-direction: row
 }
 
 .publication-card{
   background-color: lightgrey; 
-  padding: 2vh; 
+  padding: 2vh;
   display: flex; 
   justify-content: center; 
   align-items: center;
@@ -112,7 +118,7 @@ h1 {
 }
 
 .light-buttons{
-  background-color:lightseagreen !important;
+  background-color:#20b2aa !important;
   color: white !important;
 }
 

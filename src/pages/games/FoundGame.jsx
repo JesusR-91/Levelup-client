@@ -1,3 +1,4 @@
+//IMPORTS
 import { useEffect, useState, useContext } from "react";
 import { findAGameService } from "../../services/games.services";
 import { Link, useParams } from "react-router-dom";
@@ -6,15 +7,21 @@ import { ThemeContext } from "../../context/theme.context";
 import { PuffLoader } from "react-spinners";
 
 export default function FoundGame() {
+  //STATES
   const [gameList, setGameList] = useState([]);
-  const {queryValue} = useParams()
-  const {buttonTheme, cardTheme} = useContext (ThemeContext);
+  const [isLoading, setIsLoading] = useState(true);
 
+  //OTHER VARIABLES
+  const {queryValue} = useParams()
+  const {cardTheme} = useContext (ThemeContext);
+
+  //FUNCTIONS
   const getData = async () => {
     try {
+      setIsLoading(true);
       const response = await findAGameService(queryValue);
       setGameList(response.data);
-      console.log(response.data)
+      setIsLoading(false)
     } catch (error) {
       console.log(error);
     }    
@@ -22,7 +29,7 @@ export default function FoundGame() {
 
   useEffect(()=>{ getData()}, []);
 
-  return (
+  return !isLoading ? (
     <div>
       <h2>Game list</h2>
 
@@ -52,5 +59,9 @@ export default function FoundGame() {
         ))}
       </div>
     </div>
-  );
+  ): (
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
+  )
 }

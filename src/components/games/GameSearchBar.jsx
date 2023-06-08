@@ -1,6 +1,6 @@
 //IMPORTS
 import { useContext, useState } from "react"
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../context/theme.context";
 
@@ -25,11 +25,11 @@ export default function GameSearchBar() {
     }
   
   return (
-    <div>
-    <form onSubmit={handleSubmitForm}>
-        <input type="text" name="queryValue" onChange={handleForm} value={queryValue} placeholder="What game are you looking for?" style={{width:"400px"}}/>
-        <Button className={buttonTheme} type="submit">Find it!</Button>
-    </form>
-    </div>
+    <Form onSubmit={handleSubmitForm}>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", alignItems:"center", gap:"1vw", padding:"2vh"}}>
+          <Form.Control type="text" name="queryValue" onChange={handleForm} value={queryValue} placeholder="What game are you looking for?" style={{width:"400px"}}/>
+          <Button className={buttonTheme} type="submit">Find it!</Button>
+        </div>
+      </Form>
   )
 }

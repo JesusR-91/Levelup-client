@@ -1,19 +1,26 @@
+//IMPORTS
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "../../services/auth.services";
 import { AuthContext } from "../../context/auth.context";
 import name from "../../assets/logo-no-background.png"
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { ThemeContext } from "../../context/theme.context";
 
 
 
 export default function Login() {
+  //STATES
   const {authenticateUser} = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  //OTHER VAR
+  const {buttonTheme} = useContext(ThemeContext);
   const navigate = useNavigate();
 
+  //FUNCTIONS
   const handleUsername = (event) => setUsername(event.target.value);
   const handlePassword = (event) => setPassword(event.target.value);
 
@@ -44,29 +51,28 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+    
     <img src={name} alt="web-name" />
 
       <h2>Login</h2>
-        <form onSubmit={handleSubmitForm}>
-            <div>
-              <label>Username</label>
-              <input type="text" name="username" value={username} onChange={handleUsername}/>
-            </div>
+        <Form onSubmit={handleSubmitForm} style={{maxWidth:"50vw"}}>
+            <Form.Group>
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" name="username" value={username} onChange={handleUsername}/>
+            </Form.Group>
             <br />
-            <div>
-              <label>Password</label>
-              <input type="password" name="password" value={password} onChange={handlePassword}/>
-            </div>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" name="password" value={password} onChange={handlePassword}/>
+            </Form.Group>
             <br />
             {errorMessage && <p style={{color:"red"}}>{errorMessage}</p> }
             <br />
             <br/>
-            <p>If you don't have an account<Link to={`/auth/signup`}style={{color:"red"}}>click here!</Link></p>
-            <Button type="submit">Login</Button>
-
-
-        </form>
+            <p>If you don't have an account<Link to={`/auth/signup`} style={{color:"black"}}>click here!</Link></p>
+            <Button className={buttonTheme} type="submit">Login</Button>
+        </Form>
     </div>
   )
 }

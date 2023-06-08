@@ -2,6 +2,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import SearchBar from "./Searchbar.jsx";
 import { useContext, useEffect} from 'react';
 import { AuthContext } from '../context/auth.context.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +41,7 @@ export default function MyNavbar() {
   useEffect(()=>{}, [])
 
   return activeUser && (
-    <Navbar style={{border:"white solid 1px", borderRadius:"10px"}} variant="dark">
+    <Navbar style={{border:"solid 1px", borderRadius:"10px"}} variant="dark">
       <Container>
 
         {isAdmin && <Nav.Link href="/admin"><img src={isDarkMode ? adminLogo : adminLogoBlack} alt="admin" width={"50vh"}/></Nav.Link>}
@@ -54,6 +55,7 @@ export default function MyNavbar() {
 
         <Nav.Link onClick={logout}> <img src={isDarkMode ? logoutLogo : logoutLogoBlack} alt="logout" width={"40vw"}/> </Nav.Link>
 
+      <SearchBar/>
 
       </Container>
     </Navbar>

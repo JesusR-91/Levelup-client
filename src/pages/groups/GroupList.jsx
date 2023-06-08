@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
+//IMPORTS
+import { useContext, useEffect, useState } from "react";
 import CreateGroupForm from "../../components/group/CreateGroupForm";
 import { Link, useNavigate } from "react-router-dom";
 import { groupListService, ownGroupListService } from "../../services/group.services";
 import { Card, CardGroup, Col } from "react-bootstrap";
 import { PuffLoader } from "react-spinners";
+import { ThemeContext } from "../../context/theme.context";
 
 export default function GroupList() {
+  //STATES
   const [ownGroups, setOwnGroups] = useState([]);
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  //OTHER VAR
+  const {cardTheme} = useContext(ThemeContext);
   const navigate = useNavigate();
 
+  //FUNCTIONS
   const getData = async () => {
     try {
       const ownResponse = await ownGroupListService();
@@ -30,17 +37,16 @@ export default function GroupList() {
 
   return !isLoading ? (
     <div>
-      <div style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"flex-end"}}>
+      <div style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"center"}}>
       <CreateGroupForm />
-
       </div>
 
       <CardGroup style={{gap:"25vw"}}>
-        <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh"}}>
-          <div>
+        <Col md={4} style={{ maxHeight: "200vh"}}>
+          <div style={{padding:"1vh 1vh 1vh 1vh", display:"flex", justifyContent:"center", flexDirection:"column", alignItems:"center"}}>
             <h3>Your groups</h3>
             {ownGroups.map((group, index) => (
-              <Card
+              <Card className={cardTheme}
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
@@ -49,6 +55,8 @@ export default function GroupList() {
                   backgroundColor: "lightgrey",
                   padding: "3vw",
                   margin: "3vw",
+                  minWidth:"35vw",
+                  maxWidth:"35vw"
                 }}
                 key={index}
               >
@@ -73,11 +81,11 @@ export default function GroupList() {
             ))}
           </div>
         </Col>
-        <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh" }}>
-          <div>
+        <Col md={4} style={{ maxHeight: "65vh" }}>
+          <div style={{padding:"1vh 1vh 1vh 1vh", display:"flex", justifyContent:"center", flexDirection:"column", alignItems:"center"}}>
             <h3>Other groups</h3>
             {groups.map((group, index) => (
-              <Card
+              <Card className={cardTheme}
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
@@ -86,6 +94,8 @@ export default function GroupList() {
                   backgroundColor: "lightgrey",
                   padding: "3vw",
                   margin: "3vw",
+                  minWidth:"35vw",
+                  maxWidth:"35vw"
                 }}
                 key={index}
               >

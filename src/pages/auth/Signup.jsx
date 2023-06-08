@@ -1,11 +1,15 @@
+//IMPORTS
 import { useNavigate, Link } from "react-router-dom";
 import { signupService } from "../../services/auth.services";
-import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { ThemeContext } from "../../context/theme.context";
 import name from "../../assets/logo-no-background.png"
+
 
 export default function Signup() {
 
+  //STATES
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -13,10 +17,13 @@ export default function Signup() {
     firstName: "",
     lastName: ""
   });
-
   const [errorMessage, setErrorMessage] = useState("")
-  const navigate = useNavigate();
 
+  //OTHER VAR
+  const navigate = useNavigate();
+  const {buttonTheme} = useContext(ThemeContext);
+
+  //FUNCTIONS
   const handleForm = ({target:{name, value}}) => {setFormData({...formData, [name]: value})}
 
   const handleSignup = async (event) => {
@@ -37,61 +44,48 @@ export default function Signup() {
   };
 
   return (
-    <div>
+    <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+
+      <img src={name} alt="web-name" />
 
       <h1>Sign Up</h1>
+      <br />
     
-      <form onSubmit={handleSignup}>
+      <Form onSubmit={handleSignup}>
         
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleForm}
-        />
-
+        <Form.Group>
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" name="username" value={formData.username} onChange={handleForm}/>
+        </Form.Group>
         <br />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleForm}
-        />
+        <Form.Group>
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" name="password" value={formData.password} onChange={handleForm}/>
+        </Form.Group>
+        
         <br />
-        <label>Confirm password:</label>
-        <input
-          type="password"
-          name="confirmPass"
-          value={formData.confirmPass}
-          onChange={handleForm}
-        />
+        <Form.Group>
+          <Form.Label>Confirm password</Form.Label>
+          <Form.Control type="password" name="confirmPass" value={formData.confirmPass} onChange={handleForm} /> 
+        </Form.Group>
         <br />
-        <label>First name:</label>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleForm}
-        />
+        <Form.Group>
+          <Form.Label>First name</Form.Label>
+          <Form.Control type="text"  name="firstName" value={formData.firstName} onChange={handleForm} />  
+        </Form.Group>
         <br />
-        <label>Last name:</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleForm}
-        />
+        <Form.Group>
+          <Form.Label>Last name</Form.Label>
+          <Form.Control type="text" name="lastName" value={formData.lastName} onChange={handleForm} />
+        </Form.Group>
         <br />
 
         {errorMessage && <p style={{color:"red"}}>{errorMessage}</p>}
         <br/>
-        <p>If you already have an account <Link to={`/auth/login`}>click here!</Link></p>
+        <p>If you already have an account <Link to={`/auth/login`} style={{color:"black"}}>click here!</Link></p>
         <br/>
-        <Button type="submit">Signup</Button>
-      </form>
+        <Button className={buttonTheme}  type="submit">Signup</Button>
+      </Form>
       
     </div>
   );

@@ -56,6 +56,7 @@ export default function EditProfile() {
 
     try {
       await editUserService(editProfile);
+      handleClosePopup();
     } catch (error) {
       if (error.response.status === 400) {
         console.log(error.response.data.errorMessage);
@@ -202,8 +203,8 @@ export default function EditProfile() {
               />
             </Form.Group>
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-
-            <Button type="submit">Edit</Button>
+              <br />
+            <Button className={buttonTheme} type="submit">Submit</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer className={cardTheme}>

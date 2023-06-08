@@ -1,19 +1,27 @@
+//IMPORTS
 import { useContext, useState } from "react";
 import { friendQueryService } from "../services/user.services";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 import { ThemeContext } from "../context/theme.context";
 
+//IMGS
+import searchLogoDark from "../assets/icons8-search-64-white.png";
+import searchLogoLight from "../assets/icons8-search-64-black.png"
+
 export default function Searchbar() {
+  //STATES
   const [queryValue, setQueryValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState();
+  
+  //OTHER VARS
+  const { buttonTheme, isDarkMode, cardTheme} = useContext(ThemeContext);
+  const navigate = useNavigate();
+
+  //FUNCTIONS  
   const handleForm = ({ target }) => {
     setQueryValue(target.value);
   };
-  const [errorMessage, setErrorMessage] = useState();
-  const { buttonTheme, cardTheme } = useContext(ThemeContext);
-
-  const navigate = useNavigate();
-
   const handleSubmitForm = async (e) => {
     e.preventDefault();
 
@@ -45,7 +53,6 @@ export default function Searchbar() {
     <div style={{ padding: "2vh" }}>
       <Button
         onClick={handleOpenPopup}
-        className={buttonTheme}
         style={{
           display: "flex",
           marginTop: "-9.5vh",
@@ -53,17 +60,19 @@ export default function Searchbar() {
           height: "5vh",
           justifyContent: "center",
           paddingTop: "0vh",
+          backgroundColor:"transparent",
+          borderColor:"transparent"
         }}
       >
-        Search User
+        <img src={isDarkMode ? searchLogoDark : searchLogoLight} alt="search-user" style={{height:"3vw"}}/>
       </Button>
 
       <Modal show={showPopup} onHide={handleClosePopup}>
-        <Modal.Header closeButton>
-          <Modal.Title>SearchUser</Modal.Title>
+        <Modal.Header closeButton className={cardTheme}>
+          <Modal.Title>Search a friend!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmitForm}>
+        <Modal.Body className={cardTheme}>
+          <Form onSubmit={handleSubmitForm} style={{display:"flex", gap:"1vw", justifyContent:"center"}}>
             <Form.Group>
               <Form.Control
                 type="text"
@@ -74,18 +83,15 @@ export default function Searchbar() {
                 style={{ width: "20vw", height: "6vh" }}
               />
             </Form.Group>
-            <Button
-              className={buttonTheme}
-              type="submit"
-              disabled={!queryValue ? true : false}
-            >
+            <br />
+            <Button className={buttonTheme} type="submit" disabled={!queryValue ? true : false}>
               Find it!
             </Button>
           </Form>
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleClosePopup}>Close</Button>
+        <Modal.Footer className={cardTheme}>
+          <Button className={buttonTheme} onClick={handleClosePopup}>Close</Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -7,6 +7,7 @@ import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../../assets/icons8-pixel-heart-white.png";
 import { Button, Card, Col } from "react-bootstrap";
 import { PuffLoader } from "react-spinners";
+import { ThemeContext } from "../../context/theme.context";
 
 export default function GroupCommentList() {
 
@@ -16,6 +17,7 @@ export default function GroupCommentList() {
   const [reload, setReload] = useState(false);
 
   //OTHER VARIABLES
+  const {cardTheme, buttonTheme} = useContext(ThemeContext);
   const { activeUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const { groupId } = useParams();
@@ -93,14 +95,14 @@ export default function GroupCommentList() {
      </div>
 
       
-      <Col md={12} className="overflow-auto" style={{ maxHeight: "65vh", }}>
+      <Col md={12}>
           {groupComment.map((groupComment) => (
             <div key={groupComment._id}>
-              <Card      style={{
+              <Card className={cardTheme} style={{
                 display: "flex",
                 justifyContent: "center",
-                backgroundColor: "lightgrey",
-                margin: "2vh 0 2vh 8vw",
+                alignItems:"center",
+                padding:"5vh",
                 maxWidth: "30vw",
               }}>
                 <p>
@@ -117,22 +119,22 @@ export default function GroupCommentList() {
                 </div>
                 <br/>
 
-                <div>
-                  <Button
+                <div style={{display:"flex", justifyContent:"center", padding:"1vh"}}>
+                  <Button className={buttonTheme}
                     style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
                     onClick={() => {
                       handleLike(groupComment._id);
                     }}>
                     <img src={likeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button
+                  <Button className={buttonTheme}
                     style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
                     onClick={() => {
                       handleDislike(groupComment._id);
                     }}>
                     <img src={dislikeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button
+                  <Button className={buttonTheme}
                     style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
                     onClick={() => {
                       handleLove(groupComment._id);
@@ -140,7 +142,9 @@ export default function GroupCommentList() {
                     <img src={loveImg} width={"20px"} />
                   </Button>
                   <br/>
-                {(groupComment.owner._id === activeUser._id) && (<Button onClick={() => { handleValuation(groupComment._id) }}>Delete comment</Button>)}
+                </div>
+                <div>
+                  {(groupComment.owner._id === activeUser._id) && (<Button className={buttonTheme} onClick={() => { handleValuation(groupComment._id) }}>Delete comment</Button>)}
                 </div>
               </Card>
             </div>

@@ -3,12 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {groupDeleteUserService, groupDetailsService, deleteModService, addModService,} from "../../services/group.services";
 import { friendInfoService } from "../../services/user.services";
+import { AuthContext } from "../../context/auth.context";
+import { Button, Card, CardGroup, Col } from "react-bootstrap";
+import { PuffLoader } from "react-spinners";
+import { ThemeContext } from "../../context/theme.context";
+
+//COMPONENTS AND PAGES
 import AddUserGroup from "../../components/group/AddUserGroup";
 import GroupCommentList from "../../components/group/GroupCommentList";
-import { AuthContext } from "../../context/auth.context";
-import { Button, Card, Col } from "react-bootstrap";
 import CreateGroupComment from "../../components/group/CreateGroupComment.jsx";
-import { PuffLoader } from "react-spinners";
 
 
 
@@ -22,7 +25,9 @@ export default function GroupDetails() {
   //OTHER VARIABLES
   const { groupId } = useParams();
   const navigate = useNavigate();
-  const {activeUser} = useContext(AuthContext)
+  const {activeUser} = useContext(AuthContext);
+  const {cardTheme, buttonTheme} = useContext(ThemeContext);
+
 
   //FUNCTIONS
   const getData = async () => {
@@ -74,57 +79,52 @@ export default function GroupDetails() {
   useEffect(() => {
     getData();
   }, [reload]);
+
+
   return !isLoading ? (
-    <div style={{display:"flex", flexDirection:"row", gap:"20vw"}}>
+    <div style={{display:"flex", flexDirection:"column", gap:"5vw", flexWrap:"wrap", justifyContent:"center", alignItems:"center"}}>
 
+      <CreateGroupComment setReload={setReload}/>
 
-      <Col md={4}>
-<CreateGroupComment setReload={setReload} style={{padding:"3vh 3vw 3vh 3vw", display:"flex", justifyContent:"flex-end"}}/>
-        <div style={{ maxHeight: "60vh", overflow: "auto", display:"flex", flexDirection:"row"}}>
-          <Card style={{ backgroundColor: "lightgrey", padding: "5vh", margin:"0 0 0 10vh"  }}>
-      <h3>{group.name}</h3>
-      <p>{group.description}</p>
-      <h3>Owner: {owner.username}</h3>
-      <AddUserGroup setReload={setReload}/>
-      <h3>Users:</h3>
-      {group.participants.map((user, index) => (
-        <div key={index} style={{display:"flex", gap:"10px", justifyContent: "center"}}>
-          {user.username}{" "}
-          {(group.mods.includes(activeUser._id) ||
-            group.owner.includes(activeUser._id)) && (
-              <div style={{display:"flex", gap:"1vw"}}>
-                <Button onClick={() => {handleDeleteUser(group._id, user._id)}} >Delete User</Button>
-                {!group.mods.includes(user._id) && <Button onClick={() => handleAddMod(groupId, user._id)}>Add Mod</Button>}
-              </div>
-            )}
-          {group.mods.includes(user._id) && (
-            <div key={user._id}>
-              <p>Mod</p>
-              {(group.mods.includes(activeUser._id) ||
-                group.owner.includes(activeUser._id)) && (
-                  <Button
-                    onClick={() => {
-                      handleDeleteMod(group._id, user._id);
-                    }}
-                  >
-                    Delete Mod
-                  </Button>
-                )}
-                
+        <CardGroup>
+          <Col md={4}>
+            <div style={{ maxHeight: "100vh", display:"flex", flexDirection:"row"}}>
+              <Card className={cardTheme} style={{  display: "flex", flexDirection: "column",  justifyContent: "center", padding: "3vw", minWidth:"35vw", maxWidth:"35vw", minHeight:"50vh", maxHeight: "100vh", gap:"1vh"}}>
+                <h3>{group.name}</h3>
+                <br />
+                <p>{group.description}</p>
+                <h3>Owner: {owner.username}</h3>
+                <AddUserGroup setReload={setReload}/>
+                <h3>Users:</h3>
+                {group.participants.map((user, index) => (
+                  <div key={index} style={{display:"flex", gap:"1vw", justifyContent: "center"}}>
+                    {user.username}{" "}
+                    {(group.mods.includes(activeUser._id) ||
+                      group.owner.includes(activeUser._id)) && (
+                        <div style={{display:"flex", gap:"1vw"}}>
+                          <Button className={buttonTheme} onClick={() => {handleDeleteUser(group._id, user._id)}}>Delete User</Button>
+                          {!group.mods.includes(user._id) && <Button className={buttonTheme} onClick={() => handleAddMod(groupId, user._id)}>Add Mod</Button>}
+                        </div>
+                      )}
+                    {group.mods.includes(user._id) && (
+                      <div key={user._id}>
+                        <p>Mod</p>
+                        {(group.mods.includes(activeUser._id) ||
+                          group.owner.includes(activeUser._id)) && (
+                            <Button className={buttonTheme} onClick={() => {handleDeleteMod(group._id, user._id)}}>Delete Mod</Button>)}
+                      </div>)}
+                  </div>
+                ))}
+              </Card>
+              
             </div>
-            
-          )}
+          </Col>
+        </CardGroup>
+        <div style={{display:"flex", justifyContent:"center", flexDirection:"column", alignItems:"center", padding:"3vh"}}>
+          <h3>Comments:</h3>
+          <br/>
+          <GroupCommentList />
         </div>
-      ))}
-          </Card>
-          
-        </div>
-      </Col>
-      <div style={{display:"flex", justifyContent:"flex-end"}}>
-      <h3>Comments:</h3>
-      <br/>
-      <GroupCommentList />
-      </div>
     </div>
   ) : (
     <div className="spinners">
