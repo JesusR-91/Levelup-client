@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createGCService } from "../../services/groupComment.services";
 import { Button, Modal } from "react-bootstrap";
+import { PuffLoader } from "react-spinners";
 
 export default function CreateGroupComment({setReload}) {
     
@@ -61,5 +62,7 @@ export default function CreateGroupComment({setReload}) {
         </Modal.Footer>
       </Modal>
     </div>
-  ) : <h3>Loading...</h3>
+  ) :             <div className="spinners">
+  <PuffLoader color="white" size={120} />
+</div>
 }

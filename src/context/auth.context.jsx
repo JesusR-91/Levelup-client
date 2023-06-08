@@ -2,7 +2,7 @@
 
 import {createContext, useEffect, useState} from "react";
 import { verifyService } from "../services/auth.services";
-
+import { PuffLoader } from "react-spinners";
 const AuthContext = createContext();
 
 const AuthWrapper = (props) =>{
@@ -47,7 +47,9 @@ const AuthWrapper = (props) =>{
     if(isLoading) {
         return(
             <div>
-                <h3>Loading...</h3>
+                <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
             </div>
         )
     }

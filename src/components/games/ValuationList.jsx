@@ -1,5 +1,5 @@
 //IMPORTS
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {handleLikeValuationService, allValuationServices, handleDislikeValuationService, handleLoveValuationService, deleteValuationService} from "../../services/valuation.services";
 import { useContext, useEffect, useState } from "react";
 import CreateValuation from "./CreateValuation";
@@ -120,7 +120,7 @@ export default function ValuationsList() {
               <Card.Body>
                 <Card.Title>
                   <span>{eachValue.createdAt}</span> -{" "}
-                  {eachValue.owner.username} -{" "}
+                  <Link to={`/user/${eachValue.owner._id}`}>{eachValue.owner.username}</Link> - {" "}
                   {"★".repeat(Math.floor(eachValue.value))}
                   {"☆".repeat(5 - Math.floor(eachValue.value))}
                 </Card.Title>

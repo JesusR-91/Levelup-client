@@ -61,9 +61,9 @@ export default function UserInfo() {
       {profile ? (
         <div key={profile._id}>
 
-        <div style={{padding:"3vh 3vh 0 3vh", display:"flex", justifyContent:"flex-end"}}>
+        <div style={{padding:"3vh 3vh 0 3vh", display:"flex", justifyContent:"flex-start"}}>
             {!activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button className={buttonTheme} onClick={() => {addUser(profile._id);}}>Add friend</Button>)}
-            {activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button className={buttonTheme} onClick={() => {deleteFriend(profile._id)}}>Delete friend</Button>)}
+            {activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button className={buttonTheme} onClick={() => {deleteFriend(profile._id)}}  style={{display:"flex", marginTop:"-10.5vh", width:"5vw", height:"5vh", justifyContent:"center", paddingTop:"0vh"}}>Delete friend</Button>)}
         </div>
 
           <div style={{ padding: "5vh" }}>

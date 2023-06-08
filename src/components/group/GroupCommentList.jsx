@@ -6,6 +6,7 @@ import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../../assets/icons8-pixel-heart-white.png";
 import { Button, Card, Col } from "react-bootstrap";
+import { PuffLoader } from "react-spinners";
 
 export default function GroupCommentList() {
 
@@ -147,6 +148,8 @@ export default function GroupCommentList() {
       </Col>
     </div>
   ) : (
-    <h4>Loading</h4>
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
   );
 }

@@ -8,6 +8,7 @@ import GroupCommentList from "../../components/group/GroupCommentList";
 import { AuthContext } from "../../context/auth.context";
 import { Button, Card, Col } from "react-bootstrap";
 import CreateGroupComment from "../../components/group/CreateGroupComment.jsx";
+import { PuffLoader } from "react-spinners";
 
 
 
@@ -126,6 +127,8 @@ export default function GroupDetails() {
       </div>
     </div>
   ) : (
-    <h3>Loading...</h3>
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
   );
 }

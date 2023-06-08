@@ -3,6 +3,7 @@ import { getAllGroupsService, getAllUserService, deleteUserService, deleteGroupS
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button, Card, CardGroup } from "react-bootstrap";
+import { PuffLoader } from "react-spinners";
 
 export default function Admin() {
   //STATES
@@ -74,6 +75,8 @@ export default function Admin() {
       </CardGroup>
       </div>
   ):(
-    <h4>Loading</h4>
+    <div className="spinners">
+    <PuffLoader color="white" size={120} />
+  </div>
   )
 }

@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { groupAddUserService, groupDetailsService } from "../../services/group.services";
 import { getAllUserService } from "../../services/admin.services";
 import { Button, Modal } from "react-bootstrap";
+import { PuffLoader } from "react-spinners";
 
 export default function AddUserGroup({ setReload }) {
   //STATES
@@ -92,7 +93,9 @@ export default function AddUserGroup({ setReload }) {
               )
             ))
           ) : (
-            <h3>Loading...</h3>
+            <div className="spinners">
+            <PuffLoader color="white" size={120} />
+          </div>
           )}
         </Modal.Body>
         <Modal.Footer>

@@ -2,7 +2,6 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import SearchBar from "./Searchbar.jsx";
 import { useContext, useEffect} from 'react';
 import { AuthContext } from '../context/auth.context.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -55,7 +54,6 @@ export default function MyNavbar() {
 
         <Nav.Link onClick={logout}> <img src={isDarkMode ? logoutLogo : logoutLogoBlack} alt="logout" width={"40vw"}/> </Nav.Link>
 
-      <SearchBar/>
 
       </Container>
     </Navbar>

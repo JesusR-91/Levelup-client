@@ -1,26 +1,25 @@
-/* eslint-disable react/prop-types */
-
-//IMPORTS
-import { useContext, useState } from "react"
-import {newPublicationService} from "../services/publications.services"
+import { useContext, useState } from "react";
+import { newPublicationService } from "../services/publications.services";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { ThemeContext } from "../context/theme.context";
+import { PuffLoader } from "react-spinners";
 
-
-export default function CreatePublication({getData}) {
-  //STATES
-  const [content ,setContent] = useState("")
+export default function CreatePublication({ getData }) {
+  const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const {buttonTheme} = useContext (ThemeContext);
+  const { buttonTheme } = useContext(ThemeContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  //FUNCTIONS
-  const handleContentInput = ({target}) => {setContent(target.value)}
-  const handleSubmit = async () => {
+  const handleContentInput = ({ target }) => {
+    setContent(target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       await newPublicationService(content);
       getData();
       setContent("");
@@ -28,17 +27,23 @@ export default function CreatePublication({getData}) {
     } catch (error) {
       console.log(error);
       navigate("/error");
-      
     }
-  }
+  };
+
   return !isLoading ? (
-    <div style={{padding:"5vh"}}>
-      <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"row", justifyContent:"center", gap:"2vh"}}>
-        <div>
-          <input type="textarea" name="content" onChange={handleContentInput} value={content} placeholder="What are you thinking about?" style={{width:"50vw", height:"6vh"}}/>
-        </div>
-        <Button className={buttonTheme} type="submit">Create!</Button>
-      </form>
+    <div style={{ padding: "5vh" }}>
+      <Form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "2vh" }}>
+        <Form.Group>
+          <Form.Control type="textarea" name="content" onChange={handleContentInput} value={content} placeholder="What are you thinking about?" style={{ width: "50vw", height: "6vh" }} />
+        </Form.Group>
+        <Button className={buttonTheme} type="submit">
+          Create!
+        </Button>
+      </Form>
     </div>
-  ) : <h3>Loading...</h3>
+  ) : (
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
+  );
 }

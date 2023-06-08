@@ -3,6 +3,7 @@ import CreateGroupForm from "../../components/group/CreateGroupForm";
 import { Link, useNavigate } from "react-router-dom";
 import { groupListService, ownGroupListService } from "../../services/group.services";
 import { Card, CardGroup, Col } from "react-bootstrap";
+import { PuffLoader } from "react-spinners";
 
 export default function GroupList() {
   const [ownGroups, setOwnGroups] = useState([]);
@@ -112,6 +113,8 @@ export default function GroupList() {
       </CardGroup>
     </div>
   ) : (
-    <h3>Loading...</h3>
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
   );
 }

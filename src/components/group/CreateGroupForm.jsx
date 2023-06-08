@@ -2,6 +2,7 @@ import { useState } from "react"
 import { createGroupService } from "../../services/group.services";
 import {useNavigate } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
+import { PuffLoader } from "react-spinners";
 
 export default function CreateGroupForm() {
   const [name, setName] = useState("");
@@ -66,5 +67,7 @@ const navigate = useNavigate()
         </Modal.Footer>
       </Modal>
     </div>
-  ) : <h3>Loading...</h3>
+  ) :             <div className="spinners">
+  <PuffLoader color="white" size={120} />
+</div>
 }

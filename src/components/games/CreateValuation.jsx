@@ -4,9 +4,9 @@
 import { useContext, useState } from "react";
 import { newValuationService } from "../../services/valuation.services";
 import { useParams } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal,Form } from "react-bootstrap";
 import { ThemeContext } from "../../context/theme.context";
-
+import { PuffLoader } from "react-spinners";
 export default function CreateValuation({getData}) {
 
   //STATES
@@ -48,45 +48,53 @@ export default function CreateValuation({getData}) {
   };
   return !isLoading ? (
     <div>
-    <Button className={buttonTheme} onClick={handleOpenPopup}>New Valuation</Button>
+      <Button className={buttonTheme} onClick={handleOpenPopup}>
+        New Valuation
+      </Button>
 
-<Modal show={showPopup} onHide={handleClosePopup}>
-  <Modal.Header className={cardTheme} closeButton>
-    <Modal.Title>Add User</Modal.Title>
-  </Modal.Header>
-  <Modal.Body className={cardTheme}>
-     <form onSubmit={handleSubmit}>
-      
-        <div>
-          <label>Note</label>
-          <input
-            type="number"
-            name="value"
-            onChange={handleValueInput}
-            value={value}
-            min="0" max="5"
-          />
-        </div>
-        <br />
-        <div>
-          <label>Description</label>
-          <input
-            type="textarea"
-            name="content"
-            onChange={handleContentInput}
-            value={content}
-          />
-        </div>
-        <br />
-        <Button className={buttonTheme} onClick={handleClosePopup} type="submit">Create!</Button>
-      </form>
-      </Modal.Body>
+      <Modal show={showPopup} onHide={handleClosePopup}>
+        <Modal.Header className={cardTheme} closeButton>
+          <Modal.Title>Add Valuation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className={cardTheme}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>Note</Form.Label>
+              <Form.Control
+                type="number"
+                name="value"
+                onChange={handleValueInput}
+                value={value}
+                min="0"
+                max="5"
+              />
+            </Form.Group>
+            <br />
+            <Form.Group>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="content"
+                onChange={handleContentInput}
+                value={content}
+              />
+            </Form.Group>
+            <br />
+            <Button className={buttonTheme} onClick={handleClosePopup} type="submit">
+              Create!
+            </Button>
+          </Form>
+        </Modal.Body>
         <Modal.Footer className={cardTheme}>
-          <Button className={buttonTheme} onClick={handleClosePopup}>Close</Button>
+          <Button className={buttonTheme} onClick={handleClosePopup}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
   ) : (
-    <h3>Loading...</h3>
+    <div className="spinners">
+      <PuffLoader color="white" size={120} />
+    </div>
   );
 }
