@@ -2,10 +2,11 @@ import { useEffect, useState } from "react"
 import { gameDetailsService } from "../../services/games.services";
 import { useNavigate, useParams } from "react-router-dom";
 import ValuationList from "../../components/games/ValuationList";
-
+import {Button, Collapse} from "react-bootstrap"
 export default function GameDetails() {
   const [game, setGame] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const {gameId} = useParams();
   const navigate = useNavigate()
 
@@ -19,7 +20,9 @@ export default function GameDetails() {
       navigate("/error")
     }
   }
-
+const toggleCollapse = () =>{
+  setIsOpen(!isOpen)
+}
   useEffect(()=>{getData()},[]);
 
   return !isLoading ? (
@@ -27,8 +30,19 @@ export default function GameDetails() {
       <br />
       <img src={game.background_image} alt={game.name} style={{width:"300px"}}/>
       <h3>{game.name}</h3>
+      <Collapse in={isOpen}>
       <p>{game.description_raw}</p>
-     
+      </Collapse>
+     {!isOpen && (
+      <Button variant="link" onClick={toggleCollapse}>
+        <h5>Details</h5>
+      </Button>
+     )}
+     {isOpen && (
+      <Button variant="link" onClick={toggleCollapse}>
+        <h5>Details</h5>
+      </Button>
+     )}
       <div style={{display:"flex", alignItems:"center", justifyContent:"space-evenly"}}>
       <div>
         <div>
@@ -38,7 +52,7 @@ export default function GameDetails() {
 
            {game.esrb_rating?.name && (<p>Rating: {game.esrb_rating.name}</p>)}
           <p>Metacritic: {game.metacritic}</p>
-          <a href={game.website} style={{color:"black", textDecoration:"none"}}>Oficial website</a>
+          <a href={game.website} style={{color:"red", textDecoration:"none"}}>Oficial website</a>
 
         </div>
       </div>
