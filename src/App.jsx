@@ -16,12 +16,17 @@ import GameDetails from "./pages/games/GameDetails";
 import FoundGame from "./pages/games/FoundGame";
 import IsLogged from "./components/auth/IsLogged";
 import IsAdmin from "./components/auth/IsAdmin";
+import { useContext } from "react";
+import { AuthContext } from "./context/auth.context";
 
 
 function App() {
+  //STATE
+  const {activeUser} = useContext(AuthContext)
+
   return (
     <div>
-      <MyNavbar/>
+      {activeUser && (<MyNavbar/>)}
 
       <Routes>
         <Route path="/auth/signup" element={<Signup/>} />

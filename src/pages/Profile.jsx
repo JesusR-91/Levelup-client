@@ -76,7 +76,7 @@ export default function Profile() {
                     </p>
                     <p>
                       Birth date:{" "}
-                      {profile.birthDate && profile.birthDate.slice(4)}
+                      {profile.birthDate !== "Invalid Date" && profile.birthDate.slice(4)}
                     </p>
                     <p>E-mail: {profile.email}</p>
                     <p>Phone: {profile.phoneNum}</p>

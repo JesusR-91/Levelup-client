@@ -62,7 +62,7 @@ export default function Login() {
             {errorMessage && <p style={{color:"red"}}>{errorMessage}</p> }
             <br />
             <br/>
-            <Button>Login</Button>
+            <Button type="submit">Login</Button>
             <p>If you don't have an account <Link to={`/auth/signup`}>click here!</Link></p>
 
 
