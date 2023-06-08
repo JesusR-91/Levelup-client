@@ -12,7 +12,7 @@ export default function CreatePublication({getData}) {
   //STATES
   const [content ,setContent] = useState("")
   const [isLoading, setIsLoading] = useState(false);
-  const {buttonTheme, cardTheme} = useContext (ThemeContext);
+  const {buttonTheme} = useContext (ThemeContext);
 
   const navigate = useNavigate()
 
@@ -37,7 +37,7 @@ export default function CreatePublication({getData}) {
         <div>
           <input type="textarea" name="content" onChange={handleContentInput} value={content} placeholder="What are you thinking about?" style={{width:"50vw", height:"6vh"}}/>
         </div>
-        <Button type="submit">Create!</Button>
+        <Button className={buttonTheme} type="submit">Create!</Button>
       </form>
     </div>
   ) : <h3>Loading...</h3>

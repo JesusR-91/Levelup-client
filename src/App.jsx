@@ -1,7 +1,13 @@
+//IMPORTS
 import { Button } from "react-bootstrap";
 import "./App.css";
-import MyNavbar from "./components/MyNavbar";
 import { Routes, Route } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/auth.context";
+import { ThemeContext } from "./context/theme.context";
+
+//COMPONENTS AND PAGES
+import MyNavbar from "./components/MyNavbar";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import Error from "./pages/error/Error";
@@ -17,9 +23,10 @@ import GameDetails from "./pages/games/GameDetails";
 import FoundGame from "./pages/games/FoundGame";
 import IsLogged from "./components/auth/IsLogged";
 import IsAdmin from "./components/auth/IsAdmin";
-import { useContext } from "react";
-import { AuthContext } from "./context/auth.context";
-import { ThemeContext } from "./context/theme.context";
+
+//IMG
+import darkThemeLogo from "./assets/icons8-dark-24.png";
+import lightThemeLogo from "./assets/icons8-sun-50.png";
 
 
 function App() {
@@ -30,7 +37,9 @@ function App() {
   return (
     <div className = {isDarkMode ? "app-dark" : "app-light"}>
       {activeUser && (<MyNavbar/>)}
-      <Button onClick={toggleTheme} className={buttonTheme}>Theme</Button>
+      <div style={{display:"flex", justifyContent:"flex-end", padding:"2vh"}}>
+        <Button onClick={toggleTheme} className={buttonTheme} style={{width:"5vw", height:"5vh"}}><img src={isDarkMode ? darkThemeLogo: lightThemeLogo} alt="theme" width={"30vw"}/></Button>
+      </div>
       
 
       <Routes>
