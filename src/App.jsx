@@ -1,5 +1,5 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
+import MyNavbar from "./components/MyNavbar";
 import { Routes, Route } from "react-router-dom";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
@@ -21,7 +21,7 @@ import IsAdmin from "./components/auth/IsAdmin";
 function App() {
   return (
     <div>
-      <IsLogged><NavBar/></IsLogged>
+      <IsLogged><MyNavbar/></IsLogged>
 
       <Routes>
         <Route path="/auth/signup" element={<Signup/>} />

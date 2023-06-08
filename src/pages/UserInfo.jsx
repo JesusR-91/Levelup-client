@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { addFriendService, friendInfoService, userInfoService } from "../services/user.services";
 import { allPublicationsService } from "../services/publications.services";
 import { useNavigate, useParams } from "react-router-dom";
+import logo from "../assets/img.png"
 
 export default function UserInfo() {
   const [activeUser, setActiveUser] = useState();
@@ -41,7 +42,7 @@ export default function UserInfo() {
     <div>
       {profile ? (
         <div key={profile._id}>
-          <img src={profile.profileImg} alt="Profile-Image" width="200px" />
+          <img src={profile.profileImg ? profile.profileImg : logo} alt="Profile-Image" width="200px" />
           <h3>{profile.username}</h3>
          {!activeUser.friends.map(e => e._id).includes(profile._id) && (<button onClick={() =>{addUser(profile._id)}}>Add friend</button>)}
           <p>
