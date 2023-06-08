@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { deleteGCService, getAllGCService, handleDislikeGCService, handleLikeGCService, handleLoveGCService } from "../../services/groupComment.services";
 import { useNavigate, useParams } from "react-router-dom";
-import CreateGroupComment from "./CreateGroupComment";
 import { AuthContext } from "../../context/auth.context";
 import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../../assets/icons8-pixel-heart-white.png";
-import { Button, Card, CardGroup, Col } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
 
 export default function GroupCommentList() {
 
@@ -89,26 +88,23 @@ export default function GroupCommentList() {
   return !isLoading ? (
     <div>
       <div >
-      <CreateGroupComment setReload={setReload} style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"flex-end"}}/>
         
      </div>
-      <h3>Comments:</h3>
 
-        <CardGroup style={{ gap: "3vw" }}>
-      <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh"}}>
+      
+      <Col md={12} className="overflow-auto" style={{ maxHeight: "65vh", }}>
           {groupComment.map((groupComment) => (
             <div key={groupComment._id}>
-              <Card     style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  backgroundColor: "lightgrey",
-                  padding: "3vw",
-                  margin: "3vw",
-                }}>
+              <Card      style={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "lightgrey",
+                margin: "2vh 0 2vh 8vw",
+                maxWidth: "30vw",
+              }}>
                 <p>
                   {groupComment.owner.username}  <span>{groupComment.createdAt}</span>
+                  <br/>
                 </p>
                 <p>{groupComment.content}</p>
                 <div style={{display: "flex",flexDirection: "row",justifyContent:"flex-end"}}>
@@ -143,13 +139,12 @@ export default function GroupCommentList() {
                     <img src={loveImg} width={"20px"} />
                   </Button>
                   <br/>
-                </div>
                 {(groupComment.owner._id === activeUser._id) && (<Button onClick={() => { handleValuation(groupComment._id) }}>Delete comment</Button>)}
+                </div>
               </Card>
             </div>
           ))}
       </Col>
-        </CardGroup>
     </div>
   ) : (
     <h4>Loading</h4>

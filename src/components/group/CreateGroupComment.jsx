@@ -51,8 +51,8 @@ export default function CreateGroupComment({setReload}) {
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Description</label>
-                <input type="textarea" name="content" onChange={handleContentInput} value={content}/>
-            </div>
+                <textarea className="form-control" id="exampleFormControlTextarea1" rows="4" name="content" onChange={handleContentInput} value={content} />
+                  </div>
             <Button type="submit">Create!</Button>
         </form>
         </Modal.Body>

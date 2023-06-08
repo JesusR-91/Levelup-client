@@ -6,7 +6,9 @@ import { friendInfoService } from "../../services/user.services";
 import AddUserGroup from "../../components/group/AddUserGroup";
 import GroupCommentList from "../../components/group/GroupCommentList";
 import { AuthContext } from "../../context/auth.context";
-import { Button, Card, CardGroup, Col } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
+import CreateGroupComment from "../../components/group/CreateGroupComment.jsx";
+
 
 
 export default function GroupDetails() {
@@ -72,29 +74,25 @@ export default function GroupDetails() {
     getData();
   }, [reload]);
   return !isLoading ? (
-    <div>
-      
-          <CardGroup style={{ gap: "3vw", paddingTop: "3vh" }}>
+    <div style={{display:"flex", flexDirection:"row", gap:"20vw"}}>
+
+
       <Col md={4}>
-        <div style={{ maxHeight: "60vh", overflow: "auto"}}>
-          <Card style={{ backgroundColor: "lightgrey", padding: "5vh" }}>
+<CreateGroupComment setReload={setReload} style={{padding:"3vh 3vw 3vh 3vw", display:"flex", justifyContent:"flex-end"}}/>
+        <div style={{ maxHeight: "60vh", overflow: "auto", display:"flex", flexDirection:"row"}}>
+          <Card style={{ backgroundColor: "lightgrey", padding: "5vh", margin:"0 0 0 10vh"  }}>
       <h3>{group.name}</h3>
-
       <p>{group.description}</p>
-
       <h3>Owner: {owner.username}</h3>
-
       <AddUserGroup setReload={setReload}/>
-
       <h3>Users:</h3>
-
       {group.participants.map((user, index) => (
-        <div key={index}>
+        <div key={index} style={{display:"flex", gap:"10px", justifyContent: "center"}}>
           {user.username}{" "}
           {(group.mods.includes(activeUser._id) ||
             group.owner.includes(activeUser._id)) && (
-              <div>
-                <Button onClick={() => {handleDeleteUser(group._id, user._id)}}>Delete User</Button>
+              <div style={{display:"flex", gap:"1vw"}}>
+                <Button onClick={() => {handleDeleteUser(group._id, user._id)}} >Delete User</Button>
                 {!group.mods.includes(user._id) && <Button onClick={() => handleAddMod(groupId, user._id)}>Add Mod</Button>}
               </div>
             )}
@@ -121,9 +119,11 @@ export default function GroupDetails() {
           
         </div>
       </Col>
-      </CardGroup>
+      <div style={{display:"flex", justifyContent:"flex-end"}}>
+      <h3>Comments:</h3>
+      <br/>
       <GroupCommentList />
-
+      </div>
     </div>
   ) : (
     <h3>Loading...</h3>
