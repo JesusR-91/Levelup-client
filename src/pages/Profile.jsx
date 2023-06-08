@@ -42,7 +42,7 @@ export default function Profile() {
 
           <div style={{ padding: "5vh" }}>
 
-            <div className="profile-distribution">
+            <div className="profile-distribution" >
               <Card className={cardTheme}>
                 <div className="profile">
 

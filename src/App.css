@@ -69,7 +69,8 @@ h1 {
   padding: 2vh; 
   display: flex; 
   justify-content: center; 
-  align-items: center
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .friends-card-distribution{

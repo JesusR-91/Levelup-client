@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { signupService } from "../../services/auth.services";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import name from "../../assets/logo-no-background.png"
 
 export default function Signup() {
 
@@ -37,6 +38,7 @@ export default function Signup() {
 
   return (
     <div>
+    <img src={name} alt="web-name" />
 
       <h1>Sign Up</h1>
     
@@ -87,7 +89,7 @@ export default function Signup() {
 
         {errorMessage && <p style={{color:"red"}}>{errorMessage}</p>}
         <br/>
-        <p>If you already have an account <Link to={`/auth/login`}>click here!</Link></p>
+        <p>If you already have an account <Link to={`/auth/login`}style={{color:"red"}}>click here!</Link></p>
         <br/>
         <Button type="submit">Signup</Button>
       </form>

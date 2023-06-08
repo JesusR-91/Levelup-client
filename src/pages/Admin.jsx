@@ -2,7 +2,7 @@
 import { getAllGroupsService, getAllUserService, deleteUserService, deleteGroupService } from "../services/admin.services";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Card, CardGroup } from "react-bootstrap";
 
 export default function Admin() {
   //STATES
@@ -53,19 +53,25 @@ export default function Admin() {
   
   return !isLoading ? (
     <div>
+      <CardGroup className="publication-distribution">
+        <Card className="publication-card">
       <h3>All users:</h3>
         {users.map((eachUser)=>(
       <div key={eachUser._id}>
           <h4>{eachUser.username} <Button onClick={()=>{handleDeleteUser(eachUser._id)}}>Delete</Button></h4>
       </div>
       ))}
+      </Card>
       <br/>
+      <Card className="publication-card">
       <h3>All groups:</h3>
       {groups.map((eachGroup)=>
       <div key={eachGroup._id}>
           <h4>{eachGroup.name} <Button onClick={()=>{handleDeleteGroup(eachGroup._id)}}>Delete</Button></h4>
       </div>
       )}
+      </Card>
+      </CardGroup>
       </div>
   ):(
     <h4>Loading</h4>
