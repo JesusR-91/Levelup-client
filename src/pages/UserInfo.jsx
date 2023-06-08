@@ -73,7 +73,7 @@ export default function UserInfo() {
                   <div className="profile-info">
                     <h3>{profile.username}</h3>
 
-                    <p>{profile.firstName} {profile.lastName}</p>
+                    <p>Name:</p><p>{profile.firstName} {profile.lastName}</p>
 
                     <span>Birth date: {profile.birthDate}</span>
                     <p>E-mail: {profile.email}</p>

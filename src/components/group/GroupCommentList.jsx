@@ -87,32 +87,39 @@ export default function GroupCommentList() {
   }, [reload]);
 
   return !isLoading ? (
-<div>
-      <CreateGroupComment setReload={setReload} />
+    <div>
+      <div >
+      <CreateGroupComment setReload={setReload} style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"flex-end"}}/>
+        
+     </div>
       <h3>Comments:</h3>
 
         <CardGroup style={{ gap: "3vw" }}>
       <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh"}}>
           {groupComment.map((groupComment) => (
             <div key={groupComment._id}>
-              <Card style={{
+              <Card     style={{
                   display: "flex",
                   flexWrap: "wrap",
-                 
+                  flexDirection: "row",
                   justifyContent: "center",
                   backgroundColor: "lightgrey",
-                  
+                  padding: "3vw",
                   margin: "3vw",
                 }}>
-                <h4>
-                  {groupComment.owner.username} - <span>{groupComment.createdAt}</span>
-                </h4>
+                <p>
+                  {groupComment.owner.username}  <span>{groupComment.createdAt}</span>
+                </p>
                 <p>{groupComment.content}</p>
-                <div>
+                <div style={{display: "flex",flexDirection: "row",justifyContent:"flex-end"}}>
+                  <br/>
                   {groupComment.likes.length > 0 && (groupComment.likes.length > 1 ? (<p>{groupComment.likes.length} Likes</p>) : (<p>{groupComment.likes.length} Like</p>))}
                   {groupComment.loves.length > 0 && (groupComment.loves.length > 1 ? (<p>{groupComment.loves.length} Likes</p>) : (<p>{groupComment.loves.length} Love</p>))}
                   {groupComment.dislikes.length > 0 && (groupComment.dislikes.length > 1 ? (<p>{groupComment.dislikes.length} Likes</p>) : (<p>{groupComment.dislikes.length} Dislikes</p>))}
+
                 </div>
+                <br/>
+
                 <div>
                   <Button
                     style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
@@ -135,6 +142,7 @@ export default function GroupCommentList() {
                     }}>
                     <img src={loveImg} width={"20px"} />
                   </Button>
+                  <br/>
                 </div>
                 {(groupComment.owner._id === activeUser._id) && (<Button onClick={() => { handleValuation(groupComment._id) }}>Delete comment</Button>)}
               </Card>

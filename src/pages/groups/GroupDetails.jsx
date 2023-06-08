@@ -73,10 +73,11 @@ export default function GroupDetails() {
   }, [reload]);
   return !isLoading ? (
     <div>
-      <CardGroup style={{gap:"3vw"}}>
-      <Col md={4} className="overflow-auto" style={{ maxHeight: "65vh", paddingTop:"5vh"}}>
-
-      <Card style={{ backgroundColor: "lightgrey", padding:"5vh 5vh"}}>
+      
+          <CardGroup style={{ gap: "3vw", paddingTop: "3vh" }}>
+      <Col md={4}>
+        <div style={{ maxHeight: "60vh", overflow: "auto"}}>
+          <Card style={{ backgroundColor: "lightgrey", padding: "5vh" }}>
       <h3>{group.name}</h3>
 
       <p>{group.description}</p>
@@ -116,11 +117,13 @@ export default function GroupDetails() {
           )}
         </div>
       ))}
-</Card>
-       </Col>
-      <br />
-          <GroupCommentList/>
-          </CardGroup>
+          </Card>
+          
+        </div>
+      </Col>
+      </CardGroup>
+      <GroupCommentList />
+
     </div>
   ) : (
     <h3>Loading...</h3>
