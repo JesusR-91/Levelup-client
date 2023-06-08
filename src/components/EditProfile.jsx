@@ -73,7 +73,6 @@ export default function EditProfile() {
     }
 
     setIsUploading(true); 
-
     const uploadData = new FormData(); 
     uploadData.append("image", event.target.files[0]);
 

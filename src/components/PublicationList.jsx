@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 
 //IMPORTS
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   allPublicationsService,
+  deletePublicationService,
   friendsPublicationService,
   handleDislikePublicationService,
   handleLikePublicationService,
@@ -16,6 +17,7 @@ import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
 import loveImg from "../assets/icons8-pixel-heart-white.png";
 import {PuffLoader} from "react-spinners";
 import { Button, Card, CardGroup  } from "react-bootstrap";
+import { AuthContext } from "../context/auth.context.jsx";
 
 export default function PublicationList() {
   
@@ -25,6 +27,7 @@ export default function PublicationList() {
   const [reload, setReload] = useState(false);
 
   const navigate = useNavigate();
+  const {activeUser} = useContext(AuthContext)
 
   //FUNCTION
   const getData = async () => {
@@ -34,7 +37,6 @@ export default function PublicationList() {
       const friendResponse = await friendsPublicationService();
       const publicationUpdated = [...allResponse.data, ...friendResponse.data];
       setPublication(publicationUpdated);
-      console.log(publicationUpdated)
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -72,6 +74,17 @@ export default function PublicationList() {
     }
   }
 
+  //DELETE THE COMMENT
+  const handlePublication = async (valId) =>{
+    try {
+      await deletePublicationService(valId)
+      setReload(!reload)
+    } catch (error) {
+      console.log(error);
+      navigate("/error");
+    }
+}
+
   useEffect(() => {
     getData();
   }, [reload]);
@@ -97,6 +110,7 @@ export default function PublicationList() {
                 <Button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleDislike(eachPubl._id)}}><img src={dislikeImg} alt="thumbUp" width={"20px"}/></Button> 
                 <Button style={{width:"10px", height:"20px", display:"flex", alignItems:"center", justifyContent: "center"}} onClick={() =>{handleLove(eachPubl._id)}}><img src={loveImg} alt="thumbUp" width={"20px"}/></Button>
               </div>
+              {(eachPubl.owner._id === activeUser._id) && (<button onClick={()=>{handlePublication(eachPubl._id)}}>Delete valuation</button>)}
             </Card>
           ))}
         </CardGroup>
