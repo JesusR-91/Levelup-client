@@ -1,6 +1,6 @@
 //IMPORTS
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {groupDeleteUserService, groupDetailsService, deleteModService, addModService,} from "../../services/group.services";
 import { friendInfoService } from "../../services/user.services";
 import { AuthContext } from "../../context/auth.context";
@@ -12,6 +12,9 @@ import { ThemeContext } from "../../context/theme.context";
 import AddUserGroup from "../../components/group/AddUserGroup";
 import GroupCommentList from "../../components/group/GroupCommentList";
 import CreateGroupComment from "../../components/group/CreateGroupComment.jsx";
+
+//IMG
+import modLogo from "../../assets/icons8-corporal-cpl-light50.png";
 
 
 
@@ -98,7 +101,8 @@ export default function GroupDetails() {
                 <h3>Users:</h3>
                 {group.participants.map((user, index) => (
                   <div key={index} style={{display:"flex", gap:"1vw", justifyContent: "center"}}>
-                    {user.username}{" "}
+                    <Link to={`/user/${user._id}`} style={{textDecoration:"none"}}>{user.username}</Link>
+                    <p> <img src={modLogo} alt="mod" /> </p>
                     {(group.mods.includes(activeUser._id) ||
                       group.owner.includes(activeUser._id)) && (
                         <div style={{display:"flex", gap:"1vw"}}>
@@ -108,10 +112,9 @@ export default function GroupDetails() {
                       )}
                     {group.mods.includes(user._id) && (
                       <div key={user._id}>
-                        <p>Mod</p>
                         {(group.mods.includes(activeUser._id) ||
                           group.owner.includes(activeUser._id)) && (
-                            <Button className={buttonTheme} onClick={() => {handleDeleteMod(group._id, user._id)}}>Delete Mod</Button>)}
+                          <Button className={buttonTheme} onClick={() => {handleDeleteMod(group._id, user._id)}}>Delete Mod</Button>)}
                       </div>)}
                   </div>
                 ))}

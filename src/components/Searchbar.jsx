@@ -64,7 +64,7 @@ export default function Searchbar() {
           borderColor:"transparent"
         }}
       >
-        <img src={isDarkMode ? searchLogoDark : searchLogoLight} alt="search-user" style={{height:"3vw"}}/>
+        <img src={isDarkMode ? searchLogoDark : searchLogoLight} alt="search-user" style={{height:"30px"}}/>
       </Button>
 
       <Modal show={showPopup} onHide={handleClosePopup}>
@@ -80,7 +80,7 @@ export default function Searchbar() {
                 onChange={handleForm}
                 value={queryValue}
                 placeholder="Put your friends username"
-                style={{ width: "20vw", height: "6vh" }}
+                style={{ width: "200px", height: "6vh" }}
               />
             </Form.Group>
             <br />

@@ -4,9 +4,16 @@ import {addFriendService, deleteFriendService, friendInfoService, userInfoServic
 import { allPublicationsService } from "../services/publications.services";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Card, CardGroup } from "react-bootstrap";
-import logo from "../assets/img-removebg-preview.png";
 import { ThemeContext } from "../context/theme.context";
 import { PuffLoader } from "react-spinners";
+
+//IMGS
+import logo from "../assets/img-removebg-preview.png";
+import addFriendLogoDark from "../assets/icons8-add-friend-light-64.png";
+import addFriendLogoLight from "../assets/icons8-add-friend-dark-64.png";
+import deleteFriendLogoDark from "../assets/icons8-unfriend-dark-48.png";
+import deleteFriendLogoLight from "../assets/icons8-unfriend-light-48.png";
+
 
 
 export default function UserInfo() {
@@ -17,7 +24,7 @@ export default function UserInfo() {
   const [isLoading, setIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
 
-  const {buttonTheme, cardTheme} = useContext (ThemeContext);
+  const {isDarkMode, buttonTheme, cardTheme} = useContext (ThemeContext);
   const navigate = useNavigate();
   const { userId } = useParams();
 
@@ -60,10 +67,10 @@ export default function UserInfo() {
     <div>
       {profile ? (
         <div key={profile._id}>
-
-        <div style={{padding:"3vh 3vh 0 3vh", display:"flex", justifyContent:"flex-start"}}>
-            {!activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button className={buttonTheme} onClick={() => {addUser(profile._id);}}>Add friend</Button>)}
-            {activeUser.friends.map((e) => e._id).includes(profile._id) && (<Button className={buttonTheme} onClick={() => {deleteFriend(profile._id)}}  style={{display:"flex", marginTop:"-10.5vh", width:"5vw", height:"5vh", justifyContent:"center", paddingTop:"0vh"}}>Delete friend</Button>)}
+        <div style={{display:"flex", justifyContent:"flex-start", padding:"2vh"}}>
+            {!activeUser.friends.map((e) => e._id).includes(profile._id) ? 
+            (<Button onClick={() => {addUser(profile._id);}} style={{backgroundColor:"transparent", borderColor:"transparent"}}> <img src={isDarkMode ? addFriendLogoDark : addFriendLogoLight} alt="add-friend" style={{width:"50px"}}/> </Button>) : 
+            (<Button style={{backgroundColor:"transparent", borderColor:"transparent"}} onClick={() => {deleteFriend(profile._id)}}><img src={isDarkMode ? deleteFriendLogoDark : deleteFriendLogoLight} alt="add-friend" style={{width:"50px"}}/></Button>)}
         </div>
 
           <div style={{ padding: "5vh" }}>

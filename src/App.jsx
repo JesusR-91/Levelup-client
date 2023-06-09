@@ -32,13 +32,13 @@ import lightThemeLogo from "./assets/icons8-sun-50.png";
 function App() {
   //STATE
   const {activeUser} = useContext(AuthContext);
-  const {isDarkMode, toggleTheme, buttonTheme} = useContext (ThemeContext);
+  const {isDarkMode, toggleTheme} = useContext (ThemeContext);
 
   return (
     <div className = {isDarkMode ? "app-dark" : "app-light"}>
       {activeUser && (<MyNavbar/>)}
       <div style={{display:"flex", justifyContent:"flex-end", padding:"2vh"}}>
-        <Button onClick={toggleTheme} className={buttonTheme} style={{width:"5vw", height:"5vh"}}><img src={isDarkMode ? darkThemeLogo: lightThemeLogo} alt="theme" width={"30vw"}/></Button>
+        <Button onClick={toggleTheme} style={{backgroundColor:"transparent", borderColor:"transparent"}}><img src={isDarkMode ? darkThemeLogo: lightThemeLogo} alt="theme" width={"35px"}/></Button>
       </div>
       
 

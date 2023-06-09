@@ -10,14 +10,18 @@ export default function Admin() {
   const [users, setUsers] = useState(null);
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [reload, setReload] = useState(true);
+
+  //OTHER VARS
   const navigate = useNavigate();
 
   //FUNCTIONS
   const getData = async () => {
     try {
+      setIsLoading(true);
       const users = await getAllUserService();
       const groups = await getAllGroupsService();
-
+      
       setUsers(users.data);
       setGroups(groups.data);
       setIsLoading(false);
@@ -29,27 +33,27 @@ export default function Admin() {
 
   const handleDeleteGroup = async (id)=> {
     try {
-      await deleteGroupService(id)
-      navigate("/admin")
+      await deleteGroupService(id);
+      setReload(!reload);
     } catch (error) {
-      console.log(error)
-      navigate("/admin")
+      console.log(error);
+      navigate("/error");
     }
   }
   
   const handleDeleteUser = async (id)=> {
     try {
-      await deleteUserService(id)
-      navigate("/admin")
+      await deleteUserService(id);
+      setReload(!reload);
     } catch (error) {
-      console.log(error)
-      navigate("/admin")
+      console.log(error);
+      navigate("/error");
     }
   }
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [reload]);
 
   
   return !isLoading ? (

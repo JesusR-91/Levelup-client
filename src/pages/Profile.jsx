@@ -75,12 +75,15 @@ export default function Profile() {
                 )}
               </div>
             </div>
-            <div className="friends-card-distribution">
-              <h4>Your friends:</h4>
-              <Card className={`${cardTheme} friends-card`} >
-                {profile.friends.map((friend) => (<Link to={`/user/${friend._id}`} key={friend._id}> {friend.username}</Link>))}
-              </Card>
-            </div>
+
+            <h4>Your friends:</h4>
+            {profile.friends.length > 0? (
+              <div className="friends-card-distribution">
+                <Card className={`${cardTheme} friends-card`} >
+                  {profile.friends.map((friend) => (<Link to={`/user/${friend._id}`} key={friend._id}> {friend.username}</Link>))}
+                </Card>
+              </div>
+            ): <h3>You have no friends</h3>}
           </div>
         </div>
       ) : (

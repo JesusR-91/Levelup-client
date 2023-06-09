@@ -86,7 +86,6 @@ export default function AddUserGroup({ setReload }) {
             <br />
           </Form>
           <br />
-
           {!isLoading ? (
             filteredUsers.map((eachUser) => (
               !group.participants.map((e) => e._id).includes(eachUser._id) && (

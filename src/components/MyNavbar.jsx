@@ -55,8 +55,6 @@ export default function MyNavbar() {
 
         <Nav.Link onClick={logout}> <img src={isDarkMode ? logoutLogo : logoutLogoBlack} alt="logout" width={"40vw"}/> </Nav.Link>
 
-      <SearchBar/>
-
       </Container>
     </Navbar>
   )

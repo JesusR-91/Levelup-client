@@ -8,7 +8,11 @@ function ThemeWrapper ({children}){
 
     //Object and functions
     const [isDarkMode, setIsDarkMode] = useState(true);
-    const toggleTheme = () =>{setIsDarkMode(!isDarkMode)};
+    const toggleTheme = (e) =>{
+        e.preventDefault();
+        setIsDarkMode(!isDarkMode);
+
+    };
     const buttonTheme = isDarkMode ? "dark-buttons" : "light-buttons";
     const cardTheme = isDarkMode ? "dark-card" : "light-card";
 
