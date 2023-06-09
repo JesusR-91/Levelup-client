@@ -1,13 +1,16 @@
+//IMPORTS
 import { useContext, useEffect, useState } from "react";
 import { deleteGCService, getAllGCService, handleDislikeGCService, handleLikeGCService, handleLoveGCService } from "../../services/groupComment.services";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
-import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
-import loveImg from "../../assets/icons8-pixel-heart-white.png";
 import { Button, Card, Col } from "react-bootstrap";
 import { PuffLoader } from "react-spinners";
 import { ThemeContext } from "../../context/theme.context";
+
+//IMGS
+import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
+import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
+import loveImg from "../../assets/icons8-pixel-heart-50.png";
 
 export default function GroupCommentList() {
 
@@ -110,8 +113,8 @@ export default function GroupCommentList() {
                   <br/>
                 </p>
                 <p>{groupComment.content}</p>
-                <div style={{display: "flex",flexDirection: "row",justifyContent:"flex-end"}}>
-                  <br/>
+                <div style={{display: "flex",flexDirection: "row",justifyContent:"flex-end", gap:"0.2vh"}}>
+
                   {groupComment.likes.length > 0 && (groupComment.likes.length > 1 ? (<p>{groupComment.likes.length} Likes</p>) : (<p>{groupComment.likes.length} Like</p>))}
                   {groupComment.loves.length > 0 && (groupComment.loves.length > 1 ? (<p>{groupComment.loves.length} Likes</p>) : (<p>{groupComment.loves.length} Love</p>))}
                   {groupComment.dislikes.length > 0 && (groupComment.dislikes.length > 1 ? (<p>{groupComment.dislikes.length} Likes</p>) : (<p>{groupComment.dislikes.length} Dislikes</p>))}
@@ -119,27 +122,27 @@ export default function GroupCommentList() {
                 </div>
                 <br/>
 
-                <div style={{display:"flex", justifyContent:"center", padding:"1vh"}}>
-                  <Button className={buttonTheme}
-                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
+                <div style={{display:"flex", justifyContent:"center", padding:"1vh", gap:"2vh"}}>
+                  <Button
+                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor:"transparent", borderColor:"transparent"}}
                     onClick={() => {
                       handleLike(groupComment._id);
                     }}>
-                    <img src={likeImg} alt="thumbUp" width={"20px"} />
+                    <img src={likeImg} alt="thumbUp" width={"30px"} />
                   </Button>
-                  <Button className={buttonTheme}
-                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
+                  <Button
+                    style={{ width: "30px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor:"transparent", borderColor:"transparent"}}
                     onClick={() => {
                       handleDislike(groupComment._id);
                     }}>
-                    <img src={dislikeImg} alt="thumbUp" width={"20px"} />
+                    <img src={dislikeImg} alt="thumbUp" width={"30px"} />
                   </Button>
-                  <Button className={buttonTheme}
-                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", }}
+                  <Button
+                    style={{ width: "10px", height: "20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor:"transparent", borderColor:"transparent"}}
                     onClick={() => {
                       handleLove(groupComment._id);
                     }}>
-                    <img src={loveImg} width={"20px"} />
+                    <img src={loveImg} width={"25px"} />
                   </Button>
                   <br/>
                 </div>

@@ -6,7 +6,7 @@ import CreateValuation from "./CreateValuation";
 import { AuthContext } from "../../context/auth.context";
 import likeImg from "../../assets/icons8-zombie-hand-thumbs-up-100.png";
 import dislikeImg from "../../assets/icons8-zombie-hand-thumbs-dow-100.png";
-import loveImg from "../../assets/icons8-pixel-heart-white.png";
+import loveImg from "../../assets/icons8-pixel-heart-50.png";
 import { Button, Card} from "react-bootstrap";
 import { ThemeContext } from "../../context/theme.context";
 import { PuffLoader } from "react-spinners";
@@ -147,13 +147,14 @@ export default function ValuationsList() {
                     ))}
                 </div>
                 <div style={{display:"flex", flexDirection:"row", justifyContent:"center", padding:"1vh"}}>
-                  <Button className={buttonTheme}
+                  <Button
                     style={{
                       width: "10px",
                       height: "20px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      backgroundColor:"transparent", borderColor:"transparent"
                     }}
                     onClick={() => {
                       handleLike(eachValue._id);
@@ -161,13 +162,14 @@ export default function ValuationsList() {
                   >
                     <img src={likeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button className={buttonTheme}
+                  <Button
                     style={{
                       width: "10px",
                       height: "20px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      backgroundColor:"transparent", borderColor:"transparent"
                     }}
                     onClick={() => {
                       handleDislike(eachValue._id);
@@ -175,13 +177,14 @@ export default function ValuationsList() {
                   >
                     <img src={dislikeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button className={buttonTheme}
+                  <Button
                     style={{
                       width: "10px",
                       height: "20px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      backgroundColor:"transparent", borderColor:"transparent"
                     }}
                     onClick={() => {handleLove(eachValue._id)}}>
 

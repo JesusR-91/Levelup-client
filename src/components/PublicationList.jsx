@@ -5,13 +5,15 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { allPublicationsService, deletePublicationService, friendsPublicationService, handleDislikePublicationService, handleLikePublicationService, handleLovePublicationService} from "../services/publications.services.js";
 import CreatePublication from "./CreatePublication.jsx";
-import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
-import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
-import loveImg from "../assets/icons8-pixel-heart-white.png";
 import { PuffLoader } from "react-spinners";
 import { Button, Card, CardGroup } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context.jsx";
 import { ThemeContext } from "../context/theme.context.jsx";
+
+//IMGS
+import likeImg from "../assets/icons8-zombie-hand-thumbs-up-100.png";
+import dislikeImg from "../assets/icons8-zombie-hand-thumbs-dow-100.png";
+import loveImg from "../assets/icons8-pixel-heart-50.png";
 
 export default function PublicationList() {
   //STATE
@@ -137,13 +139,14 @@ export default function PublicationList() {
                     padding: "2vh",
                   }}
                 >
-                  <Button className={buttonTheme}
+                  <Button
                     style={{
                       width: "10px",
                       height: "20px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      backgroundColor:"transparent", borderColor:"transparent"
                     }}
                     onClick={() => {
                       handleLike(eachPubl._id);
@@ -151,13 +154,15 @@ export default function PublicationList() {
                   >
                     <img src={likeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button className={buttonTheme}
+                  <Button
                     style={{
                       width: "10px",
                       height: "20px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      backgroundColor:"transparent", 
+                      borderColor:"transparent"
                     }}
                     onClick={() => {
                       handleDislike(eachPubl._id);
@@ -165,13 +170,15 @@ export default function PublicationList() {
                   >
                     <img src={dislikeImg} alt="thumbUp" width={"20px"} />
                   </Button>
-                  <Button className={buttonTheme}
+                  <Button
                     style={{
                       width: "10px",
                       height: "20px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      backgroundColor:"transparent", 
+                      borderColor:"transparent"
                     }}
                     onClick={() => {
                       handleLove(eachPubl._id);
