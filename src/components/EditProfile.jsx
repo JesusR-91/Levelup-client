@@ -75,6 +75,7 @@ export default function EditProfile(props) {
   };
 
   const handleFileUpload = async (event) => {
+    event.preventDefault();
     if (!event.target.files[0]) {
       return;
     }
