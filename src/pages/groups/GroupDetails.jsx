@@ -15,8 +15,9 @@ import CreateGroupComment from "../../components/group/CreateGroupComment.jsx";
 
 //IMG
 import modLogo from "../../assets/icons8-corporal-cpl-light50.png";
-
-
+import deleteFriendLogo from "../../assets/icons8-unfriend-light-48.png";
+import deleteModLogo from "../../assets/icons8-chevron-down-50.png"
+import addModLogo from "../../assets/icons8-chevron-up-50.png"
 
 export default function GroupDetails() {
   //STATES
@@ -29,7 +30,7 @@ export default function GroupDetails() {
   const { groupId } = useParams();
   const navigate = useNavigate();
   const {activeUser} = useContext(AuthContext);
-  const {cardTheme, buttonTheme} = useContext(ThemeContext);
+  const {cardTheme} = useContext(ThemeContext);
 
 
   //FUNCTIONS
@@ -100,21 +101,21 @@ export default function GroupDetails() {
                 <AddUserGroup setReload={setReload}/>
                 <h3>Users:</h3>
                 {group.participants.map((user, index) => (
-                  <div key={index} style={{display:"flex", gap:"1vw", justifyContent: "center"}}>
-                    <Link to={`/user/${user._id}`} style={{textDecoration:"none"}}>{user.username}</Link>
-                    <p> <img src={modLogo} alt="mod" /> </p>
+                  <div key={index} style={{display:"flex", gap:"1vw", justifyContent: "center", padding:"0 5vw"}}>
+                  <Link to={`/user/${user._id}`} style={{textDecoration:"none"}}>{user.username}</Link>
+                  {group.mods.includes(user._id) && <p> <img src={modLogo} alt="mod" style={{width:"50px"}}/> </p>}
                     {(group.mods.includes(activeUser._id) ||
                       group.owner.includes(activeUser._id)) && (
                         <div style={{display:"flex", gap:"1vw"}}>
-                          <Button className={buttonTheme} onClick={() => {handleDeleteUser(group._id, user._id)}}>Delete User</Button>
-                          {!group.mods.includes(user._id) && <Button className={buttonTheme} onClick={() => handleAddMod(groupId, user._id)}>Add Mod</Button>}
+                          <Button style={{backgroundColor:"transparent", borderColor:"transparent"}} onClick={() => {handleDeleteUser(group._id, user._id)}}><img src={deleteFriendLogo} alt="add-friend" style={{width:"50px"}}/></Button>
+                          {!group.mods.includes(user._id) && <Button style={{backgroundColor:"transparent", borderColor:"transparent"}} onClick={() => handleAddMod(groupId, user._id)}><img src={addModLogo} alt="delete-mod" style={{width:"50px"}}/></Button>}
                         </div>
                       )}
                     {group.mods.includes(user._id) && (
                       <div key={user._id}>
                         {(group.mods.includes(activeUser._id) ||
                           group.owner.includes(activeUser._id)) && (
-                          <Button className={buttonTheme} onClick={() => {handleDeleteMod(group._id, user._id)}}>Delete Mod</Button>)}
+                          <Button style={{backgroundColor:"transparent", borderColor:"transparent"}} onClick={() => {handleDeleteMod(group._id, user._id)}}> <img src={deleteModLogo} alt="delete-mod" style={{width:"50px"}}/> </Button>)}
                       </div>)}
                   </div>
                 ))}
