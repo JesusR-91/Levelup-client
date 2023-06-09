@@ -24,9 +24,10 @@ export default function CreateGroupForm() {
   const handleDescriptionInput = ({target}) => {setDescription(target.value)};
 
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-    
       await createGroupService({name, description});
       setIsLoading(true); 
     } catch (error) {
