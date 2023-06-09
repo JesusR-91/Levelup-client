@@ -64,8 +64,8 @@ export default function GroupList() {
                   <h3>
                     <Link to={`/group/${group._id}/details`}>{group.name}</Link>
                   </h3>
-                  <div>
                     <h4>Users:</h4>
+                  <div style={{display:"flex", flexDirection:"row", flexWrap:"wrap", justifyContent:"center", alignItems:"center"}}>
                     {group.participants.map((user) => (
                       <Link
                         to={`/user/${user._id}`}
