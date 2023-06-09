@@ -52,7 +52,6 @@ export default function GroupList() {
                   flexWrap: "wrap",
                   flexDirection: "row",
                   justifyContent: "center",
-                  backgroundColor: "lightgrey",
                   padding: "3vw",
                   margin: "3vw",
                   minWidth:"35vw",
@@ -91,7 +90,6 @@ export default function GroupList() {
                   flexWrap: "wrap",
                   flexDirection: "row",
                   justifyContent: "center",
-                  backgroundColor: "lightgrey",
                   padding: "3vw",
                   margin: "3vw",
                   minWidth:"35vw",
@@ -109,7 +107,7 @@ export default function GroupList() {
                       <Link
                         to={`/user/${user._id}`}
                         key={user._id}
-                        style={{ textDecoration: "none" }}
+                        style={{display:"flex", flexDirection:"row", flexWrap:"wrap", justifyContent:"center", alignItems:"center", textDecoration:"none"}}
                       >
                         {user.username}
                       </Link>
