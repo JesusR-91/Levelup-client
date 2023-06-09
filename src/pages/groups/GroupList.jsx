@@ -80,7 +80,7 @@ export default function GroupList() {
             ))}
           </div>
         </Col>
-        <Col md={4} style={{ maxHeight: "65vh" }}>
+        <Col md={4} style={{ maxHeight: "200vh" }}>
           <div style={{display:"flex", justifyContent:"center", flexDirection:"column", alignItems:"center"}}>
             <h3>Other groups</h3>
             {groups.map((group, index) => (
@@ -101,13 +101,13 @@ export default function GroupList() {
                   <h3>
                     <Link to={`/group/${group._id}/details`}>{group.name}</Link>
                   </h3>
-                  <div>
-                    <h4>Users:</h4>
+                  <h4>Users:</h4>
+                  <div style= {{display:"flex", flexDirection:"row", flexWrap:"wrap", justifyContent:"center", alignItems:"center"}} >
                     {group.participants.map((user) => (
                       <Link
                         to={`/user/${user._id}`}
                         key={user._id}
-                        style={{display:"flex", flexDirection:"row", flexWrap:"wrap", justifyContent:"center", alignItems:"center", textDecoration:"none"}}
+                        style={{textDecoration:"none"}}
                       >
                         {user.username}
                       </Link>
