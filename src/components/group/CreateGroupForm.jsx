@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 //IMPORTS
 import { useContext, useState } from "react"
 import { createGroupService } from "../../services/group.services";
@@ -6,7 +8,7 @@ import { Form, Button, Modal } from "react-bootstrap";
 import { PuffLoader } from "react-spinners";
 import { ThemeContext } from "../../context/theme.context"
 
-export default function CreateGroupForm() {
+export default function CreateGroupForm(props) {
   //STATES
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -28,9 +30,9 @@ export default function CreateGroupForm() {
     e.preventDefault();
 
     try {
-      setIsLoading(true); 
       await createGroupService({name, description});
-      setIsLoading(false);
+      handleClosePopup();
+      props.getData();
     } catch (error) {
       if (error.response.status === 404) {
         setErrorMessage(error.response.data.errorMessage)

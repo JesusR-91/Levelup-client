@@ -98,7 +98,7 @@ export default function GroupDetails() {
                 <br />
                 <p>{group.description}</p>
                 <h3>Owner: {owner.username}</h3>
-                <AddUserGroup setReload={setReload}/>
+                {(group.owner.includes(activeUser._id) || group.mods.includes(activeUser._id)) && <AddUserGroup setReload={setReload}/>}
                 <h3>Users:</h3>
                 {group.participants.map((user, index) => (
                   <div key={index} style={{display:"flex", gap:"1vw", justifyContent: "center", padding:"0 5vw"}}>

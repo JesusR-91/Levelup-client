@@ -38,7 +38,7 @@ export default function GroupList() {
   return !isLoading ? (
     <div>
       <div style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"center", alignItems:"center"}}>
-      <CreateGroupForm />
+      <CreateGroupForm getData={getData}/>
       </div>
 
       <CardGroup style={{gap:"25vw"}}>
