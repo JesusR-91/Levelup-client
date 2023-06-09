@@ -53,7 +53,6 @@ export default function Profile() {
                     <p> Name: {profile.firstName} {profile.lastName}</p>
                     <p>Birth date:{" "} {profile.birthDate !== "Invalid Date" && profile.birthDate.slice(4)} </p>
                     <p>E-mail: {profile.email}</p>
-                    <p>Phone: {profile.phoneNum}</p>
                     <EditProfile getData={getData}/>
                   </div>
                 </div>

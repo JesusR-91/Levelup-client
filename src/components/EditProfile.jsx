@@ -19,7 +19,6 @@ export default function EditProfile(props) {
     lastName: "",
     birthDate: "",
     email: "",
-    phoneNumber: "",
     profileImg: "",
   });
   const [imageUrl, setImageUrl] = useState(null);
@@ -41,7 +40,6 @@ export default function EditProfile(props) {
         lastName: activeUser.data.lastName,
         birthDate: activeUser.data.birthDate,
         email: activeUser.data.email,
-        phoneNum: activeUser.data.phoneNumber,
         profileImg: activeUser.data.profileImg,
       });
       console.log(activeUser);
@@ -197,15 +195,6 @@ export default function EditProfile(props) {
                 type="text"
                 name="email"
                 value={editProfile.email}
-                onChange={handleEdit}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Phone Number:</Form.Label>
-              <Form.Control
-                type="number"
-                name="phoneNum"
-                value={editProfile.phoneNumber}
                 onChange={handleEdit}
               />
             </Form.Group>
