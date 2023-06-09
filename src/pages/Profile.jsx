@@ -54,7 +54,7 @@ export default function Profile() {
                     <p>Birth date:{" "} {profile.birthDate !== "Invalid Date" && profile.birthDate.slice(4)} </p>
                     <p>E-mail: {profile.email}</p>
                     <p>Phone: {profile.phoneNum}</p>
-                    <EditProfile />
+                    <EditProfile getData={getData}/>
                   </div>
                 </div>
               </Card>

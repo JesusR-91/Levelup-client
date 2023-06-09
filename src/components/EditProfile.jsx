@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+
+//IMPORTS
 import { useState, useEffect, useContext } from "react";
 import { editUserService } from "../services/user.services";
 import { userInfoService } from "../services/user.services";
@@ -6,7 +9,8 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { uploadImageService } from "../services/upload.services";
 import { ThemeContext } from "../context/theme.context";
 
-export default function EditProfile() {
+export default function EditProfile(props) {
+  //STATERS
   const [editProfile, setEditProfile] = useState({
     username: "",
     pastPassword: "",
@@ -22,6 +26,7 @@ export default function EditProfile() {
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  //FUNCTIONS
   const { buttonTheme, cardTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
@@ -56,6 +61,7 @@ export default function EditProfile() {
 
     try {
       await editUserService(editProfile);
+      props.getData();
       handleClosePopup();
     } catch (error) {
       if (error.response.status === 400) {
