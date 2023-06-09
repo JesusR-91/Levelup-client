@@ -10,7 +10,7 @@ export default function CreateGroupForm() {
   //STATES
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   //OTHER VAR
@@ -28,8 +28,9 @@ export default function CreateGroupForm() {
     e.preventDefault();
 
     try {
-      await createGroupService({name, description});
       setIsLoading(true); 
+      await createGroupService({name, description});
+      setIsLoading(false);
     } catch (error) {
       if (error.response.status === 404) {
         setErrorMessage(error.response.data.errorMessage)
@@ -48,7 +49,7 @@ export default function CreateGroupForm() {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
-  return !isLoading ? (
+  return isLoading ? (
     <div style={{padding:"3vh 3vh 3vh 3vh", display:"flex", justifyContent:"flex-end"}}>
 
             <Button className={buttonTheme} onClick={handleOpenPopup}>Create Group</Button>

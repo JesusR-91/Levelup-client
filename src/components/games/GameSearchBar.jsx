@@ -15,7 +15,9 @@ export default function GameSearchBar() {
 
     //FUNCTIONS
     const handleForm = ({target}) => {setQueryValue(target.value)};
-    const handleSubmitForm = async () =>{
+    const handleSubmitForm = async (e) =>{
+    e.preventDefault();
+
       try {
         navigate(`/game/found-games/${queryValue}`);
       } catch (error) {

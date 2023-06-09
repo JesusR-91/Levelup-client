@@ -21,7 +21,9 @@ export default function CreateGroupComment({setReload}) {
   
     //FUNCTIONS
     const handleContentInput = ({target}) => {setContent(target.value)}
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
       try {
         setIsLoading(true)
         await createGCService(groupId, content);
