@@ -1,7 +1,7 @@
 //IMPORTS
 import { useState, useEffect, useContext } from "react";
 import {addFriendService, deleteFriendService, friendInfoService, userInfoService} from "../services/user.services";
-import { allPublicationsService } from "../services/publications.services";
+import { friendsPublicationService } from "../services/publications.services";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Card, CardGroup } from "react-bootstrap";
 import { ThemeContext } from "../context/theme.context";
@@ -32,7 +32,7 @@ export default function UserInfo() {
   const getData = async () => {
     try {
       const userProfile = await friendInfoService(userId);
-      const allUserPublications = await allPublicationsService();
+      const allUserPublications = await friendsPublicationService();
       const currentUser = await userInfoService();
       setActiveUser(currentUser.data);
       setProfile(userProfile.data);

@@ -25,7 +25,7 @@ import IsLogged from "./components/auth/IsLogged";
 import IsAdmin from "./components/auth/IsAdmin";
 
 //IMG
-import darkThemeLogo from "./assets/icons8-dark-24.png";
+import darkThemeLogo from "./assets/icons8-moon-24.png";
 import lightThemeLogo from "./assets/icons8-sun-50.png";
 
 
@@ -63,6 +63,7 @@ function App() {
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
     </div>
   );
 }

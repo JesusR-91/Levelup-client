@@ -101,7 +101,8 @@ export default function PublicationList() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  minWidth:"30vw"
+                  minWidth:"300px",
+                  maxWidth:"500px"
                 }}
               >
                 <h5>
