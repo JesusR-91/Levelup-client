@@ -41,7 +41,7 @@ export default function EditProfile(props) {
         lastName: activeUser.data.lastName,
         birthDate: activeUser.data.birthDate,
         email: activeUser.data.email,
-        phoneNumber: activeUser.data.phoneNumber,
+        phoneNum: activeUser.data.phoneNumber,
         profileImg: activeUser.data.profileImg,
       });
       console.log(activeUser);
@@ -204,7 +204,7 @@ export default function EditProfile(props) {
               <Form.Label>Phone Number:</Form.Label>
               <Form.Control
                 type="number"
-                name="phoneNumber"
+                name="phoneNum"
                 value={editProfile.phoneNumber}
                 onChange={handleEdit}
               />
